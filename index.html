@@ -1,111 +1,333 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আমার বাংলাদেশ ভ্রমণ ম্যাপ</title>
-    <style>
-        body {
-            font-family: 'SolaimanLipi', Arial, sans-serif;
-            background-color: #f4f7f6;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 { color: #2c3e50; }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .stats {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #27ae60;
-        }
-        .district-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 10px;
-            max-height: 350px;
-            overflow-y: auto;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-        .district-btn {
-            padding: 8px;
-            border: 1px solid #3498db;
-            background-color: #fff;
-            color: #3498db;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .district-btn.visited {
-            background-color: #2ecc71;
-            color: white;
-            border-color: #2ecc71;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বাংলাদেশ ভ্রমণ ও কুইজ পোর্টাল</title>
+  <!-- html2canvas for downloading map -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    :root {
+      --bg-color: #f4f7f6;
+      --card-bg: #ffffff;
+      --text-color: #333333;
+      --primary-color: #006a4e;
+      --accent-color: #f42a41;
+      --visited-color: #27ae60;
+    }
+
+    body.dark-theme {
+      --bg-color: #1a1a2e;
+      --card-bg: #16213e;
+      --text-color: #e9ecef;
+      --primary-color: #0f3460;
+      --accent-color: #e94560;
+      --visited-color: #2e8b57;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    h1 { margin: 0; color: var(--primary-color); font-size: 24px; }
+
+    .theme-toggle-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 10px 20px;
+      border: none;
+      background: #e0e0e0;
+      cursor: pointer;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .tab-btn.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* District Grid */
+    .district-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .district-card {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      transition: 0.2s;
+    }
+
+    .district-card.visited {
+      background-color: var(--visited-color);
+      color: white;
+      border-color: var(--visited-color);
+    }
+
+    .download-btn {
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    /* Info Search Section */
+    .search-box {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    .info-card {
+      background: rgba(0,0,0,0.03);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    /* Quiz Section */
+    .quiz-option {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: white;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .quiz-option:hover { background: #f0f0f0; }
+
+    .leaderboard-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .leaderboard-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>বাংলাদেশ ভ্রমণ ট্র্যাকার</h1>
-    <div class="stats">
-        ভ্রমণকৃত জেলা: <span id="count">০</span> / ৬৪
-    </div>
+<div class="container" id="exportable-area">
+  <header>
+    <h1>🇧🇩 বাংলাদেশ ভ্রমণ ও ট্র্যাকার</h1>
+    <button class="theme-toggle-btn" onclick="toggleTheme()">🌓 থিম পরিবর্তন</button>
+  </header>
 
-    <h3>যেসব জেলা ঘুরেছেন সেগুলোতে ক্লিক করুন:</h3>
-    <div class="district-list" id="districtContainer"></div>
+  <!-- Navigation Tabs -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('tracker')">জেলা ট্র্যাকার</button>
+    <button class="tab-btn" onclick="switchTab('info')">জেলা ও ভ্রমণ তথ্য</button>
+    <button class="tab-btn" onclick="switchTab('quiz')">কুইজ ও লিডারবোর্ড</button>
+  </div>
+
+  <!-- Tab 1: District Tracker -->
+  <div id="tracker" class="tab-content active">
+    <h3>ভ্রমণকৃত জেলা নির্বাচন করুন (<span id="visited-count">0</span>/64):</h3>
+    <div class="district-grid" id="district-grid"></div>
+    <button class="download-btn" onclick="downloadMap()">📸 ম্যাপ এর ছবি ডাউনলোড করুন</button>
+  </div>
+
+  <!-- Tab 2: District & Travel Info -->
+  <div id="info" class="tab-content">
+    <h3>জেলা ও ভ্রমণ গাইড</h3>
+    <input type="text" id="search-input" class="search-box" placeholder="জেলার নাম লিখুন..." onkeyup="filterDistricts()">
+    <div id="info-list"></div>
+  </div>
+
+  <!-- Tab 3: Quiz & Leaderboard -->
+  <div id="quiz" class="tab-content">
+    <h3>বাংলাদেশ ভ্রমণ কুইজ</h3>
+    <div id="quiz-container">
+      <p id="quiz-question">প্রশ্ন লোড হচ্ছে...</p>
+      <div id="quiz-options"></div>
+    </div>
+    
+    <hr style="margin: 25px 0;">
+    
+    <h3>🏆 লিডারবোর্ড</h3>
+    <ul class="leaderboard-list" id="leaderboard">
+      <li class="leaderboard-item"><span>১. রাকিব (ঢাকা)</span> <span>১০০ পয়েন্ট</span></li>
+      <li class="leaderboard-item"><span>২. মোস্তাক আহমেদ</span> <span>৮০ পয়েন্ট</span></li>
+    </ul>
+  </div>
 </div>
 
 <script>
-    // বাংলাদেশের ৬৪টি জেলার তালিকা
-    const districts = [
-        "ঢাকা", "গাজীপুর", "নারায়ণগঞ্জ", "মুন্সীগঞ্জ", "মানিকগঞ্জ", "নরসিংদী", "ফরিদপুর", "মাদারীপুর", "গোপালগঞ্জ", "রাজবাড়ী", "শরীয়তপুর", "টাঙ্গাইল", "কিশোরগঞ্জ",
-        "চট্টগ্রাম", "কক্সবাজার", "বান্দরবান", "রাঙ্গামাটি", "খাগড়াছড়ি", "কুমিল্লা", "ফেনী", "নোয়াখালী", "লক্ষ্মীপুর", "চাঁদপুর", "ব্রাহ্মণবাড়িয়া",
-        "রাজশাহী", "বগুড়া", "পাবনা", "সিরাজগঞ্জ", "নাটোর", "নওগাঁ", "চাঁপাইনবাবগঞ্জ", "জয়পুরহাট",
-        "খুলনা", "যশোর", "সাতক্ষীরা", "বাগেরহাট", "ঝিনাইদহ", "কুষ্টিয়া", "মাগুরা", "মেহেরপুর", "নড়াইল", "চুয়াডাঙ্গা",
-        "বরিশাল", "পটুয়াখালী", "ভোলা", "ঝালকাঠি", "পিরোজপুর", "বরগুনা",
-        "সিলেট", "মৌলভীবাজার", "হবিগঞ্জ", "সুনামগঞ্জ",
-        "রংপুর", "দিনাজপুর", "গাইবান্ধা", "কুড়িগ্রাম", "লালমনিরহাট", "নীলফামারী", "পঞ্চগড়", "ঠাকুরগাঁও",
-        "ময়মনসিংহ", "জামালপুর", "শেরপুর", "নেত্রকোণা"
-    ];
+  // District Data
+  const districtsData = [
+    { name: "ঢাকা", division: "ঢাকা", places: "লালবাগ কেল্লা, আহসান মঞ্জিল, সংসদ ভবন" },
+    { name: "গাজীপুর", division: "ঢাকা", places: "ভাওয়াল জাতীয় উদ্যান, বঙ্গবন্ধু সাফারি পার্ক" },
+    { name: "চট্টগ্রাম", division: "চট্টগ্রাম", places: "পতেঙ্গা সমুদ্র সৈকত, ফয়েজ লেক" },
+    { name: "কক্সবাজার", division: "চট্টগ্রাম", places: "দীর্ঘতম সমুদ্র সৈকত, হিমছড়ি, ইনানী" },
+    { name: "সিলেট", division: "সিলেট", places: "জাফলং, রুট ক্যানাল, সাদা পাথর" },
+    { name: "বগুড়া", division: "রাজশাহী", places: "মহাস্থানগড়, মহাস্থান প্রত্নতাত্ত্বিক জাদুঘর" },
+    { name: "খুলনা", division: "খুলনা", places: "সুন্দরবন, রূপসা নদী" },
+    { name: "বরিশাল", division: "বরিশাল", places: "ভাসমান পেয়ারা বাজার, দুর্গাসাগর" }
+  ];
 
-    let visitedCount = 0;
-    const districtContainer = document.getElementById('districtContainer');
-    const countDisplay = document.getElementById('count');
+  let visitedCount = 0;
 
-    // বাংলা সংখ্যায় রূপান্তর
-    function toBanglaNum(num) {
-        return num.toString().replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
-    }
-
-    // বোতাম তৈরি ও ক্লিক ইভেন্ট হ্যান্ডলার
-    districts.forEach(district => {
-        const btn = document.createElement('button');
-        btn.classList.add('district-btn');
-        btn.innerText = district;
-
-        btn.onclick = function() {
-            if (btn.classList.contains('visited')) {
-                btn.classList.remove('visited');
-                visitedCount--;
-            } else {
-                btn.classList.add('visited');
-                visitedCount++;
-            }
-            countDisplay.innerText = toBanglaNum(visitedCount);
-        };
-
-        districtContainer.appendChild(btn);
+  // Initialize District Grid
+  function initTracker() {
+    const grid = document.getElementById("district-grid");
+    grid.innerHTML = "";
+    districtsData.forEach((d) => {
+      const card = document.createElement("div");
+      card.className = "district-card";
+      card.innerText = d.name;
+      card.onclick = () => {
+        card.classList.toggle("visited");
+        updateCount();
+      };
+      grid.appendChild(card);
     });
+  }
+
+  function updateCount() {
+    const count = document.querySelectorAll(".district-card.visited").length;
+    document.getElementById("visited-count").innerText = count;
+  }
+
+  // Theme Toggle
+  function toggleTheme() {
+    document.body.classList.toggle("dark-theme");
+  }
+
+  // Tab Switcher
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  // Info Section Render
+  function initInfo() {
+    const list = document.getElementById("info-list");
+    list.innerHTML = "";
+    districtsData.forEach(d => {
+      list.innerHTML += `
+        <div class="info-card">
+          <h4>📍 ${d.name} (বিভাগ: ${d.division})</h4>
+          <p><strong>দর্শনীয় স্থান:</strong> ${d.places}</p>
+        </div>
+      `;
+    });
+  }
+
+  function filterDistricts() {
+    const query = document.getElementById("search-input").value.toLowerCase();
+    const cards = document.querySelectorAll(".info-card");
+    cards.forEach(card => {
+      card.style.display = card.innerText.toLowerCase().includes(query) ? "block" : "none";
+    });
+  }
+
+  // Download Map Image
+  function downloadMap() {
+    html2canvas(document.getElementById("exportable-area")).then(canvas => {
+      const link = document.createElement("a");
+      link.download = "my-bd-travel-map.png";
+      link.href = canvas.toDataURL();
+      link.click();
+    });
+  }
+
+  // Quiz Setup
+  const quizData = [
+    { q: "বাংলাদেশের একমাত্র প্রবাল দ্বীপ কোনটি?", options: ["সেন্টমার্টিন", "সন্দ্বীপ", "হাতিয়া"], ans: 0 },
+    { q: "সুন্দরবন কোন বিভাগে অবস্থিত?", options: ["চট্টগ্রাম", "খুলনা", "বরিশাল"], ans: 1 }
+  ];
+  let currentQ = 0;
+
+  function loadQuiz() {
+    const q = quizData[currentQ];
+    document.getElementById("quiz-question").innerText = q.q;
+    const opts = document.getElementById("quiz-options");
+    opts.innerHTML = "";
+    q.options.forEach((opt, idx) => {
+      opts.innerHTML += `<button class="quiz-option" onclick="checkQuiz(${idx})">${opt}</button>`;
+    });
+  }
+
+  function checkQuiz(idx) {
+    if(idx === quizData[currentQ].ans) {
+      alert("সঠিক উত্তর! 🎉");
+    } else {
+      alert("ভুল উত্তর! আবার চেষ্টা করুন।");
+    }
+    currentQ = (currentQ + 1) % quizData.length;
+    loadQuiz();
+  }
+
+  // On Load
+  window.onload = () => {
+    initTracker();
+    initInfo();
+    loadQuiz();
+  };
 </script>
 
 </body>
