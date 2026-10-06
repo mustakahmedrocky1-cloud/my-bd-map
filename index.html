@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unseen Bangladesh Style Portal</title>
+  <title>আমার সোনার বাংলাদেশ</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-main: #f7f6f0;
+      --bg-main: #f4f7f6;
       --card-bg: #ffffff;
-      --text-main: #1f2937;
+      --text-main: #2c3e50;
       --primary: #006a4e;
       --accent: #f42a41;
-      --pill-bg: #e5e7eb;
-      --map-selected: #006a4e;
+      --pill-bg: #e2e8f0;
+      --whatsapp: #25D366;
     }
 
     body {
@@ -26,43 +26,41 @@
     }
 
     header {
-      background: #ffffff;
+      background: var(--primary);
+      color: white;
       padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #e5e7eb;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       position: sticky;
       top: 0;
       z-index: 100;
     }
 
     .logo {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 700;
-      color: var(--primary);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
-    /* Top Navigation Pills */
     .nav-pills {
       display: flex;
       justify-content: center;
       gap: 8px;
       padding: 12px;
-      background: #eee;
-      margin: 15px auto;
-      max-width: 500px;
-      border-radius: 30px;
+      background: #ffffff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      margin: 0 auto;
       overflow-x: auto;
     }
 
     .pill-btn {
       border: none;
-      background: transparent;
-      padding: 8px 16px;
+      background: var(--pill-bg);
+      padding: 8px 18px;
       border-radius: 20px;
       font-weight: 600;
       cursor: pointer;
@@ -71,54 +69,74 @@
     }
 
     .pill-btn.active {
-      background: #ffffff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      color: var(--primary);
+      background: var(--primary);
+      color: white;
     }
 
     .container {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 0 15px 40px 15px;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 15px 80px 15px;
     }
 
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* Hero Banner */
     .hero-banner {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1585123334904-845d60e97b29?auto=format&fit=crop&w=800&q=80');
+      background: linear-gradient(rgba(0,106,78,0.85), rgba(0,106,78,0.85)), url('https://images.unsplash.com/photo-1585123334904-845d60e97b29?auto=format&fit=crop&w=800&q=80');
       background-size: cover;
       color: white;
-      border-radius: 20px;
-      padding: 30px 20px;
+      border-radius: 15px;
+      padding: 25px;
       text-align: center;
       margin-bottom: 20px;
     }
 
-    .hero-banner h2 { font-size: 26px; margin-bottom: 10px; }
-    .hero-btn {
+    /* Interactive Map Area */
+    .map-container {
       background: white;
-      color: #333;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 10px;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 20px;
     }
 
-    /* Division & District Selection */
-    .section-title { font-weight: 700; font-size: 18px; margin: 20px 0 10px 0; }
-    .district-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .map-svg {
+      width: 100%;
+      max-height: 350px;
+    }
+
+    .map-district {
+      fill: #e2e8f0;
+      stroke: #ffffff;
+      stroke-width: 1.5;
+      cursor: pointer;
+      transition: fill 0.2s;
+    }
+
+    .map-district:hover { fill: #a7f3d0; }
+    .map-district.selected { fill: var(--primary) !important; }
+
+    /* Dropdowns & Forms */
+    select, input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+
+    .district-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
     .district-tag {
       padding: 6px 14px;
       background: #ffffff;
-      border: 1px solid #ddd;
+      border: 1px solid #cbd5e1;
       border-radius: 20px;
       font-size: 14px;
       cursor: pointer;
-      user-select: none;
     }
 
     .district-tag.selected {
@@ -127,98 +145,74 @@
       border-color: var(--primary);
     }
 
-    /* Card Preview Box */
-    .preview-card {
-      background: #f1f0e8;
-      border-radius: 15px;
+    .card {
+      background: white;
       padding: 20px;
-      text-align: center;
-      margin-top: 25px;
-      border: 1px solid #e0dfd5;
-    }
-
-    .user-info-bar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 15px;
-      background: white;
-      padding: 10px;
       border-radius: 12px;
+      margin-top: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
-    .user-avatar {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      object-fit: cover;
-      background: #ddd;
-    }
-
-    .download-group {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .dl-btn {
-      flex: 1;
-      padding: 12px;
-      border-radius: 10px;
-      border: 1px solid #000;
-      background: white;
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
       font-weight: bold;
       cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
     }
 
-    .dl-btn.dark { background: #1f2937; color: white; border: none; }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-accent { background: var(--accent); color: white; }
 
-    /* Quiz Styling */
-    .quiz-card {
-      background: white;
+    /* WhatsApp Floating Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--whatsapp);
+      color: white;
+      border-radius: 50px;
+      padding: 12px 20px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 1000;
+    }
+
+    footer {
+      text-align: center;
       padding: 20px;
-      border-radius: 15px;
-      margin-top: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-
-    .option-btn {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border: 1px solid #e5e7eb;
-      background: #f9fafb;
-      border-radius: 10px;
-      text-align: left;
-      font-size: 15px;
-      cursor: pointer;
-    }
-
-    /* Inputs */
-    input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-sizing: border-box;
-      margin-bottom: 10px;
+      color: #64748b;
+      font-size: 14px;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">🇧🇩 Unseen Bangladesh Hub</div>
+  <div class="logo">
+    <svg width="28" height="28" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" fill="#006a4e" />
+      <circle cx="45" cy="50" r="22" fill="#f42a41" />
+    </svg>
+    আমার সোনার বাংলাদেশ
+  </div>
 </header>
 
 <!-- Navigation Pills -->
 <div class="nav-pills">
   <button class="pill-btn active" onclick="switchTab('map')">আমার ম্যাপ</button>
-  <button class="pill-btn" onclick="switchTab('world')">বিশ্ব</button>
-  <button class="pill-btn" onclick="switchTab('guide')">কোথায় ঘুরবেন</button>
-  <button class="pill-btn" onclick="switchTab('quiz')">খেলা</button>
-  <button class="pill-btn" onclick="switchTab('planner')">প্ল্যানার</button>
+  <button class="pill-btn" onclick="switchTab('world')">বিশ্ব ভ্রমণ</button>
+  <button class="pill-btn" onclick="switchTab('guide')">জেলা ও উপজেলা নির্দেশিকা</button>
+  <button class="pill-btn" onclick="switchTab('quiz')">কুইজ ও লিডারবোর্ড</button>
+  <button class="pill-btn" onclick="switchTab('planner')">ট্রিপ প্ল্যানার</button>
 </div>
 
 <div class="container">
@@ -226,167 +220,163 @@
   <!-- 1. MY MAP TAB -->
   <div id="map" class="tab-content active">
     <div class="hero-banner">
-      <span style="background:rgba(255,255,255,0.2); padding:3px 10px; border-radius:12px; font-size:12px;">৬৪ জেলা • ৮ বিভাগ</span>
-      <h2>বাংলাদেশের কতটুকু ঘুরে দেখেছেন?</h2>
-      <p style="font-size: 13px;">যে জেলাগুলোতে গিয়েছেন সেগুলো বেছে নিন এবং সুন্দর ম্যাপ ডাউনলোড করুন!</p>
+      <h2 style="margin:0;">বাংলাদেশের কতটুকু ঘুরে দেখেছেন?</h2>
+      <p style="margin-top:5px; font-size:14px;">মানচিত্রে ক্লিক করুন বা বিভাগ অনুযায়ী আপনার ভ্রমণ করা স্থানগুলো চিহ্নিত করুন!</p>
     </div>
 
-    <div class="section-title">যেসব জেলায় গিয়েছি (<span id="visited-count">0</span>/64)</div>
-    <input type="text" placeholder="🔍 জেলা খুঁজুন..." onkeyup="searchDistricts(this.value)">
+    <!-- Interactive Bangladesh Map -->
+    <div class="map-container" id="exportable-card">
+      <h3>🇧🇩 বাংলাদেশ ভ্রমণ মানচিত্র (<span id="visited-count">0</span>/64)</h3>
+      <svg class="map-svg" viewBox="0 0 500 600">
+        <!-- Interactive Districts Shapes Representation -->
+        <rect class="map-district" x="200" y="250" width="80" height="60" rx="10" onclick="toggleDistrictMap(this, 'ঢাকা')"/>
+        <text x="240" y="285" fill="#333" font-size="12" text-anchor="middle">ঢাকা</text>
 
-    <div style="margin-top: 15px;">
-      <div style="font-weight:600; margin-bottom:5px;">ঢাকা বিভাগ</div>
-      <div class="district-tags" id="dhaka-districts"></div>
+        <rect class="map-district" x="300" y="320" width="100" height="80" rx="10" onclick="toggleDistrictMap(this, 'চট্টগ্রাম')"/>
+        <text x="350" y="365" fill="#333" font-size="12" text-anchor="middle">চট্টগ্রাম</text>
 
-      <div style="font-weight:600; margin:15px 0 5px 0;">ময়মনসিংহ বিভাগ</div>
-      <div class="district-tags" id="mymensingh-districts"></div>
-      
-      <div style="font-weight:600; margin:15px 0 5px 0;">চট্টগ্রাম বিভাগ</div>
-      <div class="district-tags" id="chittagong-districts"></div>
+        <rect class="map-district" x="320" y="150" width="80" height="70" rx="10" onclick="toggleDistrictMap(this, 'সিলেট')"/>
+        <text x="360" y="190" fill="#333" font-size="12" text-anchor="middle">সিলেট</text>
+
+        <rect class="map-district" x="100" y="200" width="80" height="70" rx="10" onclick="toggleDistrictMap(this, 'রাজশাহী')"/>
+        <text x="140" y="240" fill="#333" font-size="12" text-anchor="middle">রাজশাহী</text>
+
+        <rect class="map-district" x="220" y="150" width="70" height="60" rx="10" onclick="toggleDistrictMap(this, 'ময়মনসিংহ')"/>
+        <text x="255" y="185" fill="#333" font-size="12" text-anchor="middle">ময়মনসিংহ</text>
+
+        <rect class="map-district" x="180" y="380" width="80" height="60" rx="10" onclick="toggleDistrictMap(this, 'বরিশাল')"/>
+        <text x="220" y="415" fill="#333" font-size="12" text-anchor="middle">বরিশাল</text>
+
+        <rect class="map-district" x="100" y="330" width="70" height="80" rx="10" onclick="toggleDistrictMap(this, 'খুলনা')"/>
+        <text x="135" y="375" fill="#333" font-size="12" text-anchor="middle">খুলনা</text>
+
+        <rect class="map-district" x="120" y="80" width="80" height="80" rx="10" onclick="toggleDistrictMap(this, 'রংপুর')"/>
+        <text x="160" y="125" fill="#333" font-size="12" text-anchor="middle">রংপুর</text>
+      </svg>
+      <div id="selected-list-display" style="font-size:14px; margin-top:10px; color:#555;">এখনো কোনো জেলা নির্বাচন করা হয়নি।</div>
     </div>
 
-    <!-- Personalization Controls -->
-    <div style="margin-top: 25px; background: white; padding: 15px; border-radius: 12px;">
-      <div style="font-weight:600; margin-bottom:10px;">প্রোফাইল সাজান:</div>
-      <input type="text" id="user-name" value="Mustak Ahmed Rocky" oninput="updateProfile()">
-      <input type="file" accept="image/*" onchange="loadAvatar(event)">
-    </div>
-
-    <!-- Card Output Area to Download -->
-    <div class="preview-card" id="exportable-card">
-      <div class="user-info-bar">
-        <img id="avatar-img" src="https://via.placeholder.com/45" class="user-avatar" alt="User">
-        <div style="text-align: left;">
-          <div id="display-name" style="font-weight: bold; font-size: 16px;">Mustak Ahmed Rocky</div>
-          <div style="font-size: 12px; color: #666;">বাংলাদেশ ভ্রমণ ম্যাপ</div>
-        </div>
-        <div style="margin-left: auto; font-size: 22px; font-weight: bold; color: var(--primary);">
-          <span id="card-count">0</span>/64
-        </div>
-      </div>
-      <div id="selected-list-display" style="font-size:14px; color:#444; min-height:80px; background:white; padding:15px; border-radius:10px; text-align:left;">
-        এখনো কোনো জেলা নির্বাচন করা হয়নি।
-      </div>
-    </div>
-
-    <!-- Download Buttons -->
-    <div class="section-title">আপনার ম্যাপ ডাউনলোড করুন</div>
-    <div class="download-group">
-      <button class="dl-btn dark" onclick="downloadImage()">↓ PNG</button>
-      <button class="dl-btn" onclick="downloadImage()">↓ JPG</button>
-    </div>
+    <button class="btn btn-accent" onclick="downloadImage()">📸 মানচিত্র ডাউনলোড করুন (PNG)</button>
   </div>
 
   <!-- 2. WORLD TAB -->
   <div id="world" class="tab-content">
-    <div class="hero-banner" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80');">
-      <h2>পৃথিবীর কতটুকু ঘুরে দেখেছেন?</h2>
-      <p style="font-size: 13px;">১৯৭টি দেশ • ৬ মহাদেশ</p>
+    <div class="hero-banner" style="background: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.85)), url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80');">
+      <h2 style="margin:0;">বিশ্বের কোথায় কোথায় গিয়েছেন?</h2>
+      <p style="margin-top:5px; font-size:14px;">১৯৭টি দেশ ও ৬টি মহাদেশ ট্র্যাকিং</p>
     </div>
-    <div class="section-title">দেশ নির্বাচন করুন:</div>
-    <div class="district-tags">
-      <div class="district-tag" onclick="this.classList.toggle('selected')">🇧🇩 বাংলাদেশ</div>
-      <div class="district-tag" onclick="this.classList.toggle('selected')">🇮🇳 ভারত</div>
-      <div class="district-tag" onclick="this.classList.toggle('selected')">🇸🇬 সিঙ্গাপুর</div>
-      <div class="district-tag" onclick="this.classList.toggle('selected')">🇲🇾 মালয়েশিয়া</div>
-      <div class="district-tag" onclick="this.classList.toggle('selected')">🇸🇦 সৌদি আরব</div>
+
+    <div class="card">
+      <h3>🌍 আন্তর্জাতিক গন্তব্য নির্বাচন করুন</h3>
+      <div class="district-tags">
+        <div class="district-tag" onclick="this.classList.toggle('selected')">🇧🇩 বাংলাদেশ</div>
+        <div class="district-tag" onclick="this.classList.toggle('selected')">🇮🇳 ভারত</div>
+        <div class="district-tag" onclick="this.classList.toggle('selected')">🇸🇬 সিঙ্গাপুর</div>
+        <div class="district-tag" onclick="this.classList.toggle('selected')">🇲🇾 মালয়েশিয়া</div>
+        <div class="district-tag" onclick="this.classList.toggle('selected')">🇸🇦 সৌদি আরব</div>
+        <div class="district-tag" onclick="this.classList.toggle('selected')">🇦🇪 সংযুক্ত আরব আমিরাত</div>
+        <div class="district-tag" onclick="this.classList.toggle('selected')">🇹🇭 থাইল্যান্ড</div>
+        <div class="district-tag" onclick="this.classList.toggle('selected')">🇬🇧 যুক্তরাজ্য</div>
+        <div class="district-tag" onclick="this.classList.toggle('selected')">🇺🇸 যুক্তরাষ্ট্র</div>
+      </div>
     </div>
   </div>
 
-  <!-- 3. GUIDE TAB -->
+  <!-- 3. GUIDE TAB (Division, District, Upazila & Union) -->
   <div id="guide" class="tab-content">
-    <div class="section-title">কোথায় ঘুরবেন? (দর্শনীয় স্থান ও ভ্রমণ গাইড)</div>
-    <input type="text" placeholder="জেলা বা স্থানের নাম লিখুন...">
-    <div class="quiz-card">
-      <h3>📍 সাজেক ভ্যালি (রাঙ্গামাটি)</h3>
-      <p style="font-size: 14px; color: #555;">মেঘের উপত্যকা হিসেবে পরিচিত। ঘুরে আসার সেরা সময় নভেম্বর থেকে ফেব্রুয়ারি।</p>
-    </div>
-    <div class="quiz-card">
-      <h3>📍 শ্রীমঙ্গল (মৌলভীবাজার)</h3>
-      <p style="font-size: 14px; color: #555;">চা বাগান, লাউয়াছড়া জাতীয় উদ্যান এবং ৭ রঙের চায়ের জন্য বিখ্যাত।</p>
+    <div class="card">
+      <h3>📍 সারা বাংলাদেশের বিভাগ, জেলা, উপজেলা ও ইউনিয়ন</h3>
+      <p style="font-size: 13px; color: #666;">বিভাগ ও জেলা নির্বাচন করে আপনার উপজেলা দেখুন:</p>
+      
+      <label>১. বিভাগ সিলেক্ট করুন:</label>
+      <select id="division-select" onchange="loadDistricts()">
+        <option value="">-- বিভাগ বেছে নিন --</option>
+        <option value="dhaka">ঢাকা</option>
+        <option value="mymensingh">ময়মনসিংহ</option>
+        <option value="chittagong">চট্টগ্রাম</option>
+      </select>
+
+      <label>২. জেলা সিলেক্ট করুন:</label>
+      <select id="district-select" onchange="loadUpazilas()">
+        <option value="">-- আগে বিভাগ বেছে নিন --</option>
+      </select>
+
+      <label>৩. উপজেলা সমূহ:</label>
+      <div id="upazila-list" class="district-tags"></div>
     </div>
   </div>
 
   <!-- 4. QUIZ TAB -->
   <div id="quiz" class="tab-content">
-    <div style="text-align:center; margin-bottom:20px;">
-      <button class="pill-btn active">🧠 কুইজ</button>
-      <button class="pill-btn">🏆 লিডারবোর্ড</button>
+    <div class="card">
+      <h3>🧠 সাধারণ জ্ঞান ও বাংলাদেশ কুইজ</h3>
+      <div id="quiz-box">
+        <p id="quiz-q" style="font-weight:bold; font-size:16px;">প্রশ্ন: বাংলাদেশের একমাত্র প্রবাল দ্বীপ কোনটি?</p>
+        <button class="btn" style="background:#f1f5f9; text-align:left;" onclick="answerQuiz(true)">১. সেন্টমার্টিন</button>
+        <button class="btn" style="background:#f1f5f9; text-align:left; margin-top:5px;" onclick="answerQuiz(false)">২. সন্দ্বীপ</button>
+        <button class="btn" style="background:#f1f5f9; text-align:left; margin-top:5px;" onclick="answerQuiz(false)">৩. মহেশখালী</button>
+      </div>
     </div>
-    <div class="quiz-card">
-      <h3 style="margin-top:0;">বাংলাদেশকে কতটা চেনেন?</h3>
-      <p style="color:#666; font-size:14px;">প্রশ্ন ১/১০: 'সাত গম্বুজ মসজিদ' কোন জেলায় অবস্থিত?</p>
-      <button class="option-btn" onclick="alert('সঠিক উত্তর! 🎉')">ঢাকা</button>
-      <button class="option-btn" onclick="alert('ভুল উত্তর!')">বাগেরহাট</button>
-      <button class="option-btn" onclick="alert('ভুল উত্তর!')">সিলেট</button>
+
+    <div class="card">
+      <h3>🏆 সর্বোচ্চ পয়েন্ট অর্জনকারী লিডারবোর্ড</h3>
+      <ol id="leaderboard" style="padding-left:20px;">
+        <li><strong>মোস্তাক আহমেদ রকি</strong> - ১০০ পয়েন্ট</li>
+        <li>রাকিব হাসান - ৯০ পয়েন্ট</li>
+        <li>তানভীর আহমেদ - ৮০ পয়েন্ট</li>
+      </ol>
     </div>
   </div>
 
   <!-- 5. PLANNER TAB -->
   <div id="planner" class="tab-content">
-    <div class="quiz-card">
-      <h3>🗺️ ট্রিপ প্ল্যানার</h3>
-      <p style="font-size:13px; color:#666;">কোথা থেকে শুরু করবেন আর কোথায় যাবেন বেছে নিন:</p>
-      <label>১. কোথা থেকে শুরু করবেন?</label>
-      <input type="text" value="ঢাকা">
-      <label>২. কোন কোন জেলায় যাবেন?</label>
-      <input type="text" placeholder="+ জেলা যোগ করুন">
-      <button class="dl-btn dark" style="width:100%; margin-top:10px;">প্ল্যান তৈরি করুন</button>
+    <div class="card">
+      <h3>🗺️ ভ্রমণ ও ট্রিপ প্ল্যানার</h3>
+      <label>ভ্রমণকারীর নাম:</label>
+      <input type="text" placeholder="আপনার নাম লিখুন..." value="মোস্তাক আহমেদ রকি">
+      
+      <label>কোথা থেকে শুরু করবেন?</label>
+      <input type="text" placeholder="যেমন: ঢাকা বা নেত্রকোণা">
+
+      <label>গন্তব্য জেলা/উপজেলা:</label>
+      <input type="text" placeholder="যেমন: সাজেক, কক্সবাজার বা শ্রীমঙ্গল">
+
+      <button class="btn btn-primary">প্ল্যান সেভ করুন</button>
     </div>
   </div>
 
 </div>
 
+<!-- WhatsApp Support Button -->
+<a href="https://wa.me/8801810751836" target="_blank" class="whatsapp-float">
+  💬 Developer WhatsApp
+</a>
+
+<footer>
+  Developed by <strong>Mostak Ahmed Rocky</strong> <br>
+  &copy; 2026 আমার সোনার বাংলাদেশ। সর্বস্বত্ব সংরক্ষিত।
+</footer>
+
 <script>
-  // Data
-  const districts = {
-    dhaka: ["ঢাকা", "গাজীপুর", "নারায়ণগঞ্জ", "মুন্সীগঞ্জ", "মানিকগঞ্জ", "নরসিংদী", "ফরিদপুর", "টাঙ্গাইল", "কিশোরগঞ্জ"],
-    mymensingh: ["ময়মনসিংহ", "নেত্রকোণা", "জামালপুর", "শেরপুর"],
-    chittagong: ["চট্টগ্রাম", "কক্সবাজার", "বান্দরবান", "রাঙ্গামাটি", "খাগড়াছড়ি", "কুমিল্লা", "নোয়াখালী"]
+  // District Data Database
+  const dataStore = {
+    dhaka: {
+      "ঢাকা": ["ধানমন্ডি", "মিরপুর", "গুলশান", "সাভার", "ধামরাই"],
+      "গাজীপুর": ["গাজীপুর সদর", "কালিয়াকৈর", "শ্রীপুর", "কাপাসিয়া"]
+    },
+    mymensingh: {
+      "নেত্রকোণা": ["নেত্রকোণা সদর", "পূর্বধলা", "দুর্গাপুর", "কলমাকান্দা", "কেন্দুয়া"],
+      "শেরপুর": ["শেরপুর সদর", "নালিতাবাড়ী", "শ্রীবরদী", "ঝিনাইগাতী"],
+      "ময়মনসিংহ": ["ময়মনসিংহ সদর", "মুক্তাগাছা", "ফুলবাড়ীয়া", "ত্রিশাল"]
+    },
+    chittagong: {
+      "চট্টগ্রাম": ["কোতোয়ালী", "পতেঙ্গা", "পাঁচলাইশ", "হাঠহাজারী"],
+      "কক্সবাজার": ["কক্সবাজার সদর", "টেকনাফ", "উখিয়া", "মহেশখালী"]
+    }
   };
 
-  let selectedDistricts = new Set();
-
-  function initMap() {
-    renderCategory('dhaka-districts', districts.dhaka);
-    renderCategory('mymensingh-districts', districts.mymensingh);
-    renderCategory('chittagong-districts', districts.chittagong);
-  }
-
-  function renderCategory(containerId, list) {
-    const container = document.getElementById(containerId);
-    list.forEach(name => {
-      const tag = document.createElement('div');
-      tag.className = 'district-tag';
-      tag.innerText = name;
-      tag.onclick = () => toggleDistrict(tag, name);
-      container.appendChild(tag);
-    });
-  }
-
-  function toggleDistrict(element, name) {
-    if (selectedDistricts.has(name)) {
-      selectedDistricts.delete(name);
-      element.classList.remove('selected');
-    } else {
-      selectedDistricts.add(name);
-      element.classList.add('selected');
-    }
-    updateDisplay();
-  }
-
-  function updateDisplay() {
-    const count = selectedDistricts.size;
-    document.getElementById('visited-count').innerText = count;
-    document.getElementById('card-count').innerText = count;
-
-    const listDisplay = document.getElementById('selected-list-display');
-    if (count === 0) {
-      listDisplay.innerText = "এখনো কোনো জেলা নির্বাচন করা হয়নি।";
-    } else {
-      listDisplay.innerText = "ভ্রমণকৃত জেলাসমূহ: " + Array.from(selectedDistricts).join(', ');
-    }
-  }
+  let visitedDistricts = new Set();
+  let userScore = 100;
 
   function switchTab(tabId) {
     document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -395,30 +385,66 @@
     event.currentTarget.classList.add('active');
   }
 
-  function updateProfile() {
-    const name = document.getElementById('user-name').value;
-    document.getElementById('display-name').innerText = name || "Mustak Ahmed Rocky";
+  function toggleDistrictMap(element, name) {
+    if (visitedDistricts.has(name)) {
+      visitedDistricts.delete(name);
+      element.classList.remove('selected');
+    } else {
+      visitedDistricts.add(name);
+      element.classList.add('selected');
+    }
+    document.getElementById('visited-count').innerText = visitedDistricts.size;
+    document.getElementById('selected-list-display').innerText = 
+      visitedDistricts.size > 0 
+      ? "ভ্রমণকৃত এলাকা: " + Array.from(visitedDistricts).join(', ')
+      : "এখনো কোনো জেলা নির্বাচন করা হয়নি।";
   }
 
-  function loadAvatar(event) {
-    const reader = new FileReader();
-    reader.onload = function() {
-      document.getElementById('avatar-img').src = reader.result;
-    };
-    reader.readAsDataURL(event.target.files[0]);
+  function loadDistricts() {
+    const div = document.getElementById('division-select').value;
+    const distSelect = document.getElementById('district-select');
+    distSelect.innerHTML = '<option value="">-- জেলা বেছে নিন --</option>';
+    document.getElementById('upazila-list').innerHTML = '';
+
+    if (div && dataStore[div]) {
+      Object.keys(dataStore[div]).forEach(dist => {
+        distSelect.innerHTML += `<option value="${dist}">${dist}</option>`;
+      });
+    }
+  }
+
+  function loadUpazilas() {
+    const div = document.getElementById('division-select').value;
+    const dist = document.getElementById('district-select').value;
+    const upContainer = document.getElementById('upazila-list');
+    upContainer.innerHTML = '';
+
+    if (div && dist && dataStore[div][dist]) {
+      dataStore[div][dist].forEach(upazila => {
+        upContainer.innerHTML += `<div class="district-tag">${upazila}</div>`;
+      });
+    }
+  }
+
+  function answerQuiz(isCorrect) {
+    if(isCorrect) {
+      alert("🎉 চমৎকার! সঠিক উত্তর দিয়েছেন। ১০ পয়েন্ট যুক্ত করা হয়েছে।");
+      userScore += 10;
+      document.querySelector('#leaderboard li').innerHTML = `<strong>মোস্তাক আহমেদ রকি</strong> - ${userScore} পয়েন্ট`;
+    } else {
+      alert("❌ ভুল উত্তর, আবার চেষ্টা করুন!");
+    }
   }
 
   function downloadImage() {
     html2canvas(document.getElementById('exportable-card')).then(canvas => {
       const a = document.createElement('a');
       a.href = canvas.toDataURL('image/png');
-      a.download = 'my-bangladesh-travel-map.png';
+      a.download = 'my-bangladesh-map.png';
       a.click();
     });
   }
-
-  window.onload = initMap;
 </script>
 
 </body>
-</html>
+          </html>
