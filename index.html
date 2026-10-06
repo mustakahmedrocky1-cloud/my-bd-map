@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>আমার সোনার বাংলাদেশ</title>
+  <title>আমার সোনার বাংলাদেশ - ভ্রমণ ও উপজেলা নির্দেশিকা</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-main: #f4f7f6;
+      --bg-main: #f8fafc;
       --card-bg: #ffffff;
-      --text-main: #2c3e50;
+      --text-main: #1e293b;
       --primary: #006a4e;
       --accent: #f42a41;
       --pill-bg: #e2e8f0;
@@ -32,14 +32,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
       position: sticky;
       top: 0;
       z-index: 100;
     }
 
     .logo {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 700;
       display: flex;
       align-items: center;
@@ -48,24 +48,24 @@
 
     .nav-pills {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 8px;
       padding: 12px;
       background: #ffffff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      margin: 0 auto;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
       overflow-x: auto;
+      white-space: nowrap;
     }
 
     .pill-btn {
       border: none;
       background: var(--pill-bg);
-      padding: 8px 18px;
+      padding: 8px 16px;
       border-radius: 20px;
       font-weight: 600;
       cursor: pointer;
-      white-space: nowrap;
       transition: all 0.3s;
+      font-family: inherit;
     }
 
     .pill-btn.active {
@@ -74,7 +74,7 @@
     }
 
     .container {
-      max-width: 800px;
+      max-width: 900px;
       margin: 20px auto;
       padding: 0 15px 80px 15px;
     }
@@ -83,7 +83,7 @@
     .tab-content.active { display: block; }
 
     .hero-banner {
-      background: linear-gradient(rgba(0,106,78,0.85), rgba(0,106,78,0.85)), url('https://images.unsplash.com/photo-1585123334904-845d60e97b29?auto=format&fit=crop&w=800&q=80');
+      background: linear-gradient(rgba(0,106,78,0.9), rgba(0,106,78,0.9)), url('https://images.unsplash.com/photo-1585123334904-845d60e97b29?auto=format&fit=crop&w=800&q=80');
       background-size: cover;
       color: white;
       border-radius: 15px;
@@ -92,33 +92,35 @@
       margin-bottom: 20px;
     }
 
-    /* Interactive Map Area */
-    .map-container {
+    .map-card {
       background: white;
       padding: 20px;
       border-radius: 15px;
       text-align: center;
       border: 1px solid #e2e8f0;
       margin-bottom: 20px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
     }
 
-    .map-svg {
+    .bd-map-svg, .world-map-svg {
       width: 100%;
-      max-height: 350px;
+      max-height: 420px;
+      background: #f1f5f9;
+      border-radius: 10px;
+      padding: 10px;
     }
 
-    .map-district {
-      fill: #e2e8f0;
+    .district-path, .country-path {
+      fill: #cbd5e1;
       stroke: #ffffff;
       stroke-width: 1.5;
       cursor: pointer;
       transition: fill 0.2s;
     }
 
-    .map-district:hover { fill: #a7f3d0; }
-    .map-district.selected { fill: var(--primary) !important; }
+    .district-path:hover, .country-path:hover { fill: #86efac; }
+    .district-path.selected, .country-path.selected { fill: var(--primary) !important; }
 
-    /* Dropdowns & Forms */
     select, input[type="text"] {
       width: 100%;
       padding: 12px;
@@ -127,12 +129,13 @@
       border-radius: 8px;
       font-family: inherit;
       box-sizing: border-box;
+      font-size: 15px;
     }
 
-    .district-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .district-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; max-height: 200px; overflow-y: auto; padding: 5px; }
     .district-tag {
       padding: 6px 14px;
-      background: #ffffff;
+      background: #f1f5f9;
       border: 1px solid #cbd5e1;
       border-radius: 20px;
       font-size: 14px;
@@ -151,22 +154,31 @@
       border-radius: 12px;
       margin-top: 15px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border: 1px solid #e2e8f0;
+    }
+
+    .info-box {
+      background: #f8fafc;
+      border-left: 4px solid var(--primary);
+      padding: 15px;
+      margin-top: 12px;
+      border-radius: 0 8px 8px 0;
     }
 
     .btn {
-      padding: 10px 20px;
+      padding: 12px 20px;
       border: none;
       border-radius: 8px;
       font-weight: bold;
       cursor: pointer;
       width: 100%;
       margin-top: 10px;
+      font-size: 16px;
     }
 
     .btn-primary { background: var(--primary); color: white; }
     .btn-accent { background: var(--accent); color: white; }
 
-    /* WhatsApp Floating Button */
     .whatsapp-float {
       position: fixed;
       bottom: 20px;
@@ -174,10 +186,10 @@
       background-color: var(--whatsapp);
       color: white;
       border-radius: 50px;
-      padding: 12px 20px;
+      padding: 12px 22px;
       font-weight: bold;
       text-decoration: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
       display: flex;
       align-items: center;
       gap: 8px;
@@ -191,6 +203,7 @@
       font-size: 14px;
       border-top: 1px solid #e2e8f0;
       margin-top: 40px;
+      background: #ffffff;
     }
   </style>
 </head>
@@ -208,146 +221,173 @@
 
 <!-- Navigation Pills -->
 <div class="nav-pills">
-  <button class="pill-btn active" onclick="switchTab('map')">আমার ম্যাপ</button>
-  <button class="pill-btn" onclick="switchTab('world')">বিশ্ব ভ্রমণ</button>
-  <button class="pill-btn" onclick="switchTab('guide')">জেলা ও উপজেলা নির্দেশিকা</button>
-  <button class="pill-btn" onclick="switchTab('quiz')">কুইজ ও লিডারবোর্ড</button>
-  <button class="pill-btn" onclick="switchTab('planner')">ট্রিপ প্ল্যানার</button>
+  <button class="pill-btn active" onclick="switchTab('map', this)">বাংলাদেশ মানচিত্র</button>
+  <button class="pill-btn" onclick="switchTab('world', this)">বিশ্ব ভ্রমণ</button>
+  <button class="pill-btn" onclick="switchTab('guide', this)">উপজেলা, ইউনিয়ন ও ভ্রমণ তথ্য</button>
+  <button class="pill-btn" onclick="switchTab('quiz', this)">কুইজ ও লিডারবোর্ড</button>
+  <button class="pill-btn" onclick="switchTab('planner', this)">ট্রিপ প্ল্যানার</button>
 </div>
 
 <div class="container">
 
-  <!-- 1. MY MAP TAB -->
+  <!-- 1. BANGLADESH MAP TAB -->
   <div id="map" class="tab-content active">
     <div class="hero-banner">
-      <h2 style="margin:0;">বাংলাদেশের কতটুকু ঘুরে দেখেছেন?</h2>
-      <p style="margin-top:5px; font-size:14px;">মানচিত্রে ক্লিক করুন বা বিভাগ অনুযায়ী আপনার ভ্রমণ করা স্থানগুলো চিহ্নিত করুন!</p>
+      <h2 style="margin:0;">বাংলাদেশের কতটি জেলা ঘুরেছেন?</h2>
+      <p style="margin-top:5px; font-size:14px;">মানচিত্রের জেলায় ক্লিক করুন এবং আপনার ট্রাভেল প্রোফাইল তৈরি করুন!</p>
     </div>
 
-    <!-- Interactive Bangladesh Map -->
-    <div class="map-container" id="exportable-card">
-      <h3>🇧🇩 বাংলাদেশ ভ্রমণ মানচিত্র (<span id="visited-count">0</span>/64)</h3>
-      <svg class="map-svg" viewBox="0 0 500 600">
-        <!-- Interactive Districts Shapes Representation -->
-        <rect class="map-district" x="200" y="250" width="80" height="60" rx="10" onclick="toggleDistrictMap(this, 'ঢাকা')"/>
-        <text x="240" y="285" fill="#333" font-size="12" text-anchor="middle">ঢাকা</text>
-
-        <rect class="map-district" x="300" y="320" width="100" height="80" rx="10" onclick="toggleDistrictMap(this, 'চট্টগ্রাম')"/>
-        <text x="350" y="365" fill="#333" font-size="12" text-anchor="middle">চট্টগ্রাম</text>
-
-        <rect class="map-district" x="320" y="150" width="80" height="70" rx="10" onclick="toggleDistrictMap(this, 'সিলেট')"/>
-        <text x="360" y="190" fill="#333" font-size="12" text-anchor="middle">সিলেট</text>
-
-        <rect class="map-district" x="100" y="200" width="80" height="70" rx="10" onclick="toggleDistrictMap(this, 'রাজশাহী')"/>
-        <text x="140" y="240" fill="#333" font-size="12" text-anchor="middle">রাজশাহী</text>
-
-        <rect class="map-district" x="220" y="150" width="70" height="60" rx="10" onclick="toggleDistrictMap(this, 'ময়মনসিংহ')"/>
-        <text x="255" y="185" fill="#333" font-size="12" text-anchor="middle">ময়মনসিংহ</text>
-
-        <rect class="map-district" x="180" y="380" width="80" height="60" rx="10" onclick="toggleDistrictMap(this, 'বরিশাল')"/>
-        <text x="220" y="415" fill="#333" font-size="12" text-anchor="middle">বরিশাল</text>
-
-        <rect class="map-district" x="100" y="330" width="70" height="80" rx="10" onclick="toggleDistrictMap(this, 'খুলনা')"/>
-        <text x="135" y="375" fill="#333" font-size="12" text-anchor="middle">খুলনা</text>
-
-        <rect class="map-district" x="120" y="80" width="80" height="80" rx="10" onclick="toggleDistrictMap(this, 'রংপুর')"/>
-        <text x="160" y="125" fill="#333" font-size="12" text-anchor="middle">রংপুর</text>
+    <div class="map-card" id="exportable-card">
+      <h3>🇧🇩 বাংলাদেশ ভ্রমণ মানচিত্র (<span id="visited-count">0</span>/64 জেলা)</h3>
+      <svg class="bd-map-svg" viewBox="0 0 500 700">
+        <!-- Rangpur Division -->
+        <path class="district-path" d="M130,50 L200,40 L230,100 L170,140 L110,100 Z" onclick="toggleDistrict(this, 'পঞ্চগড়/দিনাজপুর/রংপুর/কুড়িগ্রাম')"/>
+        <!-- Mymensingh Division -->
+        <path class="district-path" d="M230,100 L320,90 L330,170 L240,170 Z" onclick="toggleDistrict(this, 'ময়মনসিংহ/নেত্রকোণা/শেরপুর/জামালপুর')"/>
+        <!-- Sylhet Division -->
+        <path class="district-path" d="M330,90 L450,110 L440,210 L340,180 Z" onclick="toggleDistrict(this, 'সিলেট/সুনামগঞ্জ/মৌলভীবাজার/হবিগঞ্জ')"/>
+        <!-- Dhaka Division -->
+        <path class="district-path" d="M220,180 L330,180 L320,300 L210,280 Z" onclick="toggleDistrict(this, 'ঢাকা/গাজীপুর/নারায়ণগঞ্জ/টাঙ্গাইল')"/>
+        <!-- Rajshahi Division -->
+        <path class="district-path" d="M110,110 L220,180 L190,270 L90,220 Z" onclick="toggleDistrict(this, 'রাজশাহী/বগুড়া/পাবনা/নাটোর')"/>
+        <!-- Khulna Division -->
+        <path class="district-path" d="M90,230 L200,280 L180,450 L80,410 Z" onclick="toggleDistrict(this, 'খুলনা/যশোর/সাতক্ষীরা/কুষ্টিয়া')"/>
+        <!-- Barishal Division -->
+        <path class="district-path" d="M190,380 L290,370 L280,490 L180,470 Z" onclick="toggleDistrict(this, 'বরিশাল/পটুয়াখালী/ভোলা/বরগুনা')"/>
+        <!-- Chattogram Division -->
+        <path class="district-path" d="M310,290 L400,270 L450,450 L330,520 L280,390 Z" onclick="toggleDistrict(this, 'চট্টগ্রাম/কক্সবাজার/বান্দরবান/কুমিল্লা')"/>
       </svg>
-      <div id="selected-list-display" style="font-size:14px; margin-top:10px; color:#555;">এখনো কোনো জেলা নির্বাচন করা হয়নি।</div>
+      <div id="selected-list-display" style="font-size:14px; margin-top:12px; color:#475569; font-weight:600;">এখনো কোনো জেলা নির্বাচন করা হয়নি।</div>
     </div>
 
-    <button class="btn btn-accent" onclick="downloadImage()">📸 মানচিত্র ডাউনলোড করুন (PNG)</button>
+    <div class="card">
+      <h4>সরাসরি জেলা নির্বাচন করুন (৬৪ জেলা):</h4>
+      <div class="district-tags" id="all-districts-tags"></div>
+    </div>
+
+    <button class="btn btn-accent" onclick="downloadImage()">📸 কার্ড ও মানচিত্র ডাউনলোড করুন (PNG)</button>
   </div>
 
-  <!-- 2. WORLD TAB -->
+  <!-- 2. WORLD MAP TAB -->
   <div id="world" class="tab-content">
     <div class="hero-banner" style="background: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.85)), url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80');">
-      <h2 style="margin:0;">বিশ্বের কোথায় কোথায় গিয়েছেন?</h2>
-      <p style="margin-top:5px; font-size:14px;">১৯৭টি দেশ ও ৬টি মহাদেশ ট্র্যাকিং</p>
+      <h2 style="margin:0;">আন্তর্জাতিক ভ্রমণ নির্দেশিকা</h2>
+      <p style="margin-top:5px; font-size:14px;">বিশ্বের ১৯৬টি দেশের মধ্যে আপনার ঘুরে আসা দেশগুলো সিলেক্ট করুন!</p>
+    </div>
+
+    <div class="map-card">
+      <h3>🌍 আন্তর্জাতিক বিশ্ব মানচিত্র</h3>
+      <svg class="world-map-svg" viewBox="0 0 1000 500">
+        <path class="country-path" d="M100,80 L300,60 L280,220 L120,200 Z" onclick="toggleCountry(this, 'উত্তর আমেরিকা (আমেরিকা/কানাডা)')"/>
+        <path class="country-path" d="M250,240 L350,250 L300,450 L220,350 Z" onclick="toggleCountry(this, 'দক্ষিণ আমেরিকা (ব্রাজিল/আর্জেন্টিনা)')"/>
+        <path class="country-path" d="M450,80 L580,70 L560,180 L440,160 Z" onclick="toggleCountry(this, 'ইউরোপ (যুক্তরাজ্য/জার্মানি/ফ্রান্স)')"/>
+        <path class="country-path" d="M440,190 L580,190 L550,380 L430,300 Z" onclick="toggleCountry(this, 'আফ্রিকা (মিশর/দক্ষিণ আফ্রিকা)')"/>
+        <path class="country-path" d="M590,60 L900,50 L850,280 L580,200 Z" onclick="toggleCountry(this, 'এশিয়া (বাংলাদেশ/ভারত/চীন/সৌদি আরব)')"/>
+        <path class="country-path" d="M750,320 L900,310 L880,440 L740,420 Z" onclick="toggleCountry(this, 'অস্ট্রেলিয়া ও ওশেনিয়া')"/>
+      </svg>
+      <div id="world-selected-display" style="font-size:14px; margin-top:10px; color:#475569;">এখনো কোনো দেশ সিলেক্ট করেননি।</div>
     </div>
 
     <div class="card">
-      <h3>🌍 আন্তর্জাতিক গন্তব্য নির্বাচন করুন</h3>
-      <div class="district-tags">
-        <div class="district-tag" onclick="this.classList.toggle('selected')">🇧🇩 বাংলাদেশ</div>
-        <div class="district-tag" onclick="this.classList.toggle('selected')">🇮🇳 ভারত</div>
-        <div class="district-tag" onclick="this.classList.toggle('selected')">🇸🇬 সিঙ্গাপুর</div>
-        <div class="district-tag" onclick="this.classList.toggle('selected')">🇲🇾 মালয়েশিয়া</div>
-        <div class="district-tag" onclick="this.classList.toggle('selected')">🇸🇦 সৌদি আরব</div>
-        <div class="district-tag" onclick="this.classList.toggle('selected')">🇦🇪 সংযুক্ত আরব আমিরাত</div>
-        <div class="district-tag" onclick="this.classList.toggle('selected')">🇹🇭 থাইল্যান্ড</div>
-        <div class="district-tag" onclick="this.classList.toggle('selected')">🇬🇧 যুক্তরাজ্য</div>
-        <div class="district-tag" onclick="this.classList.toggle('selected')">🇺🇸 যুক্তরাষ্ট্র</div>
-      </div>
+      <h3>বিশ্বের দেশ সিলেক্ট করুন:</h3>
+      <select id="world-country-select" onchange="addSelectedCountry()">
+        <option value="">-- দেশ নির্বাচন করুন --</option>
+      </select>
+      <div class="district-tags" id="selected-countries-container"></div>
     </div>
   </div>
 
-  <!-- 3. GUIDE TAB (Division, District, Upazila & Union) -->
+  <!-- 3. DETAILED UPAZILA & UNION GUIDE TAB -->
   <div id="guide" class="tab-content">
     <div class="card">
-      <h3>📍 সারা বাংলাদেশের বিভাগ, জেলা, উপজেলা ও ইউনিয়ন</h3>
-      <p style="font-size: 13px; color: #666;">বিভাগ ও জেলা নির্বাচন করে আপনার উপজেলা দেখুন:</p>
+      <h3>📍 জেলা, উপজেলা, ইউনিয়ন ও যাতায়াত নির্দেশিকা</h3>
       
-      <label>১. বিভাগ সিলেক্ট করুন:</label>
+      <label>১. বিভাগ বেছে নিন:</label>
       <select id="division-select" onchange="loadDistricts()">
-        <option value="">-- বিভাগ বেছে নিন --</option>
-        <option value="dhaka">ঢাকা</option>
-        <option value="mymensingh">ময়মনসিংহ</option>
-        <option value="chittagong">চট্টগ্রাম</option>
+        <option value="">-- বিভাগ নির্বাচন করুন --</option>
+        <option value="mymensingh">ময়মনসিংহ বিভাগ</option>
+        <option value="dhaka">ঢাকা বিভাগ</option>
+        <option value="chittagong">চট্টগ্রাম বিভাগ</option>
+        <option value="sylhet">সিলেট বিভাগ</option>
       </select>
 
-      <label>২. জেলা সিলেক্ট করুন:</label>
+      <label>২. জেলা বেছে নিন:</label>
       <select id="district-select" onchange="loadUpazilas()">
         <option value="">-- আগে বিভাগ বেছে নিন --</option>
       </select>
 
-      <label>৩. উপজেলা সমূহ:</label>
-      <div id="upazila-list" class="district-tags"></div>
+      <label>৩. উপজেলা বেছে নিন:</label>
+      <select id="upazila-select" onchange="showFullDetails()">
+        <option value="">-- আগে জেলা বেছে নিন --</option>
+      </select>
+
+      <!-- Detailed Info Container -->
+      <div id="details-container" style="display:none; margin-top:20px;">
+        
+        <div class="info-box">
+          <h4 style="margin:0 0 8px 0; color:var(--primary);">🏘️ অন্তর্ভুক্ত ইউনিয়নসমূহ:</h4>
+          <p id="info-unions" style="margin:0; font-size:15px;"></p>
+        </div>
+
+        <div class="info-box" style="border-left-color: #d97706;">
+          <h4 style="margin:0 0 8px 0; color:#d97706;">🌟 কিসের জন্য বিখ্যাত ও দর্শনীয় স্থান:</h4>
+          <p id="info-spots" style="margin:0; font-size:15px;"></p>
+        </div>
+
+        <div class="info-box" style="border-left-color: #2563eb;">
+          <h4 style="margin:0 0 8px 0; color:#2563eb;">🚌 যাতায়াত ও ভাড়া নির্দেশিকা (বাস/ট্রেন):</h4>
+          <p id="info-transport" style="margin:0; font-size:15px;"></p>
+        </div>
+
+        <div class="info-box" style="border-left-color: #dc2626;">
+          <h4 style="margin:0 0 8px 0; color:#dc2626;">🏥 স্বাস্থ্যসেবা (হাসপাতাল ও জরুরি পরিষেবা):</h4>
+          <p id="info-health" style="margin:0; font-size:15px;"></p>
+        </div>
+
+      </div>
     </div>
   </div>
 
-  <!-- 4. QUIZ TAB -->
+  <!-- 4. QUIZ & LEADERBOARD TAB -->
   <div id="quiz" class="tab-content">
     <div class="card">
-      <h3>🧠 সাধারণ জ্ঞান ও বাংলাদেশ কুইজ</h3>
-      <div id="quiz-box">
-        <p id="quiz-q" style="font-weight:bold; font-size:16px;">প্রশ্ন: বাংলাদেশের একমাত্র প্রবাল দ্বীপ কোনটি?</p>
-        <button class="btn" style="background:#f1f5f9; text-align:left;" onclick="answerQuiz(true)">১. সেন্টমার্টিন</button>
-        <button class="btn" style="background:#f1f5f9; text-align:left; margin-top:5px;" onclick="answerQuiz(false)">২. সন্দ্বীপ</button>
-        <button class="btn" style="background:#f1f5f9; text-align:left; margin-top:5px;" onclick="answerQuiz(false)">৩. মহেশখালী</button>
-      </div>
+      <h3>🧠 সাধারণ জ্ঞান ও ভ্রমণ কুইজ</h3>
+      <p id="quiz-q" style="font-weight:bold; font-size:16px;">প্রশ্ন: বাংলাদেশের সবচেয়ে বড় জেলা কোনটি?</p>
+      <button class="btn" style="background:#f1f5f9; text-align:left; color:#1e293b;" onclick="answerQuiz(true)">১. রাঙ্গামাটি</button>
+      <button class="btn" style="background:#f1f5f9; text-align:left; color:#1e293b; margin-top:5px;" onclick="answerQuiz(false)">২. ময়মনসিংহ</button>
+      <button class="btn" style="background:#f1f5f9; text-align:left; color:#1e293b; margin-top:5px;" onclick="answerQuiz(false)">৩. চট্টগ্রাম</button>
     </div>
 
     <div class="card">
-      <h3>🏆 সর্বোচ্চ পয়েন্ট অর্জনকারী লিডারবোর্ড</h3>
-      <ol id="leaderboard" style="padding-left:20px;">
-        <li><strong>মোস্তাক আহমেদ রকি</strong> - ১০০ পয়েন্ট</li>
-        <li>রাকিব হাসান - ৯০ পয়েন্ট</li>
-        <li>তানভীর আহমেদ - ৮০ পয়েন্ট</li>
+      <h3>🏆 লিডারবোর্ড</h3>
+      <ol id="leaderboard" style="padding-left:20px; font-size:16px;">
+        <li><strong>Mustak Ahmed Rocky</strong> - ১২০ পয়েন্ট</li>
+        <li>তানভীর আহমেদ - ১০০ পয়েন্ট</li>
+        <li>সাকিব হাসান - ৯০ পয়েন্ট</li>
       </ol>
     </div>
   </div>
 
-  <!-- 5. PLANNER TAB -->
+  <!-- 5. TRIP PLANNER TAB -->
   <div id="planner" class="tab-content">
     <div class="card">
       <h3>🗺️ ভ্রমণ ও ট্রিপ প্ল্যানার</h3>
       <label>ভ্রমণকারীর নাম:</label>
-      <input type="text" placeholder="আপনার নাম লিখুন..." value="মোস্তাক আহমেদ রকি">
-      
-      <label>কোথা থেকে শুরু করবেন?</label>
-      <input type="text" placeholder="যেমন: ঢাকা বা নেত্রকোণা">
+      <input type="text" value="Mustak Ahmed Rocky">
 
-      <label>গন্তব্য জেলা/উপজেলা:</label>
-      <input type="text" placeholder="যেমন: সাজেক, কক্সবাজার বা শ্রীমঙ্গল">
+      <label>যাত্রার সূচনা স্থান (জেলা/উপজেলা):</label>
+      <input type="text" placeholder="যেমন: নেত্রকোণা সদর">
 
-      <button class="btn btn-primary">প্ল্যান সেভ করুন</button>
+      <label>গন্তব্য স্থান (দেশ/জেলা/উপজেলা):</label>
+      <input type="text" placeholder="যেমন: সাজেক / কক্সবাজার / নেপাল">
+
+      <button class="btn btn-primary">ট্রিপ প্ল্যান তৈরি করুন</button>
     </div>
   </div>
 
 </div>
 
-<!-- WhatsApp Support Button -->
+<!-- Developer WhatsApp -->
 <a href="https://wa.me/8801810751836" target="_blank" class="whatsapp-float">
   💬 Developer WhatsApp
 </a>
@@ -358,56 +398,148 @@
 </footer>
 
 <script>
-  // District Data Database
-  const dataStore = {
-    dhaka: {
-      "ঢাকা": ["ধানমন্ডি", "মিরপুর", "গুলশান", "সাভার", "ধামরাই"],
-      "গাজীপুর": ["গাজীপুর সদর", "কালিয়াকৈর", "শ্রীপুর", "কাপাসিয়া"]
-    },
+  // All 64 Districts
+  const allDistricts = [
+    "ঢাকা", "গাজীপুর", "নারায়ণগঞ্জ", "মুন্সীগঞ্জ", "মানিকগঞ্জ", "নরসিংদী", "ফরিদপুর", "মাদারীপুর", "গোপালগঞ্জ", "শরীয়তপুর", "রাজবাড়ী", "টাঙ্গাইল", "কিশোরগঞ্জ",
+    "ময়মনসিংহ", "নেত্রকোণা", "শেরপুর", "জামালপুর",
+    "চট্টগ্রাম", "কক্সবাজার", "বান্দরবান", "রাঙ্গামাটি", "খাগড়াছড়ি", "কুমিল্লা", "নোয়াখালী", "ফেনী", "লক্ষ্মীপুর", "চাঁদপুর", "ব্রাহ্মণবাড়িয়া",
+    "সিলেট", "সুনামগঞ্জ", "মৌলভীবাজার", "হবিগঞ্জ",
+    "রাজশাহী", "বগুড়া", "পাবনা", "নাটোর", "নওগাঁ", "চাঁপাইনবাবগঞ্জ", "সিরাজগঞ্জ", "জয়পুরহাট",
+    "রংপুর", "দিনাজপুর", "গাইবান্ধা", "কুড়িগ্রাম", "লালমনিরহাট", "নীলফামারী", "পঞ্চগড়", "ঠাকুরগাঁও",
+    "খুলনা", "যশোর", "সাতক্ষীরা", "বাগেরহাট", "ঝিনাইদহ", "মাগুরা", "মেহেরপুর", "নড়াইল", "চুয়াডাঙ্গা", "কুষ্টিয়া",
+    "বরিশাল", "পটুয়াখালী", "ভোলা", "পিরোজপুর", "বরগুনা", "ঝালকাঠি"
+  ];
+
+  // World Countries
+  const worldCountries = ["বাংলাদেশ", "ভারত", "সৌদি আরব", "সংযুক্ত আরব আমিরাত", "সিঙ্গাপুর", "মালয়েশিয়া", "থাইল্যান্ড", "যুক্তরাজ্য", "যুক্তরাষ্ট্র", "কানাডা", "অস্ট্রেলিয়া", "জার্মানি", "ফ্রান্স", "জাপান", "চীন", "ইতালি", "কাতার", "তুরস্ক", "মিশর", "ব্রাজিল", "আর্জেন্টিনা", "সুইজারল্যান্ড", "মালদ্বীপ", "নেপাল"];
+
+  // Database structure for Upazila, Unions, Spots, Transports, Hospitals
+  const fullGeoDatabase = {
     mymensingh: {
-      "নেত্রকোণা": ["নেত্রকোণা সদর", "পূর্বধলা", "দুর্গাপুর", "কলমাকান্দা", "কেন্দুয়া"],
-      "শেরপুর": ["শেরপুর সদর", "নালিতাবাড়ী", "শ্রীবরদী", "ঝিনাইগাতী"],
-      "ময়মনসিংহ": ["ময়মনসিংহ সদর", "মুক্তাগাছা", "ফুলবাড়ীয়া", "ত্রিশাল"]
+      "নেত্রকোণা": {
+        "নেত্রকোণা সদর": {
+          unions: "মৌগাতি, মদনপুর, মেদনী, ঠাকুরাকোনা, আমতলা, মৌগাতী, সিংহের বাংলা, কাইলাটি, বাংলা, দক্ষিণপাড়া, মল্লিকপুর, লক্ষ্মীগঞ্জ (মোট ১২টি)",
+          spots: "হযরত শাহ সুলতান কমরউদ্দিন রুমী (র:) মাজার (মদনপুর), নাগরপুর জমিদার বাড়ি, মগড়া নদী তীরবর্তী পার্ক।",
+          transport: "🚌 ঢাকা থেকে মহাখালী বাস টার্মিনাল হয়ে বাস (ভাড়া: ৪০০ - ৪৫০ টাকা)। 🚆 আন্তঃনগর ট্রেন 'হাওয়ার এক্সপ্রেস' ও 'মোহনগঞ্জ এক্সপ্রেস' উপলব্ধ (ভাড়া: ২৬০ - ৭৫০ টাকা)।",
+          health: "🏥 নেত্রকোণা আধুনিক সদর হাসপাতাল (১০০ শয্যা), সেন্ট্রাল হাসপাতাল ও একাধিক প্রাইভেট ডায়াগনস্টিক সেন্টার।"
+        },
+        "দুর্গাপুর": {
+          unions: "কূলশ্রী, বিরিশিরি, গাঁওকান্দিয়া, চণ্ডীগড়, বিরিশিরি, বাকলজোড়া, কাকৈগড়া (মোট ৭টি)",
+          spots: "সুসং দুর্গাপুরের চিনামাটির পাহাড়, বিরিশিরি কালচারাল একাডেমি, সোমেশ্বরী নদী, বিজয়পুর সীমান্ত।",
+          transport: "🚌 নেত্রকোণা বা ঢাকা থেকে সরাসরি দুর্গাপুরের বাস রয়েছে (ভাড়া: ৪৫০ - ৫০০ টাকা)। স্থানীয় লেগুনা ও সিএনজি উপলব্ধ।",
+          health: "🏥 দুর্গাপুর উপজেলা স্বাস্থ্য কমপ্লেক্স এবং জরুরি এ্যাম্বুলেন্স সেবা।"
+        },
+        "পূর্বধলা": {
+          unions: "পূর্বধলা, ঘাগড়া, জারিয়া, বৈরাটি, গোহালাকান্দা, ধোবাউড়া, হোগলা, খলিশাউড়, আগিয়া, বিশকাকুড়া, নারায়ণডহর (মোট ১১টি)",
+          spots: "জারিয়া ঝাঞ্জাইল বালুঘাট, পূর্বধলা রাজবাড়ি ও প্রাচীন দীঘি।",
+          transport: "🚆 রেল যোগাযোগ বিদ্যমান (জারিয়া ঝাঞ্জাইল ট্রেন রুট)। বাস ও সিএনজি ভাড়া: ৫০-১০০ টাকা (নেত্রকোণা থেকে)।",
+          health: "🏥 পূর্বধলা উপজেলা স্বাস্থ্য কমপ্লেক্স।"
+        }
+      },
+      "শেরপুর": {
+        "শেরপুর সদর": {
+          unions: "কামারের চর, শেরপুর চর, চরমোশাররফ, গজারিয়া, ধলা, ভাতশালা (মোট ১৪টি)",
+          spots: "গাজীঝাড়ী মাজার, শেরপুর পৌর পার্ক, মাইসাহেবা জামে মসজিদ।",
+          transport: "🚌 ঢাকা মহাখালী থেকে ড্রিমল্যান্ড/সোনার বাংলা বাস (ভাড়া: ৪০০ টাকা)।",
+          health: "🏥 শেরপুর জেলা সদর হাসপাতাল।"
+        },
+        "নালিতাবাড়ী": {
+          unions: "পোড়াগাঁও, রামচন্দ্রকুড়া, নালিতাবাড়ী, রূপনারায়নকুড়া (মোট ১২টি)",
+          spots: "মধুটিলা ইকোপার্ক, চেল্লাখালী নদী, পাহাড়ি ঝরনা।",
+          transport: "🚌 শেরপুর সদর থেকে সিএনজি বা বাস (ভাড়া: ৮০ - ১০০ টাকা)।",
+          health: "🏥 নালিতাবাড়ী উপজেলা স্বাস্থ্য কমপ্লেক্স।"
+        }
+      }
     },
-    chittagong: {
-      "চট্টগ্রাম": ["কোতোয়ালী", "পতেঙ্গা", "পাঁচলাইশ", "হাঠহাজারী"],
-      "কক্সবাজার": ["কক্সবাজার সদর", "টেকনাফ", "উখিয়া", "মহেশখালী"]
+    dhaka: {
+      "ঢাকা": {
+        "সাভার": {
+          unions: "শিমুলিয়া, ধামসোনা, পাত্তোর, ইয়ারপুর, বিরুলিয়া, বনগাঁও, তেঁতুলঝোড়া, ভাকুড়া (মোট ১২টি)",
+          spots: "জাতীয় স্মৃতিসৌধ, বিরুলিয়া গোলাপ গ্রাম, ফ্যান্টাসি কিউংডম।",
+          transport: "🚌 গাবতলী বা গুলিস্তান থেকে সাভার পরিবহনের বাস (ভাড়া: ৫০ - ৮০ টাকা)।",
+          health: "🏥 এনাম মেডিকেল কলেজ ও হাসপাতাল, সাভার উপজেলা স্বাস্থ্য কমপ্লেক্স।"
+        }
+      }
     }
   };
 
-  let visitedDistricts = new Set();
-  let userScore = 100;
+  let visitedBD = new Set();
+  let visitedWorld = new Set();
+  let userScore = 120;
 
-  function switchTab(tabId) {
+  function initApp() {
+    // Fill 64 Districts
+    const distContainer = document.getElementById('all-districts-tags');
+    allDistricts.forEach(d => {
+      const tag = document.createElement('div');
+      tag.className = 'district-tag';
+      tag.innerText = d;
+      tag.onclick = () => {
+        tag.classList.toggle('selected');
+        if(visitedBD.has(d)) visitedBD.delete(d); else visitedBD.add(d);
+        updateBDCount();
+      };
+      distContainer.appendChild(tag);
+    });
+
+    // Fill World Countries
+    const countrySel = document.getElementById('world-country-select');
+    worldCountries.forEach(c => {
+      countrySel.innerHTML += `<option value="${c}">${c}</option>`;
+    });
+  }
+
+  function switchTab(tabId, btn) {
     document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('.pill-btn').forEach(el => el.classList.remove('active'));
     document.getElementById(tabId).classList.add('active');
-    event.currentTarget.classList.add('active');
+    btn.classList.add('active');
   }
 
-  function toggleDistrictMap(element, name) {
-    if (visitedDistricts.has(name)) {
-      visitedDistricts.delete(name);
-      element.classList.remove('selected');
-    } else {
-      visitedDistricts.add(name);
-      element.classList.add('selected');
-    }
-    document.getElementById('visited-count').innerText = visitedDistricts.size;
+  function toggleDistrict(el, name) {
+    el.classList.toggle('selected');
+    if (visitedBD.has(name)) visitedBD.delete(name);
+    else visitedBD.add(name);
+    updateBDCount();
+  }
+
+  function updateBDCount() {
+    document.getElementById('visited-count').innerText = visitedBD.size;
     document.getElementById('selected-list-display').innerText = 
-      visitedDistricts.size > 0 
-      ? "ভ্রমণকৃত এলাকা: " + Array.from(visitedDistricts).join(', ')
+      visitedBD.size > 0 
+      ? "সিলেক্ট করা অঞ্চল/জেলা: " + Array.from(visitedBD).join(', ')
       : "এখনো কোনো জেলা নির্বাচন করা হয়নি।";
   }
 
+  function toggleCountry(el, name) {
+    el.classList.toggle('selected');
+    if (visitedWorld.has(name)) visitedWorld.delete(name);
+    else visitedWorld.add(name);
+    document.getElementById('world-selected-display').innerText = "ভ্রমণ করা দেশ/মহাদেশ: " + Array.from(visitedWorld).join(', ');
+  }
+
+  function addSelectedCountry() {
+    const val = document.getElementById('world-country-select').value;
+    if(val && !visitedWorld.has(val)) {
+      visitedWorld.add(val);
+      const container = document.getElementById('selected-countries-container');
+      container.innerHTML += `<div class="district-tag selected">${val}</div>`;
+      document.getElementById('world-selected-display').innerText = "ভ্রমণ করা দেশ: " + Array.from(visitedWorld).join(', ');
+    }
+  }
+
+  // Guide Dropdowns Logic
   function loadDistricts() {
     const div = document.getElementById('division-select').value;
     const distSelect = document.getElementById('district-select');
-    distSelect.innerHTML = '<option value="">-- জেলা বেছে নিন --</option>';
-    document.getElementById('upazila-list').innerHTML = '';
+    const upSelect = document.getElementById('upazila-select');
+    
+    distSelect.innerHTML = '<option value="">-- জেলা নির্বাচন করুন --</option>';
+    upSelect.innerHTML = '<option value="">-- আগে জেলা বেছে নিন --</option>';
+    document.getElementById('details-container').style.display = 'none';
 
-    if (div && dataStore[div]) {
-      Object.keys(dataStore[div]).forEach(dist => {
+    if (div && fullGeoDatabase[div]) {
+      Object.keys(fullGeoDatabase[div]).forEach(dist => {
         distSelect.innerHTML += `<option value="${dist}">${dist}</option>`;
       });
     }
@@ -416,23 +548,43 @@
   function loadUpazilas() {
     const div = document.getElementById('division-select').value;
     const dist = document.getElementById('district-select').value;
-    const upContainer = document.getElementById('upazila-list');
-    upContainer.innerHTML = '';
+    const upSelect = document.getElementById('upazila-select');
+    
+    upSelect.innerHTML = '<option value="">-- উপজেলা নির্বাচন করুন --</option>';
+    document.getElementById('details-container').style.display = 'none';
 
-    if (div && dist && dataStore[div][dist]) {
-      dataStore[div][dist].forEach(upazila => {
-        upContainer.innerHTML += `<div class="district-tag">${upazila}</div>`;
+    if (div && dist && fullGeoDatabase[div][dist]) {
+      Object.keys(fullGeoDatabase[div][dist]).forEach(up => {
+        upSelect.innerHTML += `<option value="${up}">${up}</option>`;
       });
+    }
+  }
+
+  function showFullDetails() {
+    const div = document.getElementById('division-select').value;
+    const dist = document.getElementById('district-select').value;
+    const up = document.getElementById('upazila-select').value;
+    const container = document.getElementById('details-container');
+
+    if (div && dist && up && fullGeoDatabase[div][dist][up]) {
+      const data = fullGeoDatabase[div][dist][up];
+      document.getElementById('info-unions').innerText = data.unions;
+      document.getElementById('info-spots').innerText = data.spots;
+      document.getElementById('info-transport').innerText = data.transport;
+      document.getElementById('info-health').innerText = data.health;
+      container.style.display = 'block';
+    } else {
+      container.style.display = 'none';
     }
   }
 
   function answerQuiz(isCorrect) {
     if(isCorrect) {
-      alert("🎉 চমৎকার! সঠিক উত্তর দিয়েছেন। ১০ পয়েন্ট যুক্ত করা হয়েছে।");
+      alert("🎉 অসাধারণ! সঠিক উত্তর দিয়েছেন। ১০ পয়েন্ট যোগ হয়েছে।");
       userScore += 10;
-      document.querySelector('#leaderboard li').innerHTML = `<strong>মোস্তাক আহমেদ রকি</strong> - ${userScore} পয়েন্ট`;
+      document.querySelector('#leaderboard li').innerHTML = `<strong>Mostak Ahmed Rocky</strong> - ${userScore} পয়েন্ট`;
     } else {
-      alert("❌ ভুল উত্তর, আবার চেষ্টা করুন!");
+      alert("❌ ভুল উত্তর! সঠিক উত্তর রাঙ্গামাটি।");
     }
   }
 
@@ -440,11 +592,13 @@
     html2canvas(document.getElementById('exportable-card')).then(canvas => {
       const a = document.createElement('a');
       a.href = canvas.toDataURL('image/png');
-      a.download = 'my-bangladesh-map.png';
+      a.download = 'my-travel-map.png';
       a.click();
     });
   }
+
+  window.onload = initApp;
 </script>
 
 </body>
-          </html>
+  </html>
