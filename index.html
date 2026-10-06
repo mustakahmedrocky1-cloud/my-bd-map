@@ -1,423 +1,3799 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>আমার সোনার বাংলাদেশ ও বিশ্ব ভ্রমণ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <style>
-    :root {
-      --primary-color: #006a4e;
-      --accent-color: #f42a41;
-      --bg-color: #f4f6f8;
-      --card-bg: #ffffff;
-      --text-color: #1e293b;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#006a4e">
+<meta name="description" content="নেত্রকোণা হেল্পলাইন — নেত্রকোণার প্রয়োজনীয় তথ্য এক জায়গায়">
+
+<title>নেত্রকোণা হেল্পলাইন</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --green:#006a4e;
+    --green2:#008f68;
+    --red:#f42a41;
+    --dark:#061713;
+    --dark2:#0a211b;
+    --white:#ffffff;
+    --glass:rgba(255,255,255,.10);
+    --border:rgba(255,255,255,.17);
+    --shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Noto Sans Bengali",sans-serif;
+    background:
+        radial-gradient(circle at 20% 10%,rgba(0,143,104,.18),transparent 35%),
+        radial-gradient(circle at 90% 20%,rgba(244,42,65,.10),transparent 30%),
+        #061713;
+    color:white;
+    overflow-x:hidden;
+}
+
+button,
+input{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+
+/* =========================================================
+   INTRO SCREEN
+========================================================= */
+
+#intro{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    overflow:hidden;
+    background:
+        linear-gradient(180deg,#001d15 0%,#003d2d 48%,#00140f 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:opacity 1s ease,visibility 1s ease;
+}
+
+#intro.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+.intro-stars{
+    position:absolute;
+    inset:0;
+    background-image:
+        radial-gradient(circle,rgba(255,255,255,.7) 1px,transparent 1px);
+    background-size:55px 55px;
+    opacity:.25;
+    animation:starMove 20s linear infinite;
+}
+
+@keyframes starMove{
+    from{transform:translateY(0)}
+    to{transform:translateY(55px)}
+}
+
+.intro-content{
+    position:relative;
+    z-index:5;
+    text-align:center;
+    padding:20px;
+    animation:introContent 1.2s ease;
+}
+
+@keyframes introContent{
+    from{
+        opacity:0;
+        transform:translateY(40px) scale(.9);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+
+/* Bangladesh emblem */
+
+.bd-emblem{
+    width:145px;
+    height:145px;
+    margin:0 auto 25px;
+    border-radius:50%;
+    background:
+        radial-gradient(circle,#f42a41 0 23%,transparent 24%),
+        #006a4e;
+    border:5px solid rgba(255,255,255,.8);
+    box-shadow:
+        0 0 0 12px rgba(255,255,255,.06),
+        0 0 70px rgba(0,255,175,.45);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    animation:
+        emblemFloat 3s ease-in-out infinite,
+        emblemGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes emblemFloat{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-12px)}
+}
+
+@keyframes emblemGlow{
+    from{box-shadow:0 0 0 12px rgba(255,255,255,.06),0 0 40px rgba(0,255,175,.25)}
+    to{box-shadow:0 0 0 18px rgba(255,255,255,.08),0 0 90px rgba(0,255,175,.65)}
+}
+
+.bd-emblem span{
+    font-size:70px;
+    font-weight:900;
+    color:white;
+}
+
+.intro-title{
+    font-size:clamp(35px,7vw,75px);
+    font-weight:900;
+    letter-spacing:-2px;
+    text-shadow:0 8px 30px rgba(0,0,0,.4);
+    animation:titleReveal 1.5s ease;
+}
+
+@keyframes titleReveal{
+    from{
+        opacity:0;
+        letter-spacing:15px;
+        filter:blur(10px);
+    }
+    to{
+        opacity:1;
+        letter-spacing:-2px;
+        filter:none;
+    }
+}
+
+.intro-subtitle{
+    margin-top:10px;
+    color:#b9e8d8;
+    font-size:clamp(14px,2vw,20px);
+}
+
+.intro-loader{
+    width:220px;
+    height:5px;
+    background:rgba(255,255,255,.12);
+    border-radius:20px;
+    margin:35px auto 0;
+    overflow:hidden;
+}
+
+.intro-loader span{
+    display:block;
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,#f42a41,#fff,#006a4e);
+    animation:loader 3.2s ease forwards;
+}
+
+@keyframes loader{
+    to{width:100%}
+}
+
+
+/* Animated landscape */
+
+.landscape{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:35%;
+}
+
+.mountain{
+    position:absolute;
+    bottom:0;
+    width:0;
+    height:0;
+    border-left:180px solid transparent;
+    border-right:180px solid transparent;
+    border-bottom:220px solid #06392c;
+    filter:drop-shadow(0 -10px 20px rgba(0,0,0,.2));
+}
+
+.m1{
+    left:-100px;
+}
+
+.m2{
+    left:22%;
+    border-bottom-color:#07503c;
+    transform:scale(1.2);
+}
+
+.m3{
+    right:10%;
+    border-bottom-color:#043226;
+    transform:scale(.9);
+}
+
+.m4{
+    right:-120px;
+    border-bottom-color:#06402f;
+}
+
+.river{
+    position:absolute;
+    left:-5%;
+    right:-5%;
+    bottom:-80px;
+    height:150px;
+    background:#075d68;
+    transform:rotate(-2deg);
+    box-shadow:0 -10px 35px rgba(0,180,220,.12);
+    animation:riverFlow 5s ease-in-out infinite;
+}
+
+@keyframes riverFlow{
+    0%,100%{transform:rotate(-2deg) translateY(0)}
+    50%{transform:rotate(-2deg) translateY(-8px)}
+}
+
+.boat{
+    position:absolute;
+    bottom:85px;
+    left:-100px;
+    font-size:55px;
+    animation:boatMove 13s linear infinite;
+}
+
+@keyframes boatMove{
+    from{left:-100px}
+    to{left:110%}
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+#app{
+    opacity:0;
+    transform:translateY(20px);
+    transition:opacity 1s ease,transform 1s ease;
+}
+
+#app.show{
+    opacity:1;
+    transform:none;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(4,25,20,.82);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);
+}
+
+.nav{
+    max-width:1250px;
+    margin:auto;
+    padding:13px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.brand-logo{
+    width:48px;
+    height:48px;
+    border-radius:15px;
+    background:linear-gradient(145deg,#008f68,#004d3a);
+    display:grid;
+    place-items:center;
+    font-size:25px;
+    font-weight:900;
+    box-shadow:0 10px 30px rgba(0,143,104,.25);
+}
+
+.brand-text h1{
+    font-size:20px;
+    font-weight:900;
+}
+
+.brand-text small{
+    color:#8bd5c0;
+    font-size:11px;
+}
+
+.nav-actions{
+    display:flex;
+    gap:8px;
+}
+
+.nav-btn{
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.07);
+    color:white;
+    border-radius:12px;
+    padding:9px 14px;
+    transition:.3s;
+}
+
+.nav-btn:hover{
+    background:#008f68;
+    transform:translateY(-2px);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    position:relative;
+    min-height:570px;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    background:
+        linear-gradient(135deg,rgba(0,106,78,.95),rgba(2,26,21,.92)),
+        radial-gradient(circle at 70% 40%,#008f68,transparent 35%);
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:600px;
+    height:600px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:50%;
+    right:-200px;
+    top:-200px;
+    animation:orbit 20s linear infinite;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    width:400px;
+    height:400px;
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:50%;
+    right:-100px;
+    top:-100px;
+    animation:orbit 15s linear infinite reverse;
+}
+
+@keyframes orbit{
+    from{transform:rotate(0)}
+    to{transform:rotate(360deg)}
+}
+
+.hero-inner{
+    width:min(1200px,92%);
+    margin:auto;
+    position:relative;
+    z-index:5;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    align-items:center;
+    gap:40px;
+}
+
+.hero-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(255,255,255,.09);
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:30px;
+    padding:8px 15px;
+    color:#b8eede;
+    margin-bottom:20px;
+    animation:pulseSoft 2s infinite;
+}
+
+@keyframes pulseSoft{
+    50%{box-shadow:0 0 30px rgba(0,255,170,.12)}
+}
+
+.hero h2{
+    font-size:clamp(38px,6vw,72px);
+    line-height:1.05;
+    font-weight:900;
+    letter-spacing:-2px;
+}
+
+.hero h2 span{
+    background:linear-gradient(90deg,#fff,#9ff5d8);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    margin-top:20px;
+    color:#b8d9d0;
+    font-size:17px;
+    line-height:1.8;
+}
+
+.hero-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:28px;
+}
+
+.primary-btn,
+.secondary-btn{
+    border:none;
+    padding:13px 19px;
+    border-radius:14px;
+    font-weight:800;
+    transition:.35s;
+}
+
+.primary-btn{
+    color:white;
+    background:linear-gradient(135deg,#00a875,#006a4e);
+    box-shadow:0 12px 35px rgba(0,170,117,.25);
+}
+
+.secondary-btn{
+    color:white;
+    background:rgba(255,255,255,.08);
+    border:1px solid var(--border);
+}
+
+.primary-btn:hover,
+.secondary-btn:hover{
+    transform:translateY(-4px) scale(1.02);
+}
+
+.hero-art{
+    min-height:390px;
+    position:relative;
+}
+
+.hero-circle{
+    position:absolute;
+    width:330px;
+    height:330px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.12);
+    right:30px;
+    top:20px;
+    animation:floatCircle 6s ease-in-out infinite;
+}
+
+@keyframes floatCircle{
+    50%{transform:translateY(-20px) rotate(8deg)}
+}
+
+.hero-bd{
+    position:absolute;
+    inset:50px 40px auto auto;
+    width:250px;
+    height:300px;
+    opacity:.95;
+}
+
+.hero-bd .map-shape{
+    width:190px;
+    height:270px;
+    margin:auto;
+    background:#006a4e;
+    clip-path:polygon(
+        35% 0%,55% 6%,63% 17%,78% 22%,
+        72% 34%,90% 44%,80% 57%,88% 70%,
+        69% 76%,62% 92%,48% 100%,36% 86%,
+        24% 90%,18% 75%,4% 67%,13% 51%,
+        2% 39%,19% 27%,15% 14%
+    );
+    filter:drop-shadow(0 20px 30px rgba(0,0,0,.3));
+}
+
+.hero-bd .red-dot{
+    position:absolute;
+    width:62px;
+    height:62px;
+    border-radius:50%;
+    background:#f42a41;
+    left:92px;
+    top:112px;
+    box-shadow:0 0 40px rgba(244,42,65,.5);
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-area{
+    width:min(1050px,92%);
+    margin:-42px auto 0;
+    position:relative;
+    z-index:20;
+}
+
+.search-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:9px;
+    background:rgba(9,31,25,.92);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(20px);
+}
+
+.search-box span{
+    font-size:23px;
+    margin-left:10px;
+}
+
+.search-box input{
+    flex:1;
+    min-width:0;
+    border:none;
+    outline:none;
+    background:transparent;
+    color:white;
+    font-size:16px;
+    padding:14px 5px;
+}
+
+.search-box input::placeholder{
+    color:#7da69b;
+}
+
+.search-btn{
+    border:none;
+    border-radius:14px;
+    background:#008f68;
+    color:white;
+    padding:12px 18px;
+    font-weight:800;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.container{
+    width:min(1200px,92%);
+    margin:70px auto;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.section-title small{
+    color:#6dd3b5;
+    font-weight:700;
+}
+
+.section-title h3{
+    font-size:clamp(28px,4vw,42px);
+    font-weight:900;
+    margin-top:5px;
+}
+
+.section-title p{
+    color:#86a89f;
+    margin-top:8px;
+}
+
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.service-card{
+    position:relative;
+    overflow:hidden;
+    min-height:145px;
+    border-radius:23px;
+    padding:22px;
+    background:
+        linear-gradient(145deg,rgba(255,255,255,.095),rgba(255,255,255,.035));
+    border:1px solid rgba(255,255,255,.11);
+    transition:.4s cubic-bezier(.2,.8,.2,1);
+    cursor:pointer;
+}
+
+.service-card::before{
+    content:"";
+    position:absolute;
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    background:var(--card-color,#00a875);
+    opacity:.08;
+    right:-40px;
+    bottom:-50px;
+    transition:.4s;
+}
+
+.service-card:hover{
+    transform:translateY(-9px);
+    border-color:rgba(255,255,255,.25);
+    box-shadow:0 20px 45px rgba(0,0,0,.22);
+}
+
+.service-card:hover::before{
+    width:190px;
+    height:190px;
+}
+
+.service-icon{
+    font-size:35px;
+    margin-bottom:15px;
+    display:block;
+    transition:.4s;
+}
+
+.service-card:hover .service-icon{
+    transform:scale(1.2) rotate(-5deg);
+}
+
+.service-card h4{
+    font-size:17px;
+    font-weight:800;
+}
+
+.service-card p{
+    color:#7fa69b;
+    font-size:12px;
+    margin-top:5px;
+}
+
+
+/* =========================================================
+   EMERGENCY
+========================================================= */
+
+.emergency-section{
+    margin-top:80px;
+}
+
+.emergency-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.emergency-card{
+    padding:23px;
+    border-radius:23px;
+    background:linear-gradient(145deg,rgba(244,42,65,.14),rgba(255,255,255,.04));
+    border:1px solid rgba(244,42,65,.20);
+    transition:.35s;
+}
+
+.emergency-card:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 50px rgba(244,42,65,.12);
+}
+
+.emergency-card .num{
+    font-size:32px;
+    font-weight:900;
+    color:#ff6c7c;
+}
+
+.emergency-card h4{
+    margin-top:8px;
+}
+
+.emergency-card p{
+    color:#90aaa3;
+    font-size:12px;
+    margin:5px 0 15px;
+}
+
+.call-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:#f42a41;
+    color:white;
+    border-radius:10px;
+    padding:8px 13px;
+    font-size:13px;
+    font-weight:800;
+}
+
+
+/* =========================================================
+   UPZILA
+========================================================= */
+
+.upazila-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:12px;
+}
+
+.upazila-card{
+    border:1px solid rgba(255,255,255,.1);
+    background:rgba(255,255,255,.055);
+    border-radius:18px;
+    padding:17px;
+    text-align:center;
+    transition:.3s;
+    cursor:pointer;
+}
+
+.upazila-card:hover{
+    background:#008f68;
+    transform:translateY(-5px);
+}
+
+.upazila-card .emoji{
+    font-size:28px;
+    display:block;
+    margin-bottom:7px;
+}
+
+.upazila-card strong{
+    font-size:14px;
+}
+
+
+/* =========================================================
+   TOURISM
+========================================================= */
+
+.tour-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.tour-card{
+    min-height:210px;
+    border-radius:25px;
+    overflow:hidden;
+    position:relative;
+    background:
+        linear-gradient(180deg,transparent 20%,rgba(0,0,0,.9)),
+        linear-gradient(135deg,#0b654e,#153c33);
+    border:1px solid rgba(255,255,255,.12);
+    transition:.4s;
+}
+
+.tour-card:hover{
+    transform:scale(1.025);
+}
+
+.tour-visual{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+}
+
+.tour-visual::before{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    background:#07523f;
+    border-radius:50%;
+    right:-50px;
+    top:-60px;
+}
+
+.tour-visual::after{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:100px;
+    background:#075f69;
+    transform:rotate(-10deg);
+    bottom:35px;
+    left:-40px;
+}
+
+.tour-content{
+    position:absolute;
+    z-index:2;
+    bottom:18px;
+    left:18px;
+    right:18px;
+}
+
+.tour-content h4{
+    font-size:20px;
+}
+
+.tour-content p{
+    color:#bfd9d2;
+    font-size:12px;
+    margin-top:4px;
+}
+
+
+/* =========================================================
+   DIRECTORY
+========================================================= */
+
+.directory{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.info-panel{
+    padding:25px;
+    border-radius:25px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.info-panel h4{
+    font-size:21px;
+    margin-bottom:17px;
+}
+
+.info-list{
+    display:grid;
+    gap:10px;
+}
+
+.info-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:12px 13px;
+    border-radius:14px;
+    background:rgba(255,255,255,.045);
+}
+
+.info-item span{
+    color:#b9cec8;
+    font-size:13px;
+}
+
+.info-item b{
+    color:#70dfbd;
+}
+
+.info-item a{
+    color:#70dfbd;
+    font-weight:800;
+}
+
+
+/* =========================================================
+   DEVELOPER
+========================================================= */
+
+.developer{
+    margin-top:90px;
+    position:relative;
+    overflow:hidden;
+    border-radius:30px;
+    padding:50px 25px;
+    text-align:center;
+    background:
+        radial-gradient(circle at 50% 0%,rgba(0,255,170,.18),transparent 45%),
+        rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.11);
+}
+
+.developer::before,
+.developer::after{
+    content:"";
+    position:absolute;
+    width:200px;
+    height:200px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.07);
+    animation:developerOrbit 10s linear infinite;
+}
+
+.developer::before{
+    left:-80px;
+    top:-80px;
+}
+
+.developer::after{
+    right:-80px;
+    bottom:-80px;
+    animation-direction:reverse;
+}
+
+@keyframes developerOrbit{
+    to{transform:rotate(360deg)}
+}
+
+.dev-label{
+    color:#73dabb;
+    font-size:13px;
+    font-weight:700;
+}
+
+.dev-name{
+    font-size:clamp(30px,5vw,55px);
+    font-weight:900;
+    margin:10px 0;
+    background:linear-gradient(90deg,#fff,#64e8bf,#fff);
+    background-size:200%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:nameShine 3s linear infinite;
+}
+
+@keyframes nameShine{
+    to{background-position:200%}
+}
+
+.dev-role{
+    color:#88a9a1;
+}
+
+.whatsapp{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:22px;
+    background:#25d366;
+    color:white;
+    padding:12px 20px;
+    border-radius:15px;
+    font-weight:900;
+    box-shadow:0 10px 30px rgba(37,211,102,.2);
+    transition:.3s;
+}
+
+.whatsapp:hover{
+    transform:translateY(-4px) scale(1.03);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    margin-top:80px;
+    border-top:1px solid rgba(255,255,255,.08);
+    padding:35px 20px;
+    text-align:center;
+    color:#71958c;
+    font-size:13px;
+}
+
+footer strong{
+    color:#a9d9cc;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:9000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(0,0,0,.7);
+    backdrop-filter:blur(12px);
+}
+
+.modal.active{
+    display:flex;
+    animation:modalFade .3s ease;
+}
+
+@keyframes modalFade{
+    from{opacity:0}
+    to{opacity:1}
+}
+
+.modal-box{
+    width:min(620px,100%);
+    max-height:90vh;
+    overflow:auto;
+    background:
+        linear-gradient(145deg,#0c2921,#061713);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:28px;
+    padding:25px;
+    box-shadow:0 30px 100px rgba(0,0,0,.5);
+    animation:modalUp .45s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes modalUp{
+    from{
+        opacity:0;
+        transform:translateY(50px) scale(.94);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.modal-head h3{
+    font-size:24px;
+}
+
+.close{
+    width:38px;
+    height:38px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.1);
+    background:rgba(255,255,255,.06);
+    color:white;
+    font-size:20px;
+}
+
+.modal-description{
+    color:#8daaa3;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+.data-grid{
+    display:grid;
+    gap:10px;
+}
+
+.data-card{
+    padding:16px;
+    border-radius:16px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.data-card h4{
+    font-size:16px;
+}
+
+.data-card p{
+    color:#89aaa0;
+    font-size:13px;
+    margin:5px 0 10px;
+    line-height:1.6;
+}
+
+.badge{
+    display:inline-block;
+    padding:4px 8px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:800;
+    background:rgba(0,190,140,.12);
+    color:#66e0bd;
+    margin-right:5px;
+}
+
+.badge.warning{
+    background:rgba(255,180,0,.1);
+    color:#ffd16a;
+}
+
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+.auth-tabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    padding:5px;
+    background:rgba(255,255,255,.05);
+    border-radius:14px;
+    margin-bottom:20px;
+}
+
+.auth-tab{
+    padding:11px;
+    border:none;
+    border-radius:10px;
+    background:transparent;
+    color:#87a79e;
+    font-weight:800;
+}
+
+.auth-tab.active{
+    background:#008f68;
+    color:white;
+}
+
+.form-group{
+    margin-bottom:14px;
+}
+
+.form-group label{
+    display:block;
+    font-size:12px;
+    color:#9eb7b0;
+    margin-bottom:6px;
+}
+
+.form-control{
+    width:100%;
+    padding:13px 14px;
+    border-radius:13px;
+    border:1px solid rgba(255,255,255,.1);
+    outline:none;
+    background:rgba(255,255,255,.055);
+    color:white;
+}
+
+.form-control:focus{
+    border-color:#00a875;
+    box-shadow:0 0 0 4px rgba(0,168,117,.08);
+}
+
+.password-wrap{
+    position:relative;
+}
+
+.password-wrap button{
+    position:absolute;
+    right:8px;
+    top:7px;
+    height:38px;
+    border:none;
+    border-radius:9px;
+    background:rgba(255,255,255,.06);
+    color:white;
+}
+
+.auth-submit{
+    width:100%;
+    border:none;
+    padding:13px;
+    border-radius:13px;
+    background:linear-gradient(135deg,#00a875,#006a4e);
+    color:white;
+    font-weight:900;
+    margin-top:7px;
+}
+
+.forgot{
+    text-align:right;
+    margin:10px 0;
+}
+
+.forgot button{
+    background:none;
+    border:none;
+    color:#6dd9ba;
+    font-size:12px;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    position:fixed;
+    z-index:10000;
+    right:20px;
+    bottom:20px;
+    max-width:330px;
+    padding:14px 17px;
+    border-radius:15px;
+    background:#0b2b22;
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 20px 50px rgba(0,0,0,.3);
+    transform:translateY(120px);
+    opacity:0;
+    transition:.4s;
+}
+
+.toast.show{
+    transform:none;
+    opacity:1;
+}
+
+.toast strong{
+    display:block;
+    margin-bottom:3px;
+}
+
+.toast span{
+    color:#91ada5;
+    font-size:12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:950px){
+
+    .hero-inner{
+        grid-template-columns:1fr;
+        text-align:center;
     }
 
-    * {
-      box-sizing: border-box;
-      font-family: 'Hind Siliguri', sans-serif;
+    .hero-art{
+        display:none;
     }
 
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      margin: 0;
-      padding: 0;
+    .hero-buttons{
+        justify-content:center;
     }
 
-    /* Top Banner Header */
-    header {
-      background-color: var(--primary-color);
-      color: white;
-      padding: 16px;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    .services-grid{
+        grid-template-columns:repeat(3,1fr);
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 21px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      font-weight: 700;
+    .emergency-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .flag-circle {
-      width: 22px;
-      height: 22px;
-      background: var(--accent-color);
-      border-radius: 50%;
-      display: inline-block;
-      border: 2px solid white;
+    .upazila-grid{
+        grid-template-columns:repeat(3,1fr);
     }
 
-    /* Navigation Tabs */
-    .nav-tabs {
-      display: flex;
-      background: #024f3a;
-      padding: 8px;
-      overflow-x: auto;
-      gap: 6px;
-      justify-content: center;
+}
+
+@media(max-width:650px){
+
+    .nav{
+        padding:10px 12px;
     }
 
-    .tab-btn {
-      border: none;
-      background: transparent;
-      color: #e2e8f0;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 13.5px;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.2s ease;
+    .brand-text h1{
+        font-size:16px;
     }
 
-    .tab-btn.active {
-      background: white;
-      color: var(--primary-color);
+    .brand-logo{
+        width:42px;
+        height:42px;
     }
 
-    /* Main Container */
-    .container {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 15px;
+    .nav-btn{
+        padding:8px 10px;
+        font-size:12px;
     }
 
-    /* Card Styling */
-    .card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 18px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      border: 1px solid #e2e8f0;
+    .hero{
+        min-height:540px;
     }
 
-    .card-header {
-      font-size: 17px;
-      font-weight: 700;
-      margin-top: 0;
-      margin-bottom: 15px;
-      color: var(--text-color);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #f1f5f9;
-      padding-bottom: 8px;
+    .hero-inner{
+        width:90%;
     }
 
-    /* Form & Select Controls */
-    .select-box {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      font-size: 14px;
-      background: #f8fafc;
-      color: #334155;
-      outline: none;
-      cursor: pointer;
-      margin-bottom: 15px;
+    .hero h2{
+        font-size:43px;
     }
 
-    /* District Chips */
-    .chip-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 15px;
+    .hero p{
+        font-size:14px;
     }
 
-    .chip {
-      background: #f1f5f9;
-      color: #334155;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      border: 1px solid #cbd5e1;
-      user-select: none;
-      transition: all 0.2s;
+    .search-area{
+        margin-top:-30px;
     }
 
-    .chip.selected {
-      background: var(--primary-color);
-      color: white;
-      border-color: var(--primary-color);
-      font-weight: 600;
+    .search-box{
+        border-radius:16px;
     }
 
-    /* Map Preview Card */
-    .map-card-export {
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-      margin-top: 10px;
+    .search-btn{
+        padding:11px 13px;
     }
 
-    .map-svg-holder {
-      width: 100%;
-      max-width: 320px;
-      margin: 15px auto;
+    .services-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
     }
 
-    /* Buttons */
-    .btn-download {
-      background: var(--primary-color);
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 8px;
-      font-weight: 600;
-      width: 100%;
-      cursor: pointer;
-      font-size: 15px;
-      margin-top: 10px;
+    .service-card{
+        min-height:135px;
+        padding:17px;
+        border-radius:18px;
     }
 
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-
-    footer {
-      text-align: center;
-      padding: 20px 15px;
-      font-size: 13px;
-      color: #64748b;
+    .service-icon{
+        font-size:29px;
     }
-  </style>
+
+    .service-card h4{
+        font-size:14px;
+    }
+
+    .emergency-grid{
+        grid-template-columns:1fr;
+    }
+
+    .upazila-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .tour-grid{
+        grid-template-columns:1fr;
+    }
+
+    .directory{
+        grid-template-columns:1fr;
+    }
+
+    .container{
+        margin:55px auto;
+    }
+
+    .section-title h3{
+        font-size:30px;
+    }
+
+    .bd-emblem{
+        width:115px;
+        height:115px;
+    }
+
+    .bd-emblem span{
+        font-size:55px;
+    }
+
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(35px);
+    transition:opacity .8s ease,transform .8s ease;
+}
+
+.reveal.visible{
+    opacity:1;
+    transform:none;
+}
+
+</style>
 </head>
+
+
 <body>
 
-<!-- Header Banner -->
+
+<!-- =======================================================
+     INTRO
+======================================================= -->
+
+<div id="intro">
+
+    <div class="intro-stars"></div>
+
+    <div class="landscape">
+        <div class="mountain m1"></div>
+        <div class="mountain m2"></div>
+        <div class="mountain m3"></div>
+        <div class="mountain m4"></div>
+
+        <div class="river"></div>
+
+        <div class="boat">🛶</div>
+    </div>
+
+    <div class="intro-content">
+
+        <div class="bd-emblem">
+            <span>🇧🇩</span>
+        </div>
+
+        <div class="intro-title">
+            নেত্রকোণা হেল্পলাইন
+        </div>
+
+        <div class="intro-subtitle">
+            আপনার প্রয়োজনীয় তথ্য — এখন এক জায়গায়
+        </div>
+
+        <div class="intro-loader">
+            <span></span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =======================================================
+     APP
+======================================================= -->
+
+<div id="app">
+
+
+<!-- HEADER -->
+
 <header>
-  <h1><span class="flag-circle"></span> আমার সোনার বাংলাদেশ ও বিশ্ব ভ্রমণ</h1>
+
+    <nav class="nav">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                ন
+            </div>
+
+            <div class="brand-text">
+
+                <h1>নেত্রকোণা হেল্পলাইন</h1>
+
+                <small>
+                    আপনার জেলার ডিজিটাল সহকারী
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="nav-actions">
+
+            <button class="nav-btn" onclick="openAuth()">
+                👤 Login
+            </button>
+
+            <button class="nav-btn" onclick="scrollToSection('services')">
+                ☰ Menu
+            </button>
+
+        </div>
+
+    </nav>
+
 </header>
 
-<!-- Navigation Bar -->
-<div class="nav-tabs">
-  <button class="tab-btn active" onclick="switchTab('tab-bd', this)">🇧🇩 বাংলাদেশ মানচিত্র</button>
-  <button class="tab-btn" onclick="switchTab('tab-world', this)">🌐 বিশ্ব মানচিত্র</button>
-  <button class="tab-btn" onclick="switchTab('tab-explore', this)">📍 বিভাগ, জেলা ও গাইড</button>
-  <button class="tab-btn" onclick="switchTab('tab-quiz', this)">🎮 কুইজ</button>
-</div>
 
-<div class="container">
 
-  <!-- 1. BANGLADESH MAP TRACKER -->
-  <div id="tab-bd" class="tab-content active">
+<!-- HERO -->
 
-    <!-- District Selection Box -->
-    <div class="card">
-      <div class="card-header">
-        <span>ভ্রমণ করা জেলা সিলেক্ট করুন:</span>
-        <span style="font-size: 14px; color: var(--accent-color);"><b id="visited-count">0</b> / 64</span>
-      </div>
+<section class="hero">
 
-      <!-- Quick Dropdown Selection -->
-      <select class="select-box" id="district-dropdown" onchange="selectFromDropdown(this.value)">
-        <option value="">-- জেলা বেছে নিন --</option>
-      </select>
+    <div class="hero-inner">
 
-      <!-- Division Wise Chips -->
-      <div id="divisions-list"></div>
-    </div>
+        <div>
 
-    <!-- Generated Map Card Preview -->
-    <div class="card">
-      <div class="card-header">বাংলাদেশের জেলাভিত্তিক মানচিত্র</div>
-      
-      <div class="map-card-export" id="export-card">
-        <h3 style="margin: 0 0 5px 0; color: var(--primary-color);" id="user-title">Mostak Ahmed Rocky-এর ভ্রমণ মানচিত্র</h3>
-        <p style="margin: 0 0 10px 0; font-size: 13px; color: #64748b;">মোট ভ্রমণ সম্পন্ন: <span id="card-visited-count">0</span>টি জেলা</p>
+            <div class="hero-badge">
+                <span>●</span>
+                নেত্রকোণা জেলার স্মার্ট তথ্যসেবা
+            </div>
 
-        <!-- Vector Bangladesh Map -->
-        <div class="map-svg-holder">
-          <svg viewBox="0 0 200 260" width="100%" height="auto">
-            <!-- Map Shape -->
-            <path d="M 50,20 L 80,10 L 120,30 L 150,20 L 170,60 L 180,100 L 160,150 L 170,200 L 140,240 L 110,220 L 80,240 L 50,190 L 30,130 L 20,80 Z" 
-                  id="map-bg" fill="#e2e8f0" stroke="#006a4e" stroke-width="2"/>
-            <circle cx="100" cy="120" r="35" id="map-circle" fill="#f42a41" opacity="0.85"/>
-            <text x="100" y="125" font-size="12" text-anchor="middle" fill="white" font-weight="bold">বাংলাদেশ</text>
-          </svg>
+            <h2>
+                নেত্রকোণার
+                <span>সব তথ্য</span>
+                এক জায়গায়
+            </h2>
+
+            <p>
+                জরুরি সেবা, হাসপাতাল, উপজেলা, ইউনিয়ন,
+                পরিবহন, ট্রেন, সরকারি অফিস, পর্যটন,
+                কৃষি, শিক্ষা, ব্যবসা এবং স্থানীয় প্রয়োজনীয়
+                তথ্য সহজে খুঁজে নিন।
+            </p>
+
+            <div class="hero-buttons">
+
+                <button
+                    class="primary-btn"
+                    onclick="scrollToSection('services')">
+                    🚀 সেবা খুঁজুন
+                </button>
+
+                <button
+                    class="secondary-btn"
+                    onclick="openCategory('emergency')">
+                    🚨 জরুরি সাহায্য
+                </button>
+
+            </div>
+
         </div>
-      </div>
 
-      <button class="btn-download" onclick="downloadMapCard()">📥 মানচিত্র ডাউনলোড করুন</button>
+
+        <div class="hero-art">
+
+            <div class="hero-circle"></div>
+
+            <div class="hero-bd">
+
+                <div class="map-shape"></div>
+
+                <div class="red-dot"></div>
+
+            </div>
+
+        </div>
+
     </div>
 
-  </div>
+</section>
 
-  <!-- 2. WORLD MAP TAB -->
-  <div id="tab-world" class="tab-content">
-    <div class="card">
-      <div class="card-header">বিশ্বের বিভিন্ন দেশ ট্র্যাকার</div>
-      <p style="font-size: 13px; color: #64748b;">যেসব দেশ ভ্রমণ করেছেন বেছে নিন:</p>
-      <div class="chip-container">
-        <div class="chip" onclick="this.classList.toggle('selected')">বাংলাদেশ</div>
-        <div class="chip" onclick="this.classList.toggle('selected')">भारत (ভারত)</div>
-        <div class="chip" onclick="this.classList.toggle('selected')">সৌদি আরব</div>
-        <div class="chip" onclick="this.classList.toggle('selected')">মালয়েশিয়া</div>
-        <div class="chip" onclick="this.classList.toggle('selected')">সংযুক্ত আরব আমিরাত</div>
-        <div class="chip" onclick="this.classList.toggle('selected')">থাইল্যান্ড</div>
-      </div>
-    </div>
-  </div>
 
-  <!-- 3. EXPLORE & GUIDE TAB -->
-  <div id="tab-explore" class="tab-content">
-    <div class="card">
-      <div class="card-header">জেলাভিত্তিক ভ্রমণ তথ্য ও স্থান</div>
-      <select class="select-box" onchange="showGuideDetails(this.value)">
-        <option value="">-- বিস্তারিত জানতে জেলা পছন্দ করুন --</option>
-        <option value="netrokona">নেত্রকোণা</option>
-        <option value="coxsbazar">কক্সবাজার</option>
-        <option value="sylhet">সিলেট</option>
-      </select>
-      <div id="guide-output" style="font-size: 14px; line-height: 1.6; color: #334155;"></div>
-    </div>
-  </div>
 
-  <!-- 4. QUIZ TAB -->
-  <div id="tab-quiz" class="tab-content">
-    <div class="card">
-      <div class="card-header">ভ্রমণ কুইজ 🧠</div>
-      <p style="font-size: 14px; margin-bottom: 12px;"><b>প্রশ্ন:</b> সুসং দুর্গাপুর ও বিরিশিরি চিনামাটির পাহাড় কোন জেলায় অবস্থিত?</p>
-      <div class="chip-container">
-        <div class="chip" onclick="alert('অভিনন্দন! সঠিক উত্তর।')">নেত্রকোণা</div>
-        <div class="chip" onclick="alert('ভুল উত্তর, আবার চেষ্টা করুন।')">সুনামগঞ্জ</div>
-        <div class="chip" onclick="alert('ভুল উত্তর, আবার চেষ্টা করুন।')">কিশোরগঞ্জ</div>
-      </div>
+<!-- SEARCH -->
+
+<div class="search-area">
+
+    <div class="search-box">
+
+        <span>🔎</span>
+
+        <input
+            id="searchInput"
+            type="search"
+            placeholder="হাসপাতাল, উপজেলা, দর্শনীয় স্থান, সেবা খুঁজুন..."
+            oninput="searchEverything()"
+        >
+
+        <button class="search-btn" onclick="searchEverything()">
+            খুঁজুন
+        </button>
+
     </div>
-  </div>
 
 </div>
+
+
+
+<!-- MAIN -->
+
+<main>
+
+
+<!-- SERVICES -->
+
+<section
+    class="container reveal"
+    id="services">
+
+    <div class="section-title">
+
+        <small>SMART SERVICES</small>
+
+        <h3>
+            কী খুঁজছেন?
+        </h3>
+
+        <p>
+            নিচের যেকোনো সেবায় ক্লিক করুন
+        </p>
+
+    </div>
+
+
+    <div class="services-grid" id="serviceGrid">
+
+
+        <div
+            class="service-card"
+            style="--card-color:#f42a41"
+            onclick="openCategory('emergency')">
+
+            <span class="service-icon">🚨</span>
+
+            <h4>জরুরি সেবা</h4>
+
+            <p>জরুরি ফোন নম্বর ও সহায়তা</p>
+
+        </div>
+
+
+        <div
+            class="service-card"
+            onclick="openCategory('hospital')">
+
+            <span class="service-icon">🏥</span>
+
+            <h4>হাসপাতাল ও চিকিৎসা</h4>
+
+            <p>হাসপাতাল, ক্লিনিক ও স্বাস্থ্যসেবা</p>
+
+        </div>
+
+
+        <div
+            class="service-card"
+            onclick="openCategory('transport')">
+
+            <span class="service-icon">🚌</span>
+
+            <h4>বাস ও পরিবহন</h4>
+
+            <p>বাস, রুট ও যাতায়াত</p>
+
+        </div>
+
+
+        <div
+            class="service-card"
+            onclick="openCategory('train')">
+
+            <span class="service-icon">🚆</span>
+
+            <h4>ট্রেন ও রেলওয়ে</h4>
+
+            <p>ট্রেন ও স্টেশন তথ্য</p>
+
+        </div>
+
+
+        <div
+            class="service-card"
+            onclick="openCategory('government')">
+
+            <span class="service-icon">🏛️</span>
+
+            <h4>সরকারি অফিস</h4>
+
+            <p>সরকারি দপ্তর ও সেবা</p>
+
+        </div>
+
+
+        <div
+            class="service-card"
+            onclick="openCategory('law')">
+
+            <span class="service-icon">⚖️</span>
+
+            <h4>আদালত ও আইন</h4>
+
+            <p>আইন, আদালত ও লিগ্যাল এইড</p>
+
+        </div>
+
+
+        <div
+            class="service-card"
+            onclick="openCategory('tourism')">
+
+            <span class="service-icon">🏞️</span>
+
+            <h4>ঘোরার জায়গা</h4>
+
+            <p>নেত্রকোণার দর্শনীয় স্থান</p>
+
+        </div>
+
+
+        <div
+            class="service-card"
+            onclick="openCategory('business')">
+
+            <span class="service-icon">🏪</span>
+
+            <h4>দোকান ও ব্যবসা</h4>
+
+            <p>স্থানীয় ব্যবসা ও দোকান</p>
+
+        </div>
+
+
+        <div
+            class="service-card"
+            onclick="openCategory('agriculture')">
+
+            <span class="service-icon">🌾</span>
+
+            <h4>কৃষি</h4>
+
+            <p>সার, বীজ ও কৃষি তথ্য</p>
+
+        </div>
+
+
+        <div
+            class="service-card"
+            onclick="openCategory('bank')">
+
+            <span class="service-icon">🏦</span>
+
+            <h4>ব্যাংক ও ATM</h4>
+
+            <p>ব্যাংক ও ATM তথ্য</p>
+
+        </div>
+
+
+        <div
+            class="service-card"
+            onclick="openCategory('education')">
+
+            <span class="service-icon">🎓</span>
+
+            <h4>শিক্ষা</h4>
+
+            <p>স্কুল, কলেজ ও শিক্ষা প্রতিষ্ঠান</p>
+
+        </div>
+
+
+        <div
+            class="service-card"
+            onclick="openCategory('hotel')">
+
+            <span class="service-icon">🏨</span>
+
+            <h4>হোটেল</h4>
+
+            <p>থাকার জায়গা ও আবাসন</p>
+
+        </div>
+
+
+        <div
+            class="service-card"
+            onclick="openCategory('restaurant')">
+
+            <span class="service-icon">🍽️</span>
+
+            <h4>রেস্টুরেন্ট</h4>
+
+            <p>খাবার ও রেস্টুরেন্ট</p>
+
+        </div>
+
+
+        <div
+            class="service-card"
+            onclick="openCategory('blood')">
+
+            <span class="service-icon">🩸</span>
+
+            <h4>রক্তদাতা</h4>
+
+            <p>রক্তদাতা খোঁজার সুবিধা</p>
+
+        </div>
+
+
+        <div
+            class="service-card"
+            onclick="openCategory('religion')">
+
+            <span class="service-icon">🕌</span>
+
+            <h4>ধর্মীয় স্থান</h4>
+
+            <p>মসজিদ, মন্দির ও অন্যান্য স্থান</p>
+
+        </div>
+
+
+        <div
+            class="service-card"
+            onclick="openCategory('local')">
+
+            <span class="service-icon">📍</span>
+
+            <h4>কাছাকাছি সেবা</h4>
+
+            <p>আপনার আশেপাশের প্রয়োজনীয় সেবা</p>
+
+        </div>
+
+
+        <div
+            class="service-card"
+            onclick="openCategory('upazila')">
+
+            <span class="service-icon">🏘️</span>
+
+            <h4>উপজেলা ও ইউনিয়ন</h4>
+
+            <p>নেত্রকোণার প্রশাসনিক তথ্য</p>
+
+        </div>
+
+
+        <div
+            class="service-card"
+            onclick="openCategory('jobs')">
+
+            <span class="service-icon">💼</span>
+
+            <h4>চাকরি ও নোটিশ</h4>
+
+            <p>স্থানীয় চাকরি ও গুরুত্বপূর্ণ নোটিশ</p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- EMERGENCY -->
+
+<section
+    class="container emergency-section reveal">
+
+    <div class="section-title">
+
+        <small>EMERGENCY</small>
+
+        <h3>জরুরি নম্বর</h3>
+
+        <p>
+            প্রয়োজন হলে সরাসরি কল করতে পারবেন
+        </p>
+
+    </div>
+
+
+    <div class="emergency-grid"
+         id="emergencyGrid">
+    </div>
+
+</section>
+
+
+
+<!-- UPAZILA -->
+
+<section
+    class="container reveal"
+    id="upazila">
+
+    <div class="section-title">
+
+        <small>NETROKONA DISTRICT</small>
+
+        <h3>১০টি উপজেলা</h3>
+
+        <p>
+            আপনার এলাকার তথ্য দেখতে উপজেলা নির্বাচন করুন
+        </p>
+
+    </div>
+
+
+    <div
+        class="upazila-grid"
+        id="upazilaGrid">
+    </div>
+
+</section>
+
+
+
+<!-- TOURISM -->
+
+<section
+    class="container reveal"
+    id="tourism">
+
+    <div class="section-title">
+
+        <small>EXPLORE NETROKONA</small>
+
+        <h3>ঘুরে দেখুন নেত্রকোণা</h3>
+
+        <p>
+            প্রকৃতি, নদী, পাহাড় ও ঐতিহ্যের জেলা
+        </p>
+
+    </div>
+
+
+    <div
+        class="tour-grid"
+        id="tourGrid">
+    </div>
+
+</section>
+
+
+
+<!-- DIRECTORY -->
+
+<section class="container reveal">
+
+    <div class="section-title">
+
+        <small>DIRECTORY</small>
+
+        <h3>দ্রুত তথ্য</h3>
+
+    </div>
+
+
+    <div class="directory">
+
+
+        <div class="info-panel">
+
+            <h4>📊 জেলার কাঠামো</h4>
+
+            <div class="info-list">
+
+                <div class="info-item">
+                    <span>জেলা</span>
+                    <b>নেত্রকোণা</b>
+                </div>
+
+                <div class="info-item">
+                    <span>উপজেলা</span>
+                    <b>১০</b>
+                </div>
+
+                <div class="info-item">
+                    <span>ইউনিয়ন</span>
+                    <b>৮৬</b>
+                </div>
+
+                <div class="info-item">
+                    <span>গ্রাম</span>
+                    <b>২,২৯৯</b>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-panel">
+
+            <h4>⚡ দ্রুত সেবা</h4>
+
+            <div class="info-list">
+
+                <div class="info-item">
+                    <span>জাতীয় জরুরি সেবা</span>
+                    <a href="tel:999">৯৯৯</a>
+                </div>
+
+                <div class="info-item">
+                    <span>ফায়ার সার্ভিস</span>
+                    <a href="tel:102">১০২</a>
+                </div>
+
+                <div class="info-item">
+                    <span>সরকারি তথ্য</span>
+                    <a href="tel:333">৩৩৩</a>
+                </div>
+
+                <div class="info-item">
+                    <span>লিগ্যাল এইড</span>
+                    <a href="tel:16699">১৬৬৯৯</a>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- DEVELOPER -->
+
+<section class="container reveal">
+
+    <div class="developer">
+
+        <div class="dev-label">
+            DEVELOPED WITH ❤️ FOR NETROKONA
+        </div>
+
+        <div class="dev-name">
+            Mustak Ahmed Rohi
+        </div>
+
+        <div class="dev-role">
+            Developer • Netrakona Helpline
+        </div>
+
+
+        <a
+            class="whatsapp"
+            href="https://wa.me/8801810751836"
+            target="_blank">
+
+            💬 WhatsApp যোগাযোগ
+
+        </a>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- FOOTER -->
 
 <footer>
-  Developed by <b>Mostak Ahmed Rocky</b><br>
-  © 2026 আমার সোনার বাংলাদেশ
+
+    <strong>নেত্রকোণা হেল্পলাইন</strong>
+
+    <br>
+
+    নেত্রকোণার প্রয়োজনীয় তথ্য এক জায়গায়
+
+    <br><br>
+
+    Developer:
+    <strong>Mustak Ahmed Rohi</strong>
+
+    <br><br>
+
+    Version 1.0 • তথ্য পরিবর্তনশীল হতে পারে
+
 </footer>
 
+
+</div>
+
+
+
+<!-- =======================================================
+     GENERAL MODAL
+======================================================= -->
+
+<div
+    class="modal"
+    id="generalModal"
+    onclick="closeModalOutside(event)">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h3 id="modalTitle">
+                তথ্য
+            </h3>
+
+            <button
+                class="close"
+                onclick="closeModal()">
+                ×
+            </button>
+
+        </div>
+
+        <div
+            id="modalBody">
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =======================================================
+     AUTH MODAL
+======================================================= -->
+
+<div
+    class="modal"
+    id="authModal">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h3>👤 Account</h3>
+
+            <button
+                class="close"
+                onclick="closeAuth()">
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="auth-tabs">
+
+            <button
+                class="auth-tab active"
+                id="loginTab"
+                onclick="switchAuth('login')">
+
+                Login
+
+            </button>
+
+            <button
+                class="auth-tab"
+                id="signupTab"
+                onclick="switchAuth('signup')">
+
+                Sign Up
+
+            </button>
+
+        </div>
+
+
+        <!-- LOGIN -->
+
+        <form
+            id="loginForm"
+            onsubmit="demoLogin(event)">
+
+            <div class="form-group">
+
+                <label>
+                    মোবাইল নম্বর অথবা Email
+                </label>
+
+                <input
+                    class="form-control"
+                    type="text"
+                    required
+                    placeholder="আপনার মোবাইল / Email">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Password
+                </label>
+
+                <div class="password-wrap">
+
+                    <input
+                        id="loginPassword"
+                        class="form-control"
+                        type="password"
+                        minlength="8"
+                        required
+                        placeholder="কমপক্ষে ৮ অক্ষর">
+
+                    <button
+                        type="button"
+                        onclick="togglePassword('loginPassword')">
+                        👁️
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="forgot">
+
+                <button
+                    type="button"
+                    onclick="forgotPassword()">
+
+                    Forgot Password?
+
+                </button>
+
+            </div>
+
+
+            <button
+                class="auth-submit"
+                type="submit">
+
+                Login
+
+            </button>
+
+        </form>
+
+
+        <!-- SIGNUP -->
+
+        <form
+            id="signupForm"
+            style="display:none"
+            onsubmit="demoSignup(event)">
+
+            <div class="form-group">
+
+                <label>
+                    আপনার নাম
+                </label>
+
+                <input
+                    class="form-control"
+                    type="text"
+                    required
+                    placeholder="পুরো নাম">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    মোবাইল অথবা Email
+                </label>
+
+                <input
+                    class="form-control"
+                    type="text"
+                    required
+                    placeholder="Mobile / Email">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Password
+                </label>
+
+                <div class="password-wrap">
+
+                    <input
+                        id="signupPassword"
+                        class="form-control"
+                        type="password"
+                        minlength="8"
+                        required
+                        placeholder="কমপক্ষে ৮ অক্ষর">
+
+                    <button
+                        type="button"
+                        onclick="togglePassword('signupPassword')">
+                        👁️
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Confirm Password
+                </label>
+
+                <input
+                    id="confirmPassword"
+                    class="form-control"
+                    type="password"
+                    minlength="8"
+                    required
+                    placeholder="Password আবার লিখুন">
+
+            </div>
+
+
+            <button
+                class="auth-submit"
+                type="submit">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast">
+
+    <strong id="toastTitle">
+        সফল
+    </strong>
+
+    <span id="toastText">
+        কাজটি সম্পন্ন হয়েছে।
+    </span>
+
+</div>
+
+
+
 <script>
-  const districtsData = {
-    "ময়মনসিংহ বিভাগ": ["নেত্রকোণা", "ময়মনসিংহ", "শেরপুর", "জামালপুর"],
-    "ঢাকা বিভাগ": ["ঢাকা", "গাজীপুর", "নারায়ণগঞ্জ", "টাঙ্গাইল", "কিশোরগঞ্জ", "নরসিংদী", "ফরিদপুর", "মানিকগঞ্জ", "মুন্সীগঞ্জ", "রাজবাড়ী", "মাদারীপুর", "গোপালগঞ্জ", "শরীয়তপুর"],
-    "চট্টগ্রাম বিভাগ": ["চট্টগ্রাম", "কক্সবাজার", "কুমিল্লা", "ফেনী", "নোয়াখালী", "চাঁদপুর", "ব্রাহ্মণবাড়িয়া", "রাঙ্গামাটি", "বান্দরবান", "খাগড়াছড়ি", "লক্ষ্মীপুর"]
-  };
 
-  let visitedDistricts = new Set();
+/* =========================================================
+   DATA
+========================================================= */
 
-  function initApp() {
-    const dropdown = document.getElementById('district-dropdown');
-    const container = document.getElementById('divisions-list');
 
-    Object.keys(districtsData).forEach(division => {
-      // Build Division HTML
-      let divHTML = `<div style="margin-bottom: 12px;">
-        <span style="font-size: 12.5px; font-weight: 700; color: #64748b;">${division}</span>
-        <div class="chip-container" style="margin-top: 6px;">`;
+/* Emergency numbers verified against Bangladesh
+   National Portal current hotline listing */
 
-      districtsData[division].forEach(district => {
-        // Dropdown Option
-        let opt = document.createElement('option');
-        opt.value = district;
-        opt.innerText = district;
-        dropdown.appendChild(opt);
+const emergencyServices = [
 
-        // Chip item
-        divHTML += `<div class="chip" id="chip-${district}" onclick="toggleDistrict('${district}')">${district}</div>`;
-      });
+    {
+        name:"জাতীয় জরুরি সেবা",
+        number:"999",
+        description:"পুলিশ, ফায়ার সার্ভিস ও অ্যাম্বুলেন্সসহ জরুরি সহায়তা।",
+        verified:true
+    },
 
-      divHTML += `</div></div>`;
-      container.innerHTML += divHTML;
-    });
-  }
+    {
+        name:"ফায়ার সার্ভিস",
+        number:"102",
+        description:"ফায়ার সার্ভিস ও সিভিল ডিফেন্স জরুরি হটলাইন।",
+        verified:true
+    },
 
-  function toggleDistrict(districtName) {
-    if (visitedDistricts.has(districtName)) {
-      visitedDistricts.delete(districtName);
-    } else {
-      visitedDistricts.add(districtName);
+    {
+        name:"সরকারি তথ্য ও সেবা",
+        number:"333",
+        description:"সরকারি সেবা, জেলা/উপজেলা তথ্য ও বিভিন্ন সরকারি তথ্য।",
+        verified:true
+    },
+
+    {
+        name:"নারী ও শিশু নির্যাতন প্রতিরোধ",
+        number:"109",
+        description:"নারী ও শিশু নির্যাতন প্রতিরোধে সহায়তা।",
+        verified:true
+    },
+
+    {
+        name:"দুর্নীতি দমন কমিশন",
+        number:"106",
+        description:"দুর্নীতি সংক্রান্ত অভিযোগ ও তথ্য।",
+        verified:true
+    },
+
+    {
+        name:"শিশু সহায়তা",
+        number:"1098",
+        description:"শিশুদের সহায়তার জন্য জাতীয় হেল্পলাইন।",
+        verified:true
+    },
+
+    {
+        name:"বিদ্যুৎ সেবা",
+        number:"16999",
+        description:"বিদ্যুৎ সংক্রান্ত অভিযোগ ও সেবা তথ্য।",
+        verified:true
+    },
+
+    {
+        name:"লিগ্যাল এইড",
+        number:"16699",
+        description:"সরকারি আইনগত সহায়তা হেল্পলাইন।",
+        verified:true
+    },
+
+    {
+        name:"শ্রমিক হেল্পলাইন",
+        number:"16357",
+        description:"শ্রমিক সংক্রান্ত সহায়তা।",
+        verified:true
+    },
+
+    {
+        name:"সর্বজনীন পেনশন",
+        number:"16131",
+        description:"সর্বজনীন পেনশন স্কিম সংক্রান্ত তথ্য।",
+        verified:true
+    },
+
+    {
+        name:"সুপ্রিম কোর্ট হেল্পলাইন",
+        number:"103",
+        description:"সুপ্রিম কোর্ট সম্পর্কিত হেল্পলাইন।",
+        verified:true
+    },
+
+    {
+        name:"স্মার্ট ভূমি সেবা",
+        number:"16122",
+        description:"ভূমি সংক্রান্ত ডিজিটাল সেবা।",
+        verified:true
     }
-    updateUI();
-  }
 
-  function selectFromDropdown(val) {
-    if (val && !visitedDistricts.has(val)) {
-      visitedDistricts.add(val);
-      updateUI();
+];
+
+
+/* =========================================================
+   UPAZILAS
+========================================================= */
+
+const upazilas = [
+
+    {
+        name:"নেত্রকোণা সদর",
+        unions:12
+    },
+
+    {
+        name:"বারহাট্টা",
+        unions:7
+    },
+
+    {
+        name:"দুর্গাপুর",
+        unions:7
+    },
+
+    {
+        name:"কলমাকান্দা",
+        unions:8
+    },
+
+    {
+        name:"কেন্দুয়া",
+        unions:13
+    },
+
+    {
+        name:"আটপাড়া",
+        unions:7
+    },
+
+    {
+        name:"পূর্বধলা",
+        unions:11
+    },
+
+    {
+        name:"মদন",
+        unions:8
+    },
+
+    {
+        name:"মোহনগঞ্জ",
+        unions:7
+    },
+
+    {
+        name:"খালিয়াজুরী",
+        unions:6
     }
-    document.getElementById('district-dropdown').value = "";
-  }
 
-  function updateUI() {
-    const count = visitedDistricts.size;
-    document.getElementById('visited-count').innerText = count;
-    document.getElementById('card-visited-count').innerText = count;
+];
 
-    // Toggle Chip Colors
-    Object.keys(districtsData).forEach(division => {
-      districtsData[division].forEach(district => {
-        const chipEl = document.getElementById(`chip-${district}`);
-        if (chipEl) {
-          if (visitedDistricts.has(district)) {
-            chipEl.classList.add('selected');
-          } else {
-            chipEl.classList.remove('selected');
-          }
+
+/* =========================================================
+   UNION DATA
+========================================================= */
+
+const unions = {
+
+"নেত্রকোণা সদর":[
+"মৌগাতি",
+"মেদনী",
+"ঠাকুরাকোণা",
+"সিংহের বাংলা",
+"আমতলা",
+"লক্ষীগঞ্জ",
+"কাইলাটি",
+"দক্ষিণ বিশিউড়া",
+"চল্লিশা",
+"রৌহা",
+"কালিয়ারা গাবরাগাতি",
+"মদনপুর"
+],
+
+"বারহাট্টা":[
+"বাউসী",
+"সাহতা",
+"বারহাট্টা",
+"আসমা",
+"চিরাম",
+"সিংধা",
+"রায়পুর"
+],
+
+"দুর্গাপুর":[
+"কুল্লাগড়া",
+"দুর্গাপুর",
+"চণ্ডিগড়",
+"বিরিশিরি",
+"বাকলজোরা",
+"কাকৈরগড়া",
+"গাঁওকান্দিয়া"
+],
+
+"কলমাকান্দা":[
+"কলমাকান্দা",
+"নাজিরপুর",
+"পোগলা",
+"বড়খাপন",
+"লেংগুরা",
+"খারনৈ",
+"কৈলাটি",
+"রংছাতি"
+],
+
+"কেন্দুয়া":[
+"আশুজিয়া",
+"দলপা",
+"গড়াডোবা",
+"গণ্ডা",
+"সান্দিকোণা",
+"মাসকা",
+"বলাইশিমুল",
+"নওপাড়া",
+"কান্দিউড়া",
+"চিরাং",
+"রোয়াইলবাড়ী আমতলা",
+"পাইকুড়া",
+"মোজাফরপুর"
+],
+
+"আটপাড়া":[
+"স্বরমুশিয়া",
+"শুনই",
+"লুনেশ্বর",
+"বানিয়াজান",
+"তেলিগাতী",
+"দুওজ",
+"সুখারী"
+],
+
+"পূর্বধলা":[
+"হোগলা",
+"ঘাগড়া",
+"জারিয়া",
+"ধলামূলগাঁও",
+"পূর্বধলা",
+"আগিয়া",
+"বিশকাকুনী",
+"খলিশাউড়",
+"নারান্দিয়া",
+"গোহালাকান্দা",
+"বৈরাটি"
+],
+
+"মদন":[
+"ফতেপুর",
+"গোবিন্দশ্রী",
+"কাইটাইল",
+"মাঘান",
+"মদন",
+"নায়েকপুর",
+"তিয়শ্রী",
+"চানগাঁও"
+],
+
+"মোহনগঞ্জ":[
+"বড়কাশিয়া-বিরামপুর",
+"বড়তলী-বানিহারী",
+"গাগলাজুর",
+"সমাজ-সহিলদেও",
+"সুয়াইর",
+"তেতুলিয়া",
+"মাঘান-সিয়াধার"
+],
+
+"খালিয়াজুরী":[
+"মেন্দিপুর",
+"চাকুয়া",
+"খালিয়াজুরী",
+"নগর",
+"কৃষ্ণপুর",
+"গাজীপুর"
+]
+
+};
+
+
+/* =========================================================
+   TOURISM
+========================================================= */
+
+const touristPlaces = [
+
+    {
+        name:"বিজয়পুর সাদা মাটির পাহাড়",
+        location:"দুর্গাপুর",
+        icon:"🏔️",
+        description:"নেত্রকোণার অন্যতম পরিচিত প্রাকৃতিক ও ভূতাত্ত্বিক দর্শনীয় স্থান।"
+    },
+
+    {
+        name:"বিরিশিরি কালচারাল একাডেমী",
+        location:"দুর্গাপুর",
+        icon:"🎭",
+        description:"নেত্রকোণার আদিবাসী সংস্কৃতি ও ঐতিহ্যের গুরুত্বপূর্ণ কেন্দ্র।"
+    },
+
+    {
+        name:"সোমেশ্বরী নদী",
+        location:"দুর্গাপুর",
+        icon:"🌊",
+        description:"পাহাড় ও নদীর প্রাকৃতিক সৌন্দর্যের জন্য পরিচিত।"
+    },
+
+    {
+        name:"রাণীখং মিশন",
+        location:"দুর্গাপুর",
+        icon:"⛪",
+        description:"ঐতিহাসিক ও ধর্মীয় গুরুত্বসম্পন্ন দর্শনীয় স্থান।"
+    },
+
+    {
+        name:"রাণীমাতা রাশমণি স্মৃতিসৌধ",
+        location:"দুর্গাপুর",
+        icon:"🏛️",
+        description:"ঐতিহ্যবাহী স্মৃতিসৌধ।"
+    },
+
+    {
+        name:"কমলা রাণীর দিঘী",
+        location:"দুর্গাপুর",
+        icon:"🌿",
+        description:"ঐতিহাসিক ও স্থানীয়ভাবে পরিচিত দর্শনীয় স্থান।"
+    },
+
+    {
+        name:"সাত শহীদের মাজার",
+        location:"নেত্রকোণা",
+        icon:"🕌",
+        description:"মুক্তিযুদ্ধের স্মৃতিবিজড়িত স্থান।"
+    },
+
+    {
+        name:"রোয়াইলবাড়ি দুর্গ",
+        location:"কেন্দুয়া",
+        icon:"🏰",
+        description:"ঐতিহাসিক প্রত্নস্থল।"
+    },
+
+    {
+        name:"দুর্গাপুরের পাহাড়ি অঞ্চল",
+        location:"দুর্গাপুর",
+        icon:"🌄",
+        description:"পাহাড়, নদী ও সবুজ প্রকৃতির মনোরম পরিবেশ।"
+    }
+
+];
+
+
+/* =========================================================
+   OTHER DIRECTORY DATA
+========================================================= */
+
+const directoryData = {
+
+    hospital:[
+        {
+            name:"সরকারি হাসপাতাল তথ্য",
+            description:"উপজেলা ও জেলা পর্যায়ের সরকারি হাসপাতালের তথ্য এখানে যুক্ত করা যাবে।",
+            status:"তথ্য সংযোজনাধীন"
+        },
+        {
+            name:"ক্লিনিক ও ডায়াগনস্টিক",
+            description:"নাম, ঠিকানা, ফোন ও Google Maps তথ্য verified করে যুক্ত করা হবে।",
+            status:"তথ্য সংযোজনাধীন"
         }
-      });
+    ],
+
+    transport:[
+        {
+            name:"নেত্রকোণা বাস পরিবহন",
+            description:"রুট, কাউন্টার, সময় ও ভাড়া verified data দিয়ে যুক্ত করা হবে।",
+            status:"তথ্য সংযোজনাধীন"
+        }
+    ],
+
+    train:[
+        {
+            name:"নেত্রকোণা রেলওয়ে",
+            description:"ট্রেনের সময়সূচি পরিবর্তন হতে পারে। অফিসিয়াল রেলওয়ে তথ্য দিয়ে আপডেট করা প্রয়োজন।",
+            status:"তথ্য সংযোজনাধীন"
+        }
+    ],
+
+    government:[
+        {
+            name:"জেলা প্রশাসন",
+            description:"জেলা প্রশাসনের সরকারি সেবা ও যোগাযোগ তথ্য।",
+            status:"Official source required"
+        },
+        {
+            name:"উপজেলা প্রশাসন",
+            description:"প্রতিটি উপজেলার সরকারি অফিস ও যোগাযোগ তথ্য।",
+            status:"Official source required"
+        }
+    ],
+
+    law:[
+        {
+            name:"লিগ্যাল এইড",
+            description:"সরকারি আইনগত সহায়তা হেল্পলাইন ১৬৬৯৯।",
+            status:"Verified"
+        }
+    ],
+
+    business:[
+        {
+            name:"স্থানীয় ব্যবসা",
+            description:"দোকান, মার্কেট ও ব্যবসা প্রতিষ্ঠান verified তথ্যসহ যুক্ত হবে।",
+            status:"তথ্য সংযোজনাধীন"
+        }
+    ],
+
+    agriculture:[
+        {
+            name:"কৃষি সেবা",
+            description:"সার, বীজ, কীটনাশক, কৃষি অফিস ও কৃষি পরামর্শ।",
+            status:"তথ্য সংযোজনাধীন"
+        }
+    ],
+
+    bank:[
+        {
+            name:"ব্যাংক ও ATM",
+            description:"ব্যাংকের শাখা ও ATM location যুক্ত করা হবে।",
+            status:"তথ্য সংযোজনাধীন"
+        }
+    ],
+
+    education:[
+        {
+            name:"শিক্ষা প্রতিষ্ঠান",
+            description:"স্কুল, কলেজ, মাদ্রাসা ও অন্যান্য শিক্ষা প্রতিষ্ঠানের তথ্য।",
+            status:"তথ্য সংযোজনাধীন"
+        }
+    ],
+
+    hotel:[
+        {
+            name:"হোটেল ও আবাসন",
+            description:"হোটেল, ঠিকানা, ফোন ও location তথ্য।",
+            status:"তথ্য সংযোজনাধীন"
+        }
+    ],
+
+    restaurant:[
+        {
+            name:"রেস্টুরেন্ট",
+            description:"স্থানীয় রেস্টুরেন্ট ও খাবারের তথ্য।",
+            status:"তথ্য সংযোজনাধীন"
+        }
+    ],
+
+    blood:[
+        {
+            name:"রক্তদাতা ডিরেক্টরি",
+            description:"রক্তদাতার তথ্য শুধুমাত্র সম্মতি ও privacy policy অনুযায়ী প্রকাশ করা উচিত।",
+            status:"Privacy required"
+        }
+    ],
+
+    religion:[
+        {
+            name:"ধর্মীয় স্থান",
+            description:"মসজিদ, মন্দির, গির্জা ও অন্যান্য ধর্মীয় স্থানের তথ্য।",
+            status:"তথ্য সংযোজনাধীন"
+        }
+    ],
+
+    local:[
+        {
+            name:"কাছাকাছি সেবা",
+            description:"Browser location permission দিলে কাছাকাছি সেবা খোঁজার সুবিধা যুক্ত করা যাবে।",
+            status:"Location permission required"
+        }
+    ],
+
+    jobs:[
+        {
+            name:"স্থানীয় চাকরি ও নোটিশ",
+            description:"সরকারি ও স্থানীয় verified job/news data যুক্ত করা হবে।",
+            status:"তথ্য সংযোজনাধীন"
+        }
+    ]
+
+};
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+window.addEventListener("load",()=>{
+
+    setTimeout(()=>{
+
+        document.getElementById("intro")
+            .classList.add("hide");
+
+        document.getElementById("app")
+            .classList.add("show");
+
+    },3600);
+
+});
+
+
+/* =========================================================
+   EMERGENCY RENDER
+========================================================= */
+
+function renderEmergency(){
+
+    const grid =
+        document.getElementById("emergencyGrid");
+
+    grid.innerHTML =
+        emergencyServices.slice(0,8)
+        .map(item=>`
+
+            <div class="emergency-card">
+
+                <div class="num">
+                    ${item.number}
+                </div>
+
+                <h4>
+                    ${item.name}
+                </h4>
+
+                <p>
+                    ${item.description}
+                </p>
+
+                <a
+                    class="call-btn"
+                    href="tel:${item.number}">
+
+                    📞 কল করুন
+
+                </a>
+
+            </div>
+
+        `).join("");
+
+}
+
+
+/* =========================================================
+   UPAZILA RENDER
+========================================================= */
+
+function renderUpazilas(){
+
+    const grid =
+        document.getElementById("upazilaGrid");
+
+    grid.innerHTML =
+        upazilas.map((u,index)=>`
+
+            <div
+                class="upazila-card"
+                onclick="openUpazila('${u.name}')">
+
+                <span class="emoji">
+                    ${["🏙️","🌾","⛰️","🌳","🏘️"][index%5]}
+                </span>
+
+                <strong>
+                    ${u.name}
+                </strong>
+
+                <div
+                    style="
+                    color:#78a89c;
+                    font-size:10px;
+                    margin-top:4px;
+                    ">
+
+                    ${u.unions} ইউনিয়ন
+
+                </div>
+
+            </div>
+
+        `).join("");
+
+}
+
+
+/* =========================================================
+   TOURISM RENDER
+========================================================= */
+
+function renderTourism(){
+
+    const grid =
+        document.getElementById("tourGrid");
+
+    grid.innerHTML =
+        touristPlaces.map(place=>`
+
+            <div class="tour-card">
+
+                <div class="tour-visual"></div>
+
+                <div class="tour-content">
+
+                    <div
+                        style="
+                        font-size:32px;
+                        margin-bottom:4px;
+                        ">
+
+                        ${place.icon}
+
+                    </div>
+
+                    <h4>
+                        ${place.name}
+                    </h4>
+
+                    <p>
+                        ${place.location}
+                        •
+                        ${place.description}
+                    </p>
+
+                </div>
+
+            </div>
+
+        `).join("");
+
+}
+
+
+/* =========================================================
+   CATEGORY MODAL
+========================================================= */
+
+function openCategory(type){
+
+    if(type==="emergency"){
+
+        openEmergencyModal();
+        return;
+
+    }
+
+    if(type==="tourism"){
+
+        openTourismModal();
+        return;
+
+    }
+
+    if(type==="upazila"){
+
+        openUpazilaList();
+        return;
+
+    }
+
+    const titles = {
+
+        hospital:"🏥 হাসপাতাল ও চিকিৎসা",
+
+        transport:"🚌 বাস ও পরিবহন",
+
+        train:"🚆 ট্রেন ও রেলওয়ে",
+
+        government:"🏛️ সরকারি অফিস",
+
+        law:"⚖️ আদালত ও আইন",
+
+        business:"🏪 দোকান ও ব্যবসা",
+
+        agriculture:"🌾 কৃষি ও সার",
+
+        bank:"🏦 ব্যাংক ও ATM",
+
+        education:"🎓 শিক্ষা প্রতিষ্ঠান",
+
+        hotel:"🏨 হোটেল ও আবাসন",
+
+        restaurant:"🍽️ রেস্টুরেন্ট",
+
+        blood:"🩸 রক্তদাতা",
+
+        religion:"🕌 ধর্মীয় স্থান",
+
+        local:"📍 কাছাকাছি সেবা",
+
+        jobs:"💼 চাকরি ও নোটিশ"
+
+    };
+
+    document.getElementById("modalTitle")
+        .innerText = titles[type] || "তথ্য";
+
+    const data =
+        directoryData[type] || [];
+
+    document.getElementById("modalBody")
+        .innerHTML = `
+
+            <p class="modal-description">
+                ${titles[type] || "এই সেবা"} সম্পর্কিত তথ্য।
+            </p>
+
+            <div class="data-grid">
+
+                ${
+                    data.map(item=>`
+
+                        <div class="data-card">
+
+                            <h4>
+                                ${item.name}
+                            </h4>
+
+                            <p>
+                                ${item.description}
+                            </p>
+
+                            <span class="badge">
+                                ${item.status}
+                            </span>
+
+                        </div>
+
+                    `).join("")
+                }
+
+            </div>
+
+        `;
+
+    openModal();
+
+}
+
+
+/* =========================================================
+   EMERGENCY MODAL
+========================================================= */
+
+function openEmergencyModal(){
+
+    document.getElementById("modalTitle")
+        .innerText="🚨 জরুরি সেবা";
+
+    document.getElementById("modalBody")
+        .innerHTML=`
+
+        <p class="modal-description">
+            জরুরি প্রয়োজনে নিচের নম্বরগুলোতে সরাসরি কল করতে পারবেন।
+        </p>
+
+        <div class="data-grid">
+
+            ${
+                emergencyServices.map(item=>`
+
+                    <div class="data-card">
+
+                        <h4>
+                            ${item.name}
+                        </h4>
+
+                        <p>
+                            ${item.description}
+                        </p>
+
+                        <span class="badge">
+                            ✓ Verified
+                        </span>
+
+                        <a
+                            href="tel:${item.number}"
+                            class="call-btn"
+                            style="margin-top:10px">
+
+                            📞 ${item.number}
+
+                        </a>
+
+                    </div>
+
+                `).join("")
+            }
+
+        </div>
+
+    `;
+
+    openModal();
+
+}
+
+
+/* =========================================================
+   TOURISM MODAL
+========================================================= */
+
+function openTourismModal(){
+
+    document.getElementById("modalTitle")
+        .innerText="🏞️ নেত্রকোণার দর্শনীয় স্থান";
+
+    document.getElementById("modalBody")
+        .innerHTML=`
+
+        <p class="modal-description">
+            নেত্রকোণার প্রকৃতি, ইতিহাস ও সংস্কৃতির কিছু পরিচিত স্থান।
+        </p>
+
+        <div class="data-grid">
+
+            ${
+                touristPlaces.map(place=>`
+
+                    <div class="data-card">
+
+                        <h4>
+                            ${place.icon}
+                            ${place.name}
+                        </h4>
+
+                        <p>
+                            📍 ${place.location}
+                            <br>
+                            ${place.description}
+                        </p>
+
+                        <span class="badge">
+                            পর্যটন
+                        </span>
+
+                    </div>
+
+                `).join("")
+            }
+
+        </div>
+
+    `;
+
+    openModal();
+
+}
+
+
+/* =========================================================
+   UPAZILA LIST
+========================================================= */
+
+function openUpazilaList(){
+
+    document.getElementById("modalTitle")
+        .innerText="🏘️ নেত্রকোণার উপজেলা";
+
+    document.getElementById("modalBody")
+        .innerHTML=`
+
+        <p class="modal-description">
+            উপজেলা নির্বাচন করলে সংশ্লিষ্ট ইউনিয়নের তালিকা দেখতে পারবেন।
+        </p>
+
+        <div class="data-grid">
+
+            ${
+                upazilas.map(u=>`
+
+                    <div
+                        class="data-card"
+                        style="cursor:pointer"
+                        onclick="openUpazila('${u.name}')">
+
+                        <h4>
+                            ${u.name}
+                        </h4>
+
+                        <p>
+                            মোট ${u.unions}টি ইউনিয়ন
+                        </p>
+
+                        <span class="badge">
+                            বিস্তারিত দেখুন →
+                        </span>
+
+                    </div>
+
+                `).join("")
+            }
+
+        </div>
+
+    `;
+
+    openModal();
+
+}
+
+
+/* =========================================================
+   UPAZILA DETAIL
+========================================================= */
+
+function openUpazila(name){
+
+    document.getElementById("modalTitle")
+        .innerText="📍 "+name;
+
+    const unionList =
+        unions[name] || [];
+
+    document.getElementById("modalBody")
+        .innerHTML=`
+
+        <p class="modal-description">
+            ${name} উপজেলার ইউনিয়নসমূহ।
+        </p>
+
+        <div class="data-grid">
+
+            ${
+                unionList.map((u,index)=>`
+
+                    <div class="data-card">
+
+                        <h4>
+                            ${index+1}. ${u}
+                        </h4>
+
+                        <p>
+                            ইউনিয়নের বিস্তারিত সেবা,
+                            ওয়ার্ড ও গ্রামের তথ্য পরবর্তী
+                            ডেটা আপডেটে যুক্ত করা যাবে।
+                        </p>
+
+                        <span class="badge warning">
+                            বিস্তারিত তথ্য সংযোজনাধীন
+                        </span>
+
+                    </div>
+
+                `).join("")
+            }
+
+        </div>
+
+    `;
+
+    openModal();
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function openModal(){
+
+    document
+        .getElementById("generalModal")
+        .classList.add("active");
+
+}
+
+function closeModal(){
+
+    document
+        .getElementById("generalModal")
+        .classList.remove("active");
+
+}
+
+function closeModalOutside(e){
+
+    if(e.target.id==="generalModal"){
+        closeModal();
+    }
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function searchEverything(){
+
+    const q =
+        document
+        .getElementById("searchInput")
+        .value
+        .trim()
+        .toLowerCase();
+
+    if(!q){
+
+        document
+            .querySelectorAll(".service-card")
+            .forEach(card=>{
+                card.style.display="";
+            });
+
+        return;
+    }
+
+
+    const serviceCards =
+        document.querySelectorAll(".service-card");
+
+    serviceCards.forEach(card=>{
+
+        const text =
+            card.innerText.toLowerCase();
+
+        card.style.display =
+            text.includes(q)
+            ? ""
+            : "none";
+
     });
 
-    // Color map based on selection
-    const mapCircle = document.getElementById('map-circle');
-    if (count > 0) {
-      mapCircle.setAttribute('fill', '#006a4e');
-    } else {
-      mapCircle.setAttribute('fill', '#f42a41');
+
+    const matchingEmergency =
+        emergencyServices.filter(item=>
+            item.name.toLowerCase().includes(q) ||
+            item.number.includes(q)
+        );
+
+    const matchingUpazila =
+        upazilas.filter(item=>
+            item.name.toLowerCase().includes(q)
+        );
+
+    const matchingTour =
+        touristPlaces.filter(item=>
+            item.name.toLowerCase().includes(q) ||
+            item.location.toLowerCase().includes(q)
+        );
+
+
+    if(
+        matchingEmergency.length ||
+        matchingUpazila.length ||
+        matchingTour.length
+    ){
+
+        document.getElementById("modalTitle")
+            .innerText="🔎 সার্চ ফলাফল";
+
+        document.getElementById("modalBody")
+            .innerHTML=`
+
+            <p class="modal-description">
+                আপনার সার্চের সঙ্গে মিলে যাওয়া তথ্য:
+            </p>
+
+            <div class="data-grid">
+
+                ${
+                    matchingEmergency.map(item=>`
+
+                        <div class="data-card">
+
+                            <h4>
+                                🚨 ${item.name}
+                            </h4>
+
+                            <p>
+                                জরুরি নম্বর:
+                                ${item.number}
+                            </p>
+
+                            <a
+                                href="tel:${item.number}"
+                                class="call-btn">
+
+                                📞 কল
+
+                            </a>
+
+                        </div>
+
+                    `).join("")
+                }
+
+
+                ${
+                    matchingUpazila.map(item=>`
+
+                        <div
+                            class="data-card"
+                            onclick="openUpazila('${item.name}')"
+                            style="cursor:pointer">
+
+                            <h4>
+                                🏘️ ${item.name}
+                            </h4>
+
+                            <p>
+                                ${item.unions}টি ইউনিয়ন
+                            </p>
+
+                        </div>
+
+                    `).join("")
+                }
+
+
+                ${
+                    matchingTour.map(item=>`
+
+                        <div class="data-card">
+
+                            <h4>
+                                ${item.icon}
+                                ${item.name}
+                            </h4>
+
+                            <p>
+                                📍 ${item.location}
+                            </p>
+
+                        </div>
+
+                    `).join("")
+                }
+
+            </div>
+
+        `;
+
+        openModal();
+
     }
-  }
 
-  function switchTab(tabId, btn) {
-    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
-    btn.classList.add('active');
-  }
+}
 
-  function showGuideDetails(district) {
-    const output = document.getElementById('guide-output');
-    if (district === 'netrokona') {
-      output.innerHTML = "<b>নেত্রকোণা জেলা:</b> দর্শনীয় স্থানসমূহ - সুসং দুর্গাপুর, বিরিশিরি চিনামাটির সবুজ লেক, সোমেশ্বরী নদী এবং রাণীখং গির্জা।";
-    } else if (district === 'coxsbazar') {
-      output.innerHTML = "<b>কক্সবাজার জেলা:</b> বিশ্বের দীর্ঘতম সমুদ্র সৈকত, হিমছড়ি ও ইনানী বিচ।";
-    } else if (district === 'sylhet') {
-      output.innerHTML = "<b>সিলেট জেলা:</b> জাফলং, ভোলাগঞ্জ সাদা পাথর, রাতারগুল জলারবন এবং হযরত শাহজালাল (র:) মাজার।";
-    } else {
-      output.innerHTML = "";
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+function openAuth(){
+
+    document
+        .getElementById("authModal")
+        .classList.add("active");
+
+}
+
+function closeAuth(){
+
+    document
+        .getElementById("authModal")
+        .classList.remove("active");
+
+}
+
+function switchAuth(type){
+
+    const login =
+        document.getElementById("loginForm");
+
+    const signup =
+        document.getElementById("signupForm");
+
+    const loginTab =
+        document.getElementById("loginTab");
+
+    const signupTab =
+        document.getElementById("signupTab");
+
+
+    if(type==="login"){
+
+        login.style.display="block";
+        signup.style.display="none";
+
+        loginTab.classList.add("active");
+        signupTab.classList.remove("active");
+
+    }else{
+
+        login.style.display="none";
+        signup.style.display="block";
+
+        loginTab.classList.remove("active");
+        signupTab.classList.add("active");
+
     }
-  }
 
-  function downloadMapCard() {
-    html2canvas(document.getElementById('export-card')).then(canvas => {
-      const a = document.createElement('a');
-      a.download = 'my-bangladesh-map.png';
-      a.href = canvas.toDataURL();
-      a.click();
-    });
-  }
+}
 
-  window.onload = initApp;
+
+/* =========================================================
+   PASSWORD
+========================================================= */
+
+function togglePassword(id){
+
+    const input =
+        document.getElementById(id);
+
+    input.type =
+        input.type==="password"
+        ? "text"
+        : "password";
+
+}
+
+
+/* =========================================================
+   DEMO LOGIN
+========================================================= */
+
+function demoLogin(e){
+
+    e.preventDefault();
+
+    showToast(
+        "Login UI প্রস্তুত",
+        "আসল account login চালু করতে Firebase/Supabase backend সংযুক্ত করতে হবে।"
+    );
+
+}
+
+
+/* =========================================================
+   DEMO SIGNUP
+========================================================= */
+
+function demoSignup(e){
+
+    e.preventDefault();
+
+    const password =
+        document.getElementById("signupPassword").value;
+
+    const confirm =
+        document.getElementById("confirmPassword").value;
+
+
+    if(password!==confirm){
+
+        showToast(
+            "Password মিলছে না",
+            "Password এবং Confirm Password একই হতে হবে।"
+        );
+
+        return;
+
+    }
+
+
+    if(password.length<8){
+
+        showToast(
+            "Password দুর্বল",
+            "কমপক্ষে ৮টি অক্ষরের শক্তিশালী password ব্যবহার করুন।"
+        );
+
+        return;
+
+    }
+
+
+    showToast(
+        "Sign Up UI প্রস্তুত",
+        "আসল account system চালু করতে secure backend প্রয়োজন।"
+    );
+
+}
+
+
+/* =========================================================
+   FORGOT
+========================================================= */
+
+function forgotPassword(){
+
+    showToast(
+        "Forgot Password",
+        "আসল password recovery চালু করতে email/phone verification backend প্রয়োজন।"
+    );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+function showToast(title,text){
+
+    const toast =
+        document.getElementById("toast");
+
+    document.getElementById("toastTitle")
+        .innerText=title;
+
+    document.getElementById("toastText")
+        .innerText=text;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer=setTimeout(()=>{
+
+        toast.classList.remove("show");
+
+    },4000);
+
+}
+
+
+/* =========================================================
+   SCROLL
+========================================================= */
+
+function scrollToSection(id){
+
+    const element =
+        document.getElementById(id);
+
+    if(element){
+
+        element.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+
+    }
+
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const observer =
+    new IntersectionObserver(
+
+        entries=>{
+
+            entries.forEach(entry=>{
+
+                if(entry.isIntersecting){
+
+                    entry.target
+                        .classList
+                        .add("visible");
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold:.08
+        }
+
+    );
+
+
+document
+    .querySelectorAll(".reveal")
+    .forEach(el=>observer.observe(el));
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+renderEmergency();
+renderUpazilas();
+renderTourism();
+
+
+/* =========================================================
+   ESCAPE KEY
+========================================================= */
+
+document.addEventListener("keydown",e=>{
+
+    if(e.key==="Escape"){
+
+        closeModal();
+        closeAuth();
+
+    }
+
+});
+
+
 </script>
 
 </body>
-  </html>
+</html>
