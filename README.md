@@ -1,0 +1,3464 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>নেত্রকোণা হেল্পলাইন</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --bg:#06131f;
+    --bg2:#0b1e2d;
+    --card:rgba(255,255,255,.075);
+    --card2:rgba(255,255,255,.11);
+    --text:#f5fbff;
+    --muted:#b7c9d5;
+    --primary:#00e5ff;
+    --secondary:#7c4dff;
+    --green:#00e676;
+    --danger:#ff5252;
+    --warning:#ffc107;
+    --border:rgba(255,255,255,.12);
+    --shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Noto Sans Bengali',sans-serif;
+    background:
+      radial-gradient(circle at 10% 10%,rgba(0,229,255,.13),transparent 30%),
+      radial-gradient(circle at 90% 20%,rgba(124,77,255,.15),transparent 30%),
+      linear-gradient(135deg,#03101a,#061b2b 50%,#04131f);
+    color:var(--text);
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+/* animated background */
+body:before,
+body:after{
+    content:"";
+    position:fixed;
+    width:450px;
+    height:450px;
+    border-radius:50%;
+    filter:blur(100px);
+    opacity:.12;
+    z-index:-2;
+    animation:floatGlow 12s ease-in-out infinite alternate;
+}
+
+body:before{
+    background:#00e5ff;
+    left:-180px;
+    top:10%;
+}
+
+body:after{
+    background:#7c4dff;
+    right:-180px;
+    bottom:5%;
+    animation-delay:2s;
+}
+
+@keyframes floatGlow{
+    from{transform:translate(0,0) scale(1)}
+    to{transform:translate(80px,-50px) scale(1.25)}
+}
+
+/* particles */
+.particles{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-1;
+    overflow:hidden;
+}
+
+.particle{
+    position:absolute;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    background:#fff;
+    opacity:.4;
+    animation:particleMove linear infinite;
+}
+
+@keyframes particleMove{
+    from{
+        transform:translateY(110vh) translateX(0);
+        opacity:0;
+    }
+    15%{opacity:.6}
+    85%{opacity:.3}
+    to{
+        transform:translateY(-20vh) translateX(100px);
+        opacity:0;
+    }
+}
+
+/* Header */
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    backdrop-filter:blur(18px);
+    background:rgba(3,15,25,.78);
+    border-bottom:1px solid var(--border);
+}
+
+.nav{
+    max-width:1250px;
+    margin:auto;
+    padding:13px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo{
+    width:50px;
+    height:50px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:27px;
+    font-weight:900;
+    background:linear-gradient(135deg,#00e5ff,#7c4dff);
+    box-shadow:0 0 30px rgba(0,229,255,.35);
+    animation:logoPulse 3s ease-in-out infinite;
+}
+
+@keyframes logoPulse{
+    0%,100%{transform:rotate(0deg) scale(1)}
+    50%{transform:rotate(5deg) scale(1.06)}
+}
+
+.brand h1{
+    font-size:20px;
+    line-height:1.2;
+}
+
+.brand small{
+    color:#8fa7b7;
+    font-size:11px;
+}
+
+.nav-actions{
+    display:flex;
+    gap:8px;
+}
+
+.btn{
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.07);
+    color:white;
+    padding:10px 16px;
+    border-radius:13px;
+    cursor:pointer;
+    font-family:inherit;
+    font-weight:700;
+    transition:.25s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(0,229,255,.15);
+}
+
+.btn-primary{
+    border:0;
+    background:linear-gradient(135deg,#00bcd4,#7c4dff);
+}
+
+/* Hero */
+.hero{
+    max-width:1250px;
+    margin:auto;
+    padding:55px 18px 35px;
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:30px;
+    align-items:center;
+}
+
+.hero-content{
+    animation:heroIn 1s ease;
+}
+
+@keyframes heroIn{
+    from{opacity:0;transform:translateY(30px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+.badge{
+    display:inline-flex;
+    padding:7px 13px;
+    border:1px solid rgba(0,229,255,.25);
+    border-radius:30px;
+    background:rgba(0,229,255,.08);
+    color:#7defff;
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.hero h2{
+    font-size:clamp(34px,6vw,66px);
+    line-height:1.08;
+    font-weight:900;
+    margin-bottom:17px;
+}
+
+.gradient-text{
+    background:linear-gradient(90deg,#00e5ff,#8c6cff,#00e676);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    color:var(--muted);
+    line-height:1.9;
+    max-width:680px;
+}
+
+.hero-buttons{
+    margin-top:25px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+/* Bangladesh visual */
+.map-box{
+    position:relative;
+    min-height:360px;
+    border:1px solid var(--border);
+    border-radius:30px;
+    background:
+      linear-gradient(145deg,rgba(0,229,255,.08),rgba(124,77,255,.1)),
+      rgba(255,255,255,.035);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.map-box:before{
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    border:1px solid rgba(0,229,255,.2);
+    animation:ring 5s linear infinite;
+}
+
+@keyframes ring{
+    from{transform:scale(.7);opacity:1}
+    to{transform:scale(1.6);opacity:0}
+}
+
+.bd-map{
+    width:190px;
+    height:260px;
+    background:linear-gradient(160deg,#00e676,#00bcd4,#00695c);
+    clip-path:polygon(
+      47% 0%,59% 7%,66% 15%,77% 18%,82% 29%,
+      92% 34%,86% 45%,93% 54%,81% 62%,84% 73%,
+      72% 78%,69% 91%,58% 86%,49% 100%,40% 88%,
+      30% 83%,27% 69%,18% 61%,23% 50%,12% 42%,
+      22% 32%,19% 21%,31% 17%,34% 7%
+    );
+    box-shadow:0 0 50px rgba(0,229,118,.3);
+    animation:mapFloat 4s ease-in-out infinite;
+}
+
+@keyframes mapFloat{
+    0%,100%{transform:translateY(0) rotate(-2deg)}
+    50%{transform:translateY(-15px) rotate(2deg)}
+}
+
+.map-label{
+    position:absolute;
+    text-align:center;
+}
+
+.map-label strong{
+    display:block;
+    font-size:24px;
+}
+
+.map-label span{
+    color:#bdeef5;
+    font-size:13px;
+}
+
+/* Search */
+.search-wrap{
+    max-width:1000px;
+    margin:10px auto 40px;
+    padding:0 18px;
+}
+
+.search-box{
+    display:flex;
+    gap:8px;
+    padding:8px;
+    background:rgba(255,255,255,.08);
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+}
+
+.search-box input{
+    flex:1;
+    min-width:0;
+    border:0;
+    outline:0;
+    background:transparent;
+    color:white;
+    font-family:inherit;
+    font-size:15px;
+    padding:12px;
+}
+
+.search-box input::placeholder{
+    color:#8da2b0;
+}
+
+/* sections */
+.section{
+    max-width:1250px;
+    margin:auto;
+    padding:45px 18px;
+}
+
+.section-title{
+    margin-bottom:25px;
+}
+
+.section-title span{
+    color:#65ecff;
+    font-size:13px;
+}
+
+.section-title h3{
+    font-size:30px;
+    margin-top:4px;
+}
+
+.section-title p{
+    color:#9db1be;
+    margin-top:5px;
+}
+
+/* service grid */
+.service-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.service-card{
+    position:relative;
+    min-height:165px;
+    padding:22px;
+    border:1px solid var(--border);
+    border-radius:22px;
+    background:
+      linear-gradient(145deg,rgba(255,255,255,.095),rgba(255,255,255,.035));
+    cursor:pointer;
+    overflow:hidden;
+    transition:.35s;
+}
+
+.service-card:before{
+    content:"";
+    position:absolute;
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    background:var(--card-color,#00e5ff);
+    opacity:.09;
+    right:-50px;
+    top:-50px;
+    transition:.4s;
+}
+
+.service-card:hover{
+    transform:translateY(-8px) rotateX(2deg);
+    border-color:rgba(255,255,255,.28);
+    box-shadow:0 20px 45px rgba(0,0,0,.3);
+}
+
+.service-card:hover:before{
+    transform:scale(2);
+}
+
+.service-icon{
+    display:block;
+    font-size:32px;
+    margin-bottom:12px;
+}
+
+.service-card h4{
+    font-size:17px;
+    margin-bottom:7px;
+}
+
+.service-card p{
+    color:#9db1be;
+    font-size:13px;
+    line-height:1.7;
+}
+
+/* emergency */
+.emergency-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.emergency-card{
+    padding:20px;
+    border-radius:20px;
+    border:1px solid rgba(255,82,82,.2);
+    background:linear-gradient(145deg,rgba(255,82,82,.11),rgba(255,255,255,.04));
+}
+
+.emergency-card h4{
+    font-size:15px;
+}
+
+.emergency-number{
+    font-size:28px;
+    font-weight:900;
+    color:#ff8585;
+    margin:8px 0;
+}
+
+.emergency-card p{
+    color:#9db1be;
+    font-size:12px;
+    margin-bottom:12px;
+}
+
+.call-btn{
+    display:inline-block;
+    text-decoration:none;
+    color:white;
+    padding:8px 12px;
+    border-radius:10px;
+    background:#b71c1c;
+    font-size:12px;
+    font-weight:700;
+}
+
+/* info cards */
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.info-card{
+    padding:22px;
+    border-radius:20px;
+    background:rgba(255,255,255,.06);
+    border:1px solid var(--border);
+}
+
+.info-card .big{
+    font-size:35px;
+    font-weight:900;
+    color:#66efff;
+}
+
+.info-card h4{
+    margin:5px 0;
+}
+
+.info-card p{
+    color:#9db1be;
+    line-height:1.7;
+    font-size:13px;
+}
+
+/* upazila */
+.upazila-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:12px;
+}
+
+.upazila{
+    padding:18px 12px;
+    text-align:center;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.06);
+    border-radius:18px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.upazila:hover{
+    transform:translateY(-5px);
+    background:rgba(0,229,255,.08);
+    border-color:rgba(0,229,255,.3);
+}
+
+.upazila strong{
+    display:block;
+    font-size:15px;
+}
+
+.upazila small{
+    color:#8fa7b7;
+}
+
+/* Developer */
+.developer{
+    text-align:center;
+    padding:65px 20px;
+    margin-top:30px;
+    background:
+      linear-gradient(135deg,rgba(0,229,255,.08),rgba(124,77,255,.08));
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+}
+
+.dev-name{
+    font-size:clamp(30px,5vw,58px);
+    font-weight:900;
+    background:linear-gradient(90deg,#00e5ff,#fff,#7c4dff,#00e676);
+    background-size:300%;
+    -webkit-background-clip:text;
+    color:transparent;
+    animation:devGradient 5s linear infinite;
+}
+
+@keyframes devGradient{
+    from{background-position:0%}
+    to{background-position:300%}
+}
+
+.dev-sub{
+    color:#9db1be;
+    margin-top:8px;
+}
+
+/* footer */
+footer{
+    padding:30px 18px;
+    text-align:center;
+    color:#718796;
+    font-size:12px;
+}
+
+/* Modal */
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:2000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(12px);
+}
+
+.modal.show{
+    display:flex;
+    animation:modalBg .25s ease;
+}
+
+@keyframes modalBg{
+    from{opacity:0}
+    to{opacity:1}
+}
+
+.modal-box{
+    width:min(950px,100%);
+    max-height:90vh;
+    overflow:auto;
+    border:1px solid var(--border);
+    border-radius:25px;
+    background:
+      linear-gradient(145deg,rgba(12,34,49,.98),rgba(5,20,32,.98));
+    box-shadow:0 30px 100px rgba(0,0,0,.6);
+    animation:modalIn .3s ease;
+}
+
+@keyframes modalIn{
+    from{opacity:0;transform:translateY(30px) scale(.96)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+.modal-head{
+    position:sticky;
+    top:0;
+    z-index:3;
+    padding:18px 20px;
+    background:rgba(6,19,31,.93);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.modal-head h3{
+    font-size:19px;
+}
+
+.close{
+    width:38px;
+    height:38px;
+    border:0;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    color:white;
+    cursor:pointer;
+    font-size:20px;
+}
+
+.modal-content{
+    padding:20px;
+}
+
+/* detail */
+.detail-top{
+    padding:20px;
+    border-radius:20px;
+    background:rgba(0,229,255,.06);
+    border:1px solid rgba(0,229,255,.15);
+    margin-bottom:18px;
+}
+
+.detail-top h2{
+    font-size:28px;
+}
+
+.detail-top p{
+    color:#9db1be;
+    margin-top:7px;
+    line-height:1.8;
+}
+
+.detail-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.detail-item{
+    padding:17px;
+    background:rgba(255,255,255,.05);
+    border:1px solid var(--border);
+    border-radius:15px;
+}
+
+.detail-item strong{
+    display:block;
+    color:#65ecff;
+    margin-bottom:6px;
+}
+
+.detail-item span{
+    color:#b8c9d4;
+    line-height:1.7;
+    font-size:13px;
+}
+
+.data-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+    font-size:13px;
+}
+
+.data-table th,
+.data-table td{
+    padding:12px;
+    border-bottom:1px solid var(--border);
+    text-align:left;
+}
+
+.data-table th{
+    color:#65ecff;
+}
+
+/* auth */
+.auth-tabs{
+    display:flex;
+    gap:7px;
+    padding:5px;
+    background:rgba(255,255,255,.05);
+    border-radius:14px;
+    margin-bottom:18px;
+}
+
+.auth-tab{
+    flex:1;
+    border:0;
+    background:transparent;
+    color:#8fa7b7;
+    padding:11px;
+    border-radius:10px;
+    cursor:pointer;
+    font-family:inherit;
+    font-weight:700;
+}
+
+.auth-tab.active{
+    color:white;
+    background:linear-gradient(135deg,#007c91,#6542d9);
+}
+
+.form-group{
+    margin-bottom:13px;
+}
+
+.form-group label{
+    display:block;
+    color:#a9bcc8;
+    font-size:13px;
+    margin-bottom:6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    padding:12px 13px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    outline:0;
+    background:rgba(255,255,255,.06);
+    color:white;
+    font-family:inherit;
+}
+
+.form-group textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.form-group option{
+    color:#111;
+}
+
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.password-wrap{
+    position:relative;
+}
+
+.password-wrap input{
+    padding-right:70px;
+}
+
+.show-pass{
+    position:absolute;
+    right:8px;
+    top:7px;
+    border:0;
+    background:rgba(255,255,255,.08);
+    color:#a9c4d1;
+    padding:7px 9px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.forgot{
+    display:block;
+    margin:10px 0 15px;
+    color:#65ecff;
+    cursor:pointer;
+    font-size:13px;
+}
+
+/* complaint */
+.complaint-warning{
+    padding:14px;
+    border-radius:15px;
+    background:rgba(255,193,7,.08);
+    border:1px solid rgba(255,193,7,.2);
+    color:#ffe082;
+    line-height:1.8;
+    font-size:13px;
+    margin-bottom:18px;
+}
+
+.stepper{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:7px;
+    margin-bottom:22px;
+}
+
+.step{
+    padding:9px 4px;
+    text-align:center;
+    font-size:11px;
+    color:#718796;
+    background:rgba(255,255,255,.05);
+    border-radius:10px;
+}
+
+.step.active{
+    color:white;
+    background:linear-gradient(135deg,#00a4bd,#6542d9);
+}
+
+.complaint-step{
+    display:none;
+}
+
+.complaint-step.active{
+    display:block;
+    animation:stepIn .25s ease;
+}
+
+@keyframes stepIn{
+    from{opacity:0;transform:translateX(15px)}
+    to{opacity:1;transform:translateX(0)}
+}
+
+.step-actions{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:20px;
+}
+
+.upload-box{
+    border:1px dashed rgba(0,229,255,.4);
+    border-radius:18px;
+    padding:30px;
+    text-align:center;
+    background:rgba(0,229,255,.04);
+    cursor:pointer;
+}
+
+.upload-box input{
+    display:none;
+}
+
+.file-list{
+    margin-top:12px;
+}
+
+.file-item{
+    padding:8px 10px;
+    background:rgba(255,255,255,.06);
+    border-radius:9px;
+    margin-bottom:5px;
+    font-size:12px;
+}
+
+/* toggle */
+.toggle-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    padding:15px;
+    border-radius:15px;
+    background:rgba(255,255,255,.05);
+    margin-bottom:15px;
+}
+
+.switch{
+    width:52px;
+    height:28px;
+    background:#455a64;
+    border-radius:30px;
+    padding:3px;
+    cursor:pointer;
+}
+
+.switch span{
+    display:block;
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    background:white;
+    transition:.25s;
+}
+
+.switch.on{
+    background:#00a86b;
+}
+
+.switch.on span{
+    transform:translateX(24px);
+}
+
+/* success */
+.success{
+    text-align:center;
+    padding:25px 10px;
+}
+
+.success-circle{
+    width:95px;
+    height:95px;
+    margin:0 auto 20px;
+    border-radius:50%;
+    background:rgba(0,230,118,.12);
+    border:2px solid #00e676;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:45px;
+    color:#00e676;
+    animation:successPop .7s ease;
+}
+
+@keyframes successPop{
+    0%{transform:scale(.3);opacity:0}
+    70%{transform:scale(1.15)}
+    100%{transform:scale(1)}
+}
+
+.tracking-id{
+    display:inline-block;
+    margin:15px 0;
+    padding:12px 20px;
+    border-radius:13px;
+    background:rgba(0,229,255,.1);
+    border:1px solid rgba(0,229,255,.25);
+    color:#65ecff;
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+/* toast */
+.toast{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translate(-50%,120px);
+    z-index:5000;
+    background:#102c3d;
+    border:1px solid rgba(0,229,255,.3);
+    color:white;
+    padding:13px 18px;
+    border-radius:13px;
+    box-shadow:var(--shadow);
+    opacity:0;
+    transition:.3s;
+}
+
+.toast.show{
+    transform:translate(-50%,0);
+    opacity:1;
+}
+
+/* responsive */
+@media(max-width:950px){
+    .hero{
+        grid-template-columns:1fr;
+    }
+
+    .service-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .emergency-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .upazila-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .nav{
+        align-items:flex-start;
+    }
+
+    .brand h1{
+        font-size:16px;
+    }
+
+    .logo{
+        width:43px;
+        height:43px;
+        font-size:22px;
+    }
+
+    .nav-actions .btn{
+        padding:8px 10px;
+        font-size:11px;
+    }
+
+    .hero{
+        padding-top:35px;
+    }
+
+    .hero h2{
+        font-size:37px;
+    }
+
+    .map-box{
+        min-height:280px;
+    }
+
+    .service-grid,
+    .emergency-grid,
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+    .upazila-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .detail-grid,
+    .form-row{
+        grid-template-columns:1fr;
+    }
+
+    .modal{
+        padding:8px;
+    }
+
+    .modal-box{
+        max-height:94vh;
+        border-radius:20px;
+    }
+
+    .modal-content{
+        padding:15px;
+    }
+
+    .stepper{
+        gap:3px;
+    }
+
+    .step{
+        font-size:9px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="particles" id="particles"></div>
+
+<header>
+    <div class="nav">
+
+        <div class="brand">
+            <div class="logo">ন</div>
+
+            <div>
+                <h1>নেত্রকোণা হেল্পলাইন</h1>
+                <small>এক জায়গায় নেত্রকোণার প্রয়োজনীয় তথ্য</small>
+            </div>
+        </div>
+
+        <div class="nav-actions">
+            <button class="btn" onclick="openAuth('login')">লগ ইন</button>
+            <button class="btn btn-primary" onclick="openAuth('signup')">সাইন আপ</button>
+        </div>
+
+    </div>
+</header>
+
+
+<!-- HERO -->
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="badge">🇧🇩 নেত্রকোণার জন্য ডিজিটাল সহায়তা কেন্দ্র</span>
+
+        <h2>
+            নেত্রকোণার প্রয়োজনীয় সবকিছু
+            <span class="gradient-text">এক জায়গায়</span>
+        </h2>
+
+        <p>
+            হাসপাতাল, ডাক্তার, জরুরি সেবা, সরকারি অফিস, আইন, শিক্ষা,
+            কৃষি, ব্যাংক, রেলওয়ে, বাস, দর্শনীয় স্থান, হোটেল,
+            রেস্টুরেন্ট, রক্তদাতা, স্থানীয় সেবা ও অভিযোগ—
+            প্রয়োজনীয় তথ্য সহজে খুঁজে পাওয়ার জন্য এই প্ল্যাটফর্ম।
+        </p>
+
+        <div class="hero-buttons">
+            <button class="btn btn-primary" onclick="openCategory('hospital')">
+                🏥 হাসপাতাল দেখুন
+            </button>
+
+            <button class="btn" onclick="openComplaintCenter()">
+                ⚠️ অভিযোগ করুন
+            </button>
+
+            <button class="btn" onclick="openCategory('upazila')">
+                🗺️ উপজেলা দেখুন
+            </button>
+        </div>
+
+    </div>
+
+
+    <div class="map-box">
+
+        <div class="bd-map"></div>
+
+        <div class="map-label">
+            <strong>🇧🇩</strong>
+            <span>নেত্রকোণা হেল্পলাইন</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SEARCH -->
+<div class="search-wrap">
+
+    <div class="search-box">
+
+        <input
+            id="globalSearch"
+            type="search"
+            placeholder="হাসপাতাল, উপজেলা, অফিস, দর্শনীয় স্থান, ব্যাংক... খুঁজুন"
+            oninput="searchData(this.value)"
+        >
+
+        <button class="btn btn-primary" onclick="searchData(document.getElementById('globalSearch').value)">
+            🔎 খুঁজুন
+        </button>
+
+    </div>
+
+</div>
+
+<div id="searchResults" style="max-width:1100px;margin:-20px auto 20px;padding:0 18px;"></div>
+
+
+<!-- SERVICES -->
+<section class="section">
+
+    <div class="section-title">
+        <span>সেবা নির্বাচন করুন</span>
+        <h3>আপনার কী সাহায্য দরকার?</h3>
+        <p>প্রতিটি বাটনের ভিতরে আলাদা তথ্য ও প্রয়োজনীয় কাজ রাখা হয়েছে।</p>
+    </div>
+
+
+    <div class="service-grid">
+
+        <div class="service-card" style="--card-color:#ff5252"
+             onclick="openCategory('emergency')">
+            <span class="service-icon">🚨</span>
+            <h4>জরুরি সেবা</h4>
+            <p>999, ফায়ার সার্ভিস, নারী ও শিশু, শিশু সহায়তা ও অন্যান্য জরুরি নম্বর।</p>
+        </div>
+
+
+        <div class="service-card" style="--card-color:#00e676"
+             onclick="openCategory('hospital')">
+            <span class="service-icon">🏥</span>
+            <h4>হাসপাতাল ও চিকিৎসা</h4>
+            <p>সরকারি, বেসরকারি ও NGO হাসপাতাল/ক্লিনিক এবং স্বাস্থ্যসেবা তথ্য।</p>
+        </div>
+
+
+        <div class="service-card" style="--card-color:#00bcd4"
+             onclick="openCategory('nearby')">
+            <span class="service-icon">📍</span>
+            <h4>কাছাকাছি সেবা</h4>
+            <p>আপনার আশেপাশের হাসপাতাল, ফার্মেসি, ATM ও অন্যান্য সেবা Maps-এ খুঁজুন।</p>
+        </div>
+
+
+        <div class="service-card" style="--card-color:#ff9800"
+             onclick="openCategory('bus')">
+            <span class="service-icon">🚌</span>
+            <h4>বাস ও যাতায়াত</h4>
+            <p>নেত্রকোণা থেকে বিভিন্ন গন্তব্যে যাতায়াতের তথ্য ও Maps খোঁজার সুবিধা।</p>
+        </div>
+
+
+        <div class="service-card" style="--card-color:#9c27b0"
+             onclick="openCategory('train')">
+            <span class="service-icon">🚆</span>
+            <h4>ট্রেন ও রেলওয়ে</h4>
+            <p>নেত্রকোণা রেলস্টেশন ও বাংলাদেশ রেলওয়ের গুরুত্বপূর্ণ তথ্য।</p>
+        </div>
+
+
+        <div class="service-card" style="--card-color:#3f51b5"
+             onclick="openCategory('government')">
+            <span class="service-icon">🏛️</span>
+            <h4>সরকারি অফিস</h4>
+            <p>জেলা প্রশাসন, সরকারি দপ্তর, উপজেলা প্রশাসন ও গুরুত্বপূর্ণ যোগাযোগ।</p>
+        </div>
+
+
+        <div class="service-card" style="--card-color:#607d8b"
+             onclick="openCategory('law')">
+            <span class="service-icon">⚖️</span>
+            <h4>আদালত ও আইন</h4>
+            <p>আইনি সহায়তা, লিগ্যাল এইড ও প্রয়োজনীয় সরকারি আইনসেবা।</p>
+        </div>
+
+
+        <div class="service-card" style="--card-color:#00e676"
+             onclick="openCategory('tourism')">
+            <span class="service-icon">🏞️</span>
+            <h4>দর্শনীয় স্থান</h4>
+            <p>বিজয়পুর, বিরিশিরি, সোমেশ্বরী নদী, রাশিমণি স্মৃতিসৌধসহ পর্যটন স্পট।</p>
+        </div>
+
+
+        <div class="service-card" style="--card-color:#ff9800"
+             onclick="openCategory('business')">
+            <span class="service-icon">🏪</span>
+            <h4>দোকান ও ব্যবসা</h4>
+            <p>নেত্রকোণার ব্যবসা প্রতিষ্ঠান খুঁজে Maps-এ অবস্থান দেখুন।</p>
+        </div>
+
+
+        <div class="service-card" style="--card-color:#8bc34a"
+             onclick="openCategory('agriculture')">
+            <span class="service-icon">🌾</span>
+            <h4>কৃষি</h4>
+            <p>কৃষি অফিস, কৃষি পরামর্শ, সার-বীজ ও কৃষি সহায়তার তথ্য।</p>
+        </div>
+
+
+        <div class="service-card" style="--card-color:#00bcd4"
+             onclick="openCategory('bank')">
+            <span class="service-icon">🏦</span>
+            <h4>ব্যাংক ও ATM</h4>
+            <p>ব্যাংক, ATM ও কাছাকাছি আর্থিক সেবা Maps-এ খুঁজুন।</p>
+        </div>
+
+
+        <div class="service-card" style="--card-color:#2196f3"
+             onclick="openCategory('education')">
+            <span class="service-icon">🎓</span>
+            <h4>শিক্ষা</h4>
+            <p>স্কুল, কলেজ, মাদ্রাসা ও গুরুত্বপূর্ণ শিক্ষা প্রতিষ্ঠানের তথ্য।</p>
+        </div>
+
+
+        <div class="service-card" style="--card-color:#795548"
+             onclick="openCategory('hotel')">
+            <span class="service-icon">🏨</span>
+            <h4>হোটেল</h4>
+            <p>হোটেল, মোটেল, গেস্টহাউস ও থাকার জায়গার তথ্য।</p>
+        </div>
+
+
+        <div class="service-card" style="--card-color:#ff7043"
+             onclick="openCategory('restaurant')">
+            <span class="service-icon">🍽️</span>
+            <h4>রেস্টুরেন্ট</h4>
+            <p>নেত্রকোণার খাবারের দোকান ও রেস্টুরেন্ট Maps-এ খুঁজুন।</p>
+        </div>
+
+
+        <div class="service-card" style="--card-color:#e91e63"
+             onclick="openCategory('blood')">
+            <span class="service-icon">🩸</span>
+            <h4>রক্তদাতা</h4>
+            <p>রক্তের গ্রুপ অনুযায়ী স্বেচ্ছাসেবী রক্তদাতা খোঁজার ব্যবস্থা।</p>
+        </div>
+
+
+        <div class="service-card" style="--card-color:#673ab7"
+             onclick="openCategory('religion')">
+            <span class="service-icon">🕌</span>
+            <h4>ধর্মীয় স্থান</h4>
+            <p>মসজিদ, মন্দির, গির্জা ও অন্যান্য ধর্মীয় স্থান খুঁজুন।</p>
+        </div>
+
+
+        <div class="service-card" style="--card-color:#009688"
+             onclick="openCategory('local')">
+            <span class="service-icon">🛠️</span>
+            <h4>স্থানীয় সেবা</h4>
+            <p>ইলেকট্রিশিয়ান, প্লাম্বার, মেকানিক, ফটোগ্রাফারসহ স্থানীয় সেবা।</p>
+        </div>
+
+
+        <div class="service-card" style="--card-color:#ffc107"
+             onclick="openComplaintCenter()">
+            <span class="service-icon">⚠️</span>
+            <h4>দুর্নীতি ও অভিযোগ</h4>
+            <p>অভিযোগ করুন, প্রমাণ সংযুক্ত করুন এবং Tracking ID পান।</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- QUICK STATS -->
+<section class="section">
+
+    <div class="section-title">
+        <span>নেত্রকোণা এক নজরে</span>
+        <h3>জেলার গুরুত্বপূর্ণ তথ্য</h3>
+    </div>
+
+    <div class="info-grid">
+
+        <div class="info-card">
+            <div class="big">১০</div>
+            <h4>উপজেলা</h4>
+            <p>
+                নেত্রকোণা সদর, বারহাট্টা, দুর্গাপুর, কলমাকান্দা,
+                কেন্দুয়া, আটপাড়া, পূর্বধলা, মদন, মোহনগঞ্জ ও খালিয়াজুরী।
+            </p>
+        </div>
+
+        <div class="info-card">
+            <div class="big">৩৭+</div>
+            <h4>Private Hospital / Clinic</h4>
+            <p>
+                DGHS Facility Registry-তে নেত্রকোণার বিভিন্ন উপজেলায়
+                ৩৭টি Private Hospital/Clinic তালিকাভুক্ত রয়েছে।
+            </p>
+        </div>
+
+        <div class="info-card">
+            <div class="big">২৬+</div>
+            <h4>NGO Hospital / Clinic</h4>
+            <p>
+                DGHS Registry অনুযায়ী বিভিন্ন উপজেলায়
+                NGO Hospital/Clinic-ও তালিকাভুক্ত আছে।
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- EMERGENCY -->
+<section class="section">
+
+    <div class="section-title">
+        <span>জরুরি অবস্থায়</span>
+        <h3>গুরুত্বপূর্ণ হটলাইন</h3>
+        <p>জরুরি হলে সরাসরি সংশ্লিষ্ট নম্বরে কল করুন।</p>
+    </div>
+
+
+    <div class="emergency-grid">
+
+        <div class="emergency-card">
+            <h4>জাতীয় জরুরি সেবা</h4>
+            <div class="emergency-number">999</div>
+            <p>পুলিশ, ফায়ার সার্ভিস ও অ্যাম্বুলেন্স সহায়তা।</p>
+            <a class="call-btn" href="tel:999">📞 কল করুন</a>
+        </div>
+
+
+        <div class="emergency-card">
+            <h4>ফায়ার সার্ভিস</h4>
+            <div class="emergency-number">102</div>
+            <p>অগ্নিকাণ্ড ও ফায়ার সার্ভিস জরুরি সহায়তা।</p>
+            <a class="call-btn" href="tel:102">📞 কল করুন</a>
+        </div>
+
+
+        <div class="emergency-card">
+            <h4>সরকারি তথ্য ও সেবা</h4>
+            <div class="emergency-number">333</div>
+            <p>সরকারি তথ্য, সেবা ও অভিযোগ সংক্রান্ত সহায়তা।</p>
+            <a class="call-btn" href="tel:333">📞 কল করুন</a>
+        </div>
+
+
+        <div class="emergency-card">
+            <h4>দুদক</h4>
+            <div class="emergency-number">106</div>
+            <p>দুর্নীতি সংক্রান্ত অভিযোগের জন্য।</p>
+            <a class="call-btn" href="tel:106">📞 কল করুন</a>
+        </div>
+
+
+        <div class="emergency-card">
+            <h4>লিগ্যাল এইড</h4>
+            <div class="emergency-number">16699</div>
+            <p>জাতীয় আইনগত সহায়তা হেল্পলাইন।</p>
+            <a class="call-btn" href="tel:16699">📞 কল করুন</a>
+        </div>
+
+
+        <div class="emergency-card">
+            <h4>নারী ও শিশু</h4>
+            <div class="emergency-number">109</div>
+            <p>নারী ও শিশু নির্যাতন প্রতিরোধ সহায়তা।</p>
+            <a class="call-btn" href="tel:109">📞 কল করুন</a>
+        </div>
+
+
+        <div class="emergency-card">
+            <h4>শিশু সহায়তা</h4>
+            <div class="emergency-number">1098</div>
+            <p>শিশু সহায়তা হেল্পলাইন।</p>
+            <a class="call-btn" href="tel:1098">📞 কল করুন</a>
+        </div>
+
+
+        <div class="emergency-card">
+            <h4>সুপ্রিম কোর্ট</h4>
+            <div class="emergency-number">103</div>
+            <p>সুপ্রিম কোর্টের হেল্পলাইন।</p>
+            <a class="call-btn" href="tel:103">📞 কল করুন</a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- UPAZILA -->
+<section class="section">
+
+    <div class="section-title">
+        <span>এলাকা নির্বাচন</span>
+        <h3>নেত্রকোণার ১০ উপজেলা</h3>
+        <p>উপজেলায় ক্লিক করলে ইউনিয়ন ও স্থানীয় তথ্য দেখতে পারবেন।</p>
+    </div>
+
+
+    <div class="upazila-grid">
+
+        <div class="upazila" onclick="openUpazila('সদর')">
+            <strong>নেত্রকোণা সদর</strong>
+            <small>১২ ইউনিয়ন</small>
+        </div>
+
+        <div class="upazila" onclick="openUpazila('বারহাট্টা')">
+            <strong>বারহাট্টা</strong>
+            <small>৭ ইউনিয়ন</small>
+        </div>
+
+        <div class="upazila" onclick="openUpazila('দুর্গাপুর')">
+            <strong>দুর্গাপুর</strong>
+            <small>৭ ইউনিয়ন</small>
+        </div>
+
+        <div class="upazila" onclick="openUpazila('কলমাকান্দা')">
+            <strong>কলমাকান্দা</strong>
+            <small>৮ ইউনিয়ন</small>
+        </div>
+
+        <div class="upazila" onclick="openUpazila('কেন্দুয়া')">
+            <strong>কেন্দুয়া</strong>
+            <small>১৩ ইউনিয়ন</small>
+        </div>
+
+        <div class="upazila" onclick="openUpazila('আটপাড়া')">
+            <strong>আটপাড়া</strong>
+            <small>৭ ইউনিয়ন</small>
+        </div>
+
+        <div class="upazila" onclick="openUpazila('পূর্বধলা')">
+            <strong>পূর্বধলা</strong>
+            <small>১১ ইউনিয়ন</small>
+        </div>
+
+        <div class="upazila" onclick="openUpazila('মদন')">
+            <strong>মদন</strong>
+            <small>৮ ইউনিয়ন</small>
+        </div>
+
+        <div class="upazila" onclick="openUpazila('মোহনগঞ্জ')">
+            <strong>মোহনগঞ্জ</strong>
+            <small>৭ ইউনিয়ন</small>
+        </div>
+
+        <div class="upazila" onclick="openUpazila('খালিয়াজুরী')">
+            <strong>খালিয়াজুরী</strong>
+            <small>৬ ইউনিয়ন</small>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DEVELOPER -->
+<section class="developer">
+
+    <div class="dev-sub">Developed with ❤️ for Netrakona</div>
+
+    <div class="dev-name">
+        Mustak Ahmed Rohi
+    </div>
+
+    <div class="dev-sub">
+        Developer • Netrakona HelpLine
+    </div>
+
+    <div style="margin-top:20px">
+        <a
+            href="https://wa.me/8801810751836"
+            target="_blank"
+            class="btn btn-primary"
+            style="text-decoration:none;display:inline-block">
+            💬 WhatsApp যোগাযোগ
+        </a>
+    </div>
+
+</section>
+
+
+<footer>
+    © <span id="year"></span> নেত্রকোণা হেল্পলাইন
+    <br>
+    তথ্য পরিবর্তনশীল — গুরুত্বপূর্ণ তথ্য ব্যবহারের আগে সংশ্লিষ্ট কর্তৃপক্ষের সাথে যাচাই করুন।
+</footer>
+
+
+<!-- GENERAL DETAIL MODAL -->
+<div class="modal" id="detailModal" onclick="outsideClose(event,'detailModal')">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+            <h3 id="detailTitle">তথ্য</h3>
+            <button class="close" onclick="closeModal('detailModal')">×</button>
+        </div>
+
+        <div class="modal-content" id="detailContent"></div>
+
+    </div>
+
+</div>
+
+
+<!-- AUTH MODAL -->
+<div class="modal" id="authModal" onclick="outsideClose(event,'authModal')">
+
+    <div class="modal-box" style="max-width:500px">
+
+        <div class="modal-head">
+            <h3>🔐 অ্যাকাউন্ট</h3>
+            <button class="close" onclick="closeModal('authModal')">×</button>
+        </div>
+
+        <div class="modal-content">
+
+            <div class="auth-tabs">
+
+                <button
+                    id="loginTab"
+                    class="auth-tab active"
+                    onclick="switchAuth('login')">
+                    লগ ইন
+                </button>
+
+                <button
+                    id="signupTab"
+                    class="auth-tab"
+                    onclick="switchAuth('signup')">
+                    সাইন আপ
+                </button>
+
+            </div>
+
+
+            <!-- LOGIN -->
+            <div id="loginForm">
+
+                <div class="form-group">
+                    <label>মোবাইল নম্বর অথবা ইমেইল</label>
+                    <input id="loginIdentity" placeholder="01XXXXXXXXX / example@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label>পাসওয়ার্ড</label>
+
+                    <div class="password-wrap">
+                        <input id="loginPassword" type="password" placeholder="পাসওয়ার্ড">
+                        <button class="show-pass" onclick="togglePassword('loginPassword')">
+                            দেখুন
+                        </button>
+                    </div>
+                </div>
+
+                <span class="forgot" onclick="forgotPassword()">
+                    পাসওয়ার্ড ভুলে গেছেন?
+                </span>
+
+                <button class="btn btn-primary" style="width:100%" onclick="loginUser()">
+                    🔐 লগ ইন
+                </button>
+
+            </div>
+
+
+            <!-- SIGNUP -->
+            <div id="signupForm" style="display:none">
+
+                <div class="form-group">
+                    <label>আপনার নাম</label>
+                    <input id="signupName" placeholder="আপনার নাম">
+                </div>
+
+                <div class="form-group">
+                    <label>মোবাইল অথবা ইমেইল</label>
+                    <input id="signupIdentity" placeholder="01XXXXXXXXX / example@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label>পাসওয়ার্ড</label>
+
+                    <div class="password-wrap">
+                        <input id="signupPassword" type="password" placeholder="কমপক্ষে ৮ অক্ষর">
+                        <button class="show-pass" onclick="togglePassword('signupPassword')">
+                            দেখুন
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>পাসওয়ার্ড আবার লিখুন</label>
+                    <input id="signupConfirm" type="password" placeholder="পাসওয়ার্ড নিশ্চিত করুন">
+                </div>
+
+                <button class="btn btn-primary" style="width:100%" onclick="signupUser()">
+                    ✨ অ্যাকাউন্ট তৈরি করুন
+                </button>
+
+                <p style="color:#8198a6;font-size:11px;margin-top:12px;line-height:1.7">
+                    নোট: এই HTML সংস্করণে লগইন ডেমো হিসেবে ব্রাউজারের localStorage ব্যবহার করে।
+                    বাস্তব অ্যাপে Firebase/Supabase বা নিরাপদ backend ব্যবহার করতে হবে।
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- COMPLAINT MODAL -->
+<div class="modal" id="complaintModal" onclick="outsideClose(event,'complaintModal')">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+            <h3>⚠️ দুর্নীতি ও অভিযোগ কেন্দ্র</h3>
+            <button class="close" onclick="closeModal('complaintModal')">×</button>
+        </div>
+
+        <div class="modal-content">
+
+            <div class="complaint-warning">
+                ⚠️ গুরুত্বপূর্ণ: এই সংস্করণে অভিযোগের ফর্ম ও Tracking ID
+                আপনার ব্রাউজারে ডেমো হিসেবে কাজ করবে। বাস্তবে অভিযোগ কর্তৃপক্ষের কাছে
+                পাঠাতে নিরাপদ backend/API সংযোগ প্রয়োজন।
+            </div>
+
+
+            <div class="stepper">
+
+                <div class="step active" id="stepIndicator1">১. অভিযোগ</div>
+                <div class="step" id="stepIndicator2">২. প্রমাণ</div>
+                <div class="step" id="stepIndicator3">৩. পরিচয়</div>
+                <div class="step" id="stepIndicator4">৪. সম্পন্ন</div>
+
+            </div>
+
+
+            <!-- STEP 1 -->
+            <div class="complaint-step active" id="complaintStep1">
+
+                <div class="form-group">
+                    <label>অভিযোগের ধরন</label>
+
+                    <select id="complaintCategory">
+                        <option value="">নির্বাচন করুন</option>
+                        <option>দুর্নীতি / ঘুষ</option>
+                        <option>ঘুষ দাবি</option>
+                        <option>সরকারি সেবা পেতে অনিয়ম</option>
+                        <option>ক্ষমতার অপব্যবহার</option>
+                        <option>জালিয়াতি / প্রতারণা</option>
+                        <option>অবৈধ অর্থ লেনদেন</option>
+                        <option>সরকারি সম্পদের অপব্যবহার</option>
+                        <option>অন্যান্য</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label>অভিযোগের শিরোনাম</label>
+                    <input id="complaintTitle" placeholder="সংক্ষেপে অভিযোগের বিষয়">
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>ঘটনাস্থল</label>
+                        <input id="complaintPlace" placeholder="উপজেলা/অফিস/স্থান">
+                    </div>
+
+                    <div class="form-group">
+                        <label>ঘটনার তারিখ</label>
+                        <input id="complaintDate" type="date">
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label>অভিযোগের বিস্তারিত</label>
+                    <textarea
+                        id="complaintDetails"
+                        maxlength="3000"
+                        placeholder="ঘটনাটি বিস্তারিত লিখুন..."></textarea>
+                </div>
+
+
+                <div class="step-actions">
+
+                    <span></span>
+
+                    <button class="btn btn-primary" onclick="complaintNext(2)">
+                        পরবর্তী →
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 2 -->
+            <div class="complaint-step" id="complaintStep2">
+
+                <h4 style="margin-bottom:10px">
+                    📎 প্রমাণ / Evidence
+                </h4>
+
+                <p style="color:#8fa7b7;font-size:12px;line-height:1.7;margin-bottom:15px">
+                    ছবি, PDF বা প্রয়োজনীয় ডকুমেন্ট সংযুক্ত করতে পারেন।
+                    OTP, Password, ব্যাংক PIN বা অতিরিক্ত সংবেদনশীল তথ্য আপলোড করবেন না।
+                </p>
+
+
+                <label class="upload-box">
+
+                    <input
+                        type="file"
+                        id="evidenceFiles"
+                        multiple
+                        accept="image/*,.pdf,.doc,.docx"
+                        onchange="showFiles()">
+
+                    <div style="font-size:35px">📤</div>
+
+                    <strong>ফাইল নির্বাচন করুন</strong>
+
+                    <div style="color:#8198a6;font-size:12px;margin-top:5px">
+                        ছবি / PDF / DOC
+                    </div>
+
+                </label>
+
+
+                <div id="fileList" class="file-list"></div>
+
+
+                <div class="step-actions">
+
+                    <button class="btn" onclick="complaintNext(1)">
+                        ← পিছনে
+                    </button>
+
+                    <button class="btn btn-primary" onclick="complaintNext(3)">
+                        পরবর্তী →
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 3 -->
+            <div class="complaint-step" id="complaintStep3">
+
+                <div class="toggle-row">
+
+                    <div>
+                        <strong>পরিচয় গোপন রাখুন</strong>
+
+                        <div style="font-size:11px;color:#8198a6;margin-top:4px">
+                            Anonymous complaint
+                        </div>
+                    </div>
+
+                    <div
+                        id="anonymousToggle"
+                        class="switch"
+                        onclick="toggleAnonymous()">
+                        <span></span>
+                    </div>
+
+                </div>
+
+
+                <div id="identityFields">
+
+                    <div class="form-group">
+                        <label>নাম</label>
+                        <input id="complainantName" placeholder="আপনার নাম">
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label>মোবাইল</label>
+                            <input id="complainantMobile" placeholder="01XXXXXXXXX">
+                        </div>
+
+                        <div class="form-group">
+                            <label>ইমেইল</label>
+                            <input id="complainantEmail" placeholder="ইমেইল">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="complaint-warning">
+                    🔒 আপনার পরিচয় গোপন রাখতে চাইলে Anonymous অপশন চালু করুন।
+                </div>
+
+
+                <div class="step-actions">
+
+                    <button class="btn" onclick="complaintNext(2)">
+                        ← পিছনে
+                    </button>
+
+                    <button class="btn btn-primary" onclick="submitComplaint()">
+                        অভিযোগ জমা দিন
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 4 -->
+            <div class="complaint-step" id="complaintStep4">
+
+                <div class="success">
+
+                    <div class="success-circle">✓</div>
+
+                    <h2>অভিযোগ গ্রহণ করা হয়েছে</h2>
+
+                    <p style="color:#9db1be;margin-top:8px">
+                        আপনার Tracking ID সংরক্ষণ করুন।
+                    </p>
+
+                    <div class="tracking-id" id="trackingId">
+                        NTH-000000
+                    </div>
+
+                    <br>
+
+                    <button class="btn" onclick="copyTrackingId()">
+                        📋 Tracking ID কপি
+                    </button>
+
+                    <button class="btn btn-primary" onclick="openTracker()">
+                        🔎 স্ট্যাটাস দেখুন
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TRACKER -->
+<div class="modal" id="trackerModal" onclick="outsideClose(event,'trackerModal')">
+
+    <div class="modal-box" style="max-width:550px">
+
+        <div class="modal-head">
+
+            <h3>🔎 অভিযোগের স্ট্যাটাস</h3>
+
+            <button class="close" onclick="closeModal('trackerModal')">
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-content">
+
+            <div class="form-group">
+
+                <label>Tracking ID</label>
+
+                <input
+                    id="trackInput"
+                    placeholder="যেমন NTH-123456">
+
+            </div>
+
+
+            <button
+                class="btn btn-primary"
+                style="width:100%"
+                onclick="trackComplaint()">
+
+                স্ট্যাটাস দেখুন
+
+            </button>
+
+
+            <div id="trackingResult" style="margin-top:18px"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* ============================
+   PARTICLES
+============================ */
+
+const particleBox = document.getElementById("particles");
+
+for(let i=0;i<45;i++){
+
+    const p=document.createElement("div");
+
+    p.className="particle";
+
+    p.style.left=Math.random()*100+"%";
+
+    p.style.animationDuration=(7+Math.random()*13)+"s";
+
+    p.style.animationDelay=(-Math.random()*15)+"s";
+
+    p.style.opacity=(.15+Math.random()*.5);
+
+    particleBox.appendChild(p);
+}
+
+
+/* ============================
+   YEAR
+============================ */
+
+document.getElementById("year").textContent=new Date().getFullYear();
+
+
+/* ============================
+   DATA
+============================ */
+
+const upazilas = {
+
+"সদর":{
+    unions:[
+        "মৌগাতি","মেদনী","ঠাকুরাকোণা","সিংহের বাংলা",
+        "আমতলা","লক্ষীগঞ্জ","কাইলাটি","দক্ষিণ বিশিউড়া",
+        "চল্লিশা","রৌহা","কালিয়ারা গাবরাগাতি","মদনপুর"
+    ],
+    private:27,
+    ngo:6
+},
+
+"বারহাট্টা":{
+    unions:[
+        "বাউসী","সাহতা","বারহাট্টা","আসমা",
+        "চিরাম","সিংধা","রায়পুর"
+    ],
+    private:0,
+    ngo:2
+},
+
+"দুর্গাপুর":{
+    unions:[
+        "কুল্লাগড়া","দুর্গাপুর","চণ্ডিগড়",
+        "বিরিশিরি","বাকলজোরা","কাকৈরগড়া","গাঁওকান্দিয়া"
+    ],
+    private:5,
+    ngo:2
+},
+
+"কলমাকান্দা":{
+    unions:[
+        "কলমাকান্দা","নাজিরপুর","পোগলা","বড়খাপন",
+        "লেংগুরা","খারনৈ","কৈলাটি","রংছাতি"
+    ],
+    private:1,
+    ngo:1
+},
+
+"কেন্দুয়া":{
+    unions:[
+        "আশুজিয়া","দলপা","গড়াডোবা","গণ্ডা",
+        "সান্দিকোণা","মাসকা","বলাইশিমুল","নওপাড়া",
+        "কান্দিউড়া","চিরাং","রোয়াইলবাড়ী আমতলা",
+        "পাইকুড়া","মোজাফরপুর"
+    ],
+    private:2,
+    ngo:3
+},
+
+"আটপাড়া":{
+    unions:[
+        "স্বরমুশিয়া","শুনই","লুনেশ্বর","বানিয়াজান",
+        "তেলিগাতী","দুওজ","সুখারী"
+    ],
+    private:0,
+    ngo:2
+},
+
+"পূর্বধলা":{
+    unions:[
+        "হোগলা","ঘাগড়া","জারিয়া","ধলামূলগাঁও",
+        "পূর্বধলা","আগিয়া","বিশকাকুনী","খলিশাউড়",
+        "নারান্দিয়া","গোহালাকান্দা","বৈরাটি"
+    ],
+    private:1,
+    ngo:3
+},
+
+"মদন":{
+    unions:[
+        "ফতেপুর","গোবিন্দশ্রী","কাইটাইল","মাঘান",
+        "মদন","নায়েকপুর","তিয়শ্রী","চানগাঁও"
+    ],
+    private:0,
+    ngo:3
+},
+
+"মোহনগঞ্জ":{
+    unions:[
+        "বড়কাশিয়া-বিরামপুর","বড়তলী-বানিহারী",
+        "গাগলাজুর","সমাজ-সহিলদেও","সুয়াইর",
+        "তেতুলিয়া","মাঘান-সিয়াধার"
+    ],
+    private:1,
+    ngo:4
+},
+
+"খালিয়াজুরী":{
+    unions:[
+        "মেন্দিপুর","চাকুয়া","খালিয়াজুরী",
+        "নগর","কৃষ্ণপুর","গাজীপুর"
+    ],
+    private:0,
+    ngo:0
+}
+
+};
+
+
+/* ============================
+   CATEGORY DATA
+============================ */
+
+const categoryData = {
+
+emergency:{
+    title:"🚨 জরুরি সেবা",
+    intro:"জরুরি পরিস্থিতিতে দ্রুত যোগাযোগের জন্য গুরুত্বপূর্ণ সরকারি হটলাইন।",
+    items:[
+        ["999","জাতীয় জরুরি সেবা","পুলিশ, ফায়ার সার্ভিস ও অ্যাম্বুলেন্স"],
+        ["102","ফায়ার সার্ভিস","অগ্নিকাণ্ড ও উদ্ধার সহায়তা"],
+        ["333","সরকারি তথ্য ও সেবা","সরকারি তথ্য, সেবা ও অভিযোগ"],
+        ["106","দুদক","দুর্নীতি সংক্রান্ত অভিযোগ"],
+        ["16699","লিগ্যাল এইড","জাতীয় আইনগত সহায়তা"],
+        ["109","নারী ও শিশু","নারী ও শিশু নির্যাতন প্রতিরোধ"],
+        ["1098","শিশু সহায়তা","শিশু সহায়তা হেল্পলাইন"],
+        ["103","সুপ্রিম কোর্ট","সুপ্রিম কোর্ট হেল্পলাইন"]
+    ]
+},
+
+hospital:{
+    title:"🏥 হাসপাতাল ও চিকিৎসা",
+    intro:"DGHS Facility Registry-তে পাওয়া সরকারি, বেসরকারি ও NGO স্বাস্থ্যসেবা তথ্য।",
+    stats:[
+        ["১","জেলা/জেনারেল হাসপাতাল"],
+        ["১","নেত্রকোণা মেডিকেল কলেজ হাসপাতাল"],
+        ["৩৭","Private Hospital / Clinic"],
+        ["২৬","NGO Hospital / Clinic"]
+    ],
+    hospitals:[
+        ["নেত্রকোনা জেলা হাসপাতাল","সরকারি","নেত্রকোনা সদর","০১৭০১২৪৮২১৭"],
+        ["নেত্রকোনা মেডিকেল কলেজ হাসপাতাল","সরকারি","নেত্রকোনা সদর","তথ্য DGHS Registry-তে"],
+        ["নেত্রকোনা আইডিয়াল হাসপাতাল","বেসরকারি","নেত্রকোনা সদর","০১৭৮৮৪৬৪৯২৩"],
+        ["Netrakona Eye Hospital","বেসরকারি","নেত্রকোনা সদর","DGHS Registry-তে তালিকাভুক্ত"],
+        ["Netrakona Hazrat Shah Jalal (R.) Private Hospital","বেসরকারি","নেত্রকোনা সদর","DGHS Registry-তে তালিকাভুক্ত"],
+        ["Mission Hospital Netrakona","বেসরকারি","নেত্রকোনা সদর","০১৭১০৭১১২৬১"],
+        ["Icon Memorial Hospital","বেসরকারি","নেত্রকোনা সদর","স্থানীয় তালিকাভুক্ত"],
+        ["Alnur Hospital & Diagnostic Center","বেসরকারি","নেত্রকোনা সদর","০১৭২৩৯২৮৬৭৫"],
+        ["Haor Hospital and Diagnostic Center","বেসরকারি","নেত্রকোনা সদর","Maps-এ তালিকাভুক্ত"]
+    ],
+    note:"পূর্ণ সরকারি/বেসরকারি রেজিস্ট্রি নিয়মিত পরিবর্তন হতে পারে। তাই পূর্ণ Facility Registry দেখার বাটন রাখা হয়েছে।"
+},
+
+nearby:{
+    title:"📍 কাছাকাছি সেবা",
+    intro:"আপনার অনুমতি নিয়ে Google Maps-এ কাছাকাছি প্রয়োজনীয় সেবা খুঁজে দেখুন।",
+    actions:[
+        ["🏥 কাছাকাছি হাসপাতাল","hospitals near me"],
+        ["💊 কাছাকাছি ফার্মেসি","pharmacy near me"],
+        ["🏦 কাছাকাছি ATM","ATM near me"],
+        ["⛽ কাছাকাছি পেট্রোল পাম্প","petrol pump near me"],
+        ["🍽️ কাছাকাছি রেস্টুরেন্ট","restaurant near me"],
+        ["🏨 কাছাকাছি হোটেল","hotel near me"]
+    ]
+},
+
+bus:{
+    title:"🚌 বাস ও যাতায়াত",
+    intro:"নেত্রকোণা থেকে বাস/সড়ক যোগাযোগ খুঁজতে Maps ব্যবহার করুন।",
+    routes:[
+        ["নেত্রকোণা → ঢাকা","ঢাকা"],
+        ["নেত্রকোণা → ময়মনসিংহ","ময়মনসিংহ"],
+        ["নেত্রকোণা → দুর্গাপুর","দুর্গাপুর নেত্রকোণা"],
+        ["নেত্রকোণা → কলমাকান্দা","কলমাকান্দা নেত্রকোণা"],
+        ["নেত্রকোণা → কেন্দুয়া","কেন্দুয়া নেত্রকোণা"],
+        ["নেত্রকোণা → মোহনগঞ্জ","মোহনগঞ্জ নেত্রকোণা"]
+    ]
+},
+
+train:{
+    title:"🚆 ট্রেন ও রেলওয়ে",
+    intro:"নেত্রকোণা রেলস্টেশনের তথ্য ও বাংলাদেশ রেলওয়ের অফিসিয়াল যোগাযোগ।",
+    items:[
+        ["নেত্রকোণা রেলস্টেশন","রেলওয়ের গুরুত্বপূর্ণ স্টেশন"],
+        ["স্টেশন ফোন","০২৯৯৬৬৫১৪৭৫"],
+        ["জারিয়া স্টেশন","পূর্বধলা অঞ্চলের গুরুত্বপূর্ণ স্টেশন"]
+    ],
+    links:[
+        ["বাংলাদেশ রেলওয়ে","https://railway.gov.bd/"]
+    ]
+},
+
+government:{
+    title:"🏛️ সরকারি অফিস",
+    intro:"নেত্রকোণা জেলার সরকারি প্রশাসন ও প্রয়োজনীয় দপ্তরের তথ্য।",
+    items:[
+        ["জেলা প্রশাসকের কার্যালয়","নেত্রকোণা","০২৯৯৮৮২৮৮৮৮"],
+        ["জেলা প্রশাসক","মোহাম্মদ আব্দুল্লাহ আল মাহমুদ জামান","০১৭১৫১২৩১২৮"],
+        ["নেত্রকোণা সিভিল সার্জন অফিস","স্বাস্থ্য প্রশাসন","DGHS Registry"],
+        ["পুলিশ সুপারের কার্যালয়","নেত্রকোণা","অফিসিয়াল পুলিশ পোর্টাল"],
+        ["উপজেলা প্রশাসন","১০ উপজেলা","সংশ্লিষ্ট উপজেলা পোর্টাল"]
+    ],
+    links:[
+        ["নেত্রকোণা জেলা পোর্টাল","https://netrokona.gov.bd/"],
+        ["নেত্রকোণা পুলিশ","https://police.netrokona.gov.bd/"]
+    ]
+},
+
+law:{
+    title:"⚖️ আদালত ও আইন",
+    intro:"আইনি সহায়তা ও সরকারি আইনসেবা পাওয়ার গুরুত্বপূর্ণ পথ।",
+    items:[
+        ["জাতীয় লিগ্যাল এইড","16699","আইনগত সহায়তার জন্য"],
+        ["সুপ্রিম কোর্ট হেল্পলাইন","103","সুপ্রিম কোর্ট সংক্রান্ত সহায়তা"],
+        ["সরকারি তথ্য ও সেবা","333","সরকারি সেবা/অভিযোগ"]
+    ]
+},
+
+tourism:{
+    title:"🏞️ দর্শনীয় স্থান",
+    intro:"সরকারি জেলা পোর্টালে তালিকাভুক্ত গুরুত্বপূর্ণ পর্যটন স্পট।",
+    places:[
+        ["বিজয়পুর সাদা মাটির পাহাড়","দুর্গাপুর","সোমেশ্বরী নদী পার হয়ে বিজয়পুর অঞ্চলে"],
+        ["বিরিশিরি ক্ষুদ্র নৃ-গোষ্ঠী কালচারাল একাডেমি","দুর্গাপুর","বিরিশিরি"],
+        ["সোমেশ্বরী নদী","দুর্গাপুর","বিরিশিরি ও দুর্গাপুর অঞ্চল"],
+        ["রাণীমাতা রাশমণি স্মৃতিসৌধ","দুর্গাপুর","বহেড়াতলী অঞ্চল"],
+        ["কমলা রাণী দিঘী","দুর্গাপুর","বিরিশিরি"],
+        ["রোয়াইলবাড়ি দুর্গ","কেন্দুয়া","রোয়াইলবাড়ি"],
+        ["সাত শহীদের মাজার","কলমাকান্দা","কলমাকান্দা"]
+    ]
+},
+
+business:{
+    title:"🏪 দোকান ও ব্যবসা",
+    intro:"নেত্রকোণার ব্যবসা প্রতিষ্ঠান Maps-এ খুঁজে দেখতে পারবেন।",
+    actions:[
+        ["🛒 মুদি দোকান","grocery store in Netrokona"],
+        ["📱 মোবাইল দোকান","mobile phone shop in Netrokona"],
+        ["💻 কম্পিউটার দোকান","computer shop in Netrokona"],
+        ["🔧 মেকানিক","mechanic in Netrokona"],
+        ["👗 কাপড়ের দোকান","clothing store in Netrokona"],
+        ["🛍️ শপিং","shopping in Netrokona"]
+    ]
+},
+
+agriculture:{
+    title:"🌾 কৃষি",
+    intro:"কৃষক ও কৃষি উদ্যোক্তাদের জন্য প্রয়োজনীয় তথ্য।",
+    items:[
+        ["কৃষি অফিস","উপজেলা কৃষি অফিস","কৃষি পরামর্শ ও সরকারি সেবা"],
+        ["সার","সার বিক্রেতা খুঁজুন","স্থানীয় Maps সার্চ"],
+        ["বীজ","বীজ বিক্রেতা খুঁজুন","স্থানীয় Maps সার্চ"],
+        ["কৃষি যন্ত্রপাতি","কৃষি যন্ত্রপাতির দোকান","স্থানীয় Maps সার্চ"],
+        ["কৃষি বাজার","স্থানীয় বাজার","ফসল/পণ্য বিক্রির তথ্য"]
+    ],
+    links:[
+        ["কৃষি বাতায়ন","https://www.ais.gov.bd/"]
+    ]
+},
+
+bank:{
+    title:"🏦 ব্যাংক ও ATM",
+    intro:"ব্যাংক ও ATM খুঁজতে সরাসরি Maps সার্চ ব্যবহার করুন।",
+    actions:[
+        ["🏦 ব্যাংক","bank in Netrokona"],
+        ["💳 ATM","ATM in Netrokona"],
+        ["🏦 ইসলামী ব্যাংক","Islamic bank in Netrokona"],
+        ["🏦 সোনালী ব্যাংক","Sonali Bank in Netrokona"],
+        ["🏦 অগ্রণী ব্যাংক","Agrani Bank in Netrokona"],
+        ["🏦 জনতা ব্যাংক","Janata Bank in Netrokona"]
+    ]
+},
+
+education:{
+    title:"🎓 শিক্ষা",
+    intro:"নেত্রকোণা জেলার স্কুল, কলেজ ও শিক্ষা প্রতিষ্ঠানের তথ্য।",
+    stats:[
+        ["২৮","কলেজ"],
+        ["২৩৬","মাধ্যমিক বিদ্যালয়"],
+        ["১০৮৩","প্রাথমিক বিদ্যালয়"],
+        ["১৬০","মাদ্রাসা"]
+    ],
+    notable:[
+        "নেত্রকোনা দত্ত উচ্চ বিদ্যালয়",
+        "আঞ্জুমান আদর্শ সরকারি উচ্চ বিদ্যালয়",
+        "দুর্গাপুর এন্ট্রেন্স স্কুল",
+        "কলমাকান্দা পাইলট উচ্চ বিদ্যালয়",
+        "পূর্বধলা পাইলট উচ্চ বিদ্যালয়",
+        "মোহনগঞ্জ সরকারি পাইলট হাইস্কুল",
+        "কেন্দুয়া জয়হরি পাইলট সরকারি উচ্চ বিদ্যালয়"
+    ]
+},
+
+hotel:{
+    title:"🏨 হোটেল / গেস্টহাউস",
+    intro:"নেত্রকোণা জেলা সরকারি পোর্টালে Hotel/Motel/Guesthouse তথ্যের আলাদা ডাটাবেস রয়েছে।",
+    actions:[
+        ["🏨 নেত্রকোণা সদর হোটেল","hotel in Netrokona Sadar"],
+        ["🏨 দুর্গাপুর হোটেল","hotel in Durgapur Netrokona"],
+        ["🏨 বিরিশিরি থাকার জায়গা","hotel in Birishiri"],
+        ["🏠 গেস্টহাউস","guest house in Netrokona"]
+    ],
+    links:[
+        ["সরকারি হোটেল/মোটেল তালিকা","https://netrokona.gov.bd/pages/hotel-motel-guesthouse"]
+    ]
+},
+
+restaurant:{
+    title:"🍽️ রেস্টুরেন্ট",
+    intro:"নেত্রকোণার খাবারের দোকান ও রেস্টুরেন্ট Maps-এ খুঁজুন।",
+    actions:[
+        ["🍛 রেস্টুরেন্ট","restaurant in Netrokona"],
+        ["🍕 ফাস্ট ফুড","fast food in Netrokona"],
+        ["☕ ক্যাফে","cafe in Netrokona"],
+        ["🍗 বিরিয়ানি","biriyani in Netrokona"],
+        ["🥘 দেশি খাবার","Bangladeshi restaurant in Netrokona"]
+    ]
+},
+
+blood:{
+    title:"🩸 রক্তদাতা",
+    intro:"রক্তের প্রয়োজন হলে পরিচিত/অনুমোদিত স্বেচ্ছাসেবী সংগঠন ও হাসপাতালের মাধ্যমে রক্তদাতা খুঁজুন।",
+    items:[
+        ["রক্তের গ্রুপ","A+ / A- / B+ / B- / AB+ / AB- / O+ / O-"],
+        ["নিরাপত্তা","দাতার সম্মতি ছাড়া ব্যক্তিগত নম্বর প্রকাশ করা উচিত নয়"],
+        ["জরুরি প্রয়োজন","নিকটস্থ হাসপাতাল/ব্লাড ব্যাংকের সাথে যোগাযোগ করুন"],
+        ["ভবিষ্যৎ ফিচার","রক্তের গ্রুপ, উপজেলা ও availability অনুযায়ী donor matching"]
+    ]
+},
+
+religion:{
+    title:"🕌 ধর্মীয় স্থান",
+    intro:"মসজিদ, মন্দির, গির্জা ও অন্যান্য ধর্মীয় স্থান Maps-এ খুঁজুন।",
+    actions:[
+        ["🕌 মসজিদ","mosque in Netrokona"],
+        ["🛕 মন্দির","temple in Netrokona"],
+        ["⛪ গির্জা","church in Netrokona"],
+        ["🕌 মাজার","mazar in Netrokona"]
+    ]
+},
+
+local:{
+    title:"🛠️ স্থানীয় সেবা",
+    intro:"দৈনন্দিন প্রয়োজনে স্থানীয় সেবা প্রদানকারী খুঁজে নিন।",
+    actions:[
+        ["⚡ ইলেকট্রিশিয়ান","electrician in Netrokona"],
+        ["🚰 প্লাম্বার","plumber in Netrokona"],
+        ["🔧 মেকানিক","mechanic in Netrokona"],
+        ["📸 ফটোগ্রাফার","photographer in Netrokona"],
+        ["💻 কম্পিউটার সার্ভিস","computer repair in Netrokona"],
+        ["🚚 পরিবহন","transport service in Netrokona"]
+    ]
+}
+
+};
+
+
+/* ============================
+   OPEN CATEGORY
+============================ */
+
+function openCategory(key){
+
+    if(key==="upazila"){
+        document.querySelector(".upazila-grid").scrollIntoView({
+            behavior:"smooth"
+        });
+        return;
+    }
+
+    const data=categoryData[key];
+
+    if(!data) return;
+
+    document.getElementById("detailTitle").textContent=data.title;
+
+    let html=`
+        <div class="detail-top">
+            <h2>${data.title}</h2>
+            <p>${data.intro}</p>
+        </div>
+    `;
+
+
+    if(data.stats){
+
+        html+=`
+        <div class="info-grid">
+        `;
+
+        data.stats.forEach(x=>{
+            html+=`
+            <div class="info-card">
+                <div class="big">${x[0]}</div>
+                <h4>${x[1]}</h4>
+            </div>
+            `;
+        });
+
+        html+=`</div>`;
+    }
+
+
+    if(data.hospitals){
+
+        html+=`
+        <h3 style="margin:20px 0 8px">হাসপাতাল / ক্লিনিক</h3>
+
+        <div style="overflow:auto">
+
+        <table class="data-table">
+
+        <thead>
+            <tr>
+                <th>নাম</th>
+                <th>ধরন</th>
+                <th>উপজেলা</th>
+                <th>যোগাযোগ</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        `;
+
+        data.hospitals.forEach(x=>{
+            html+=`
+            <tr>
+                <td>${x[0]}</td>
+                <td>${x[1]}</td>
+                <td>${x[2]}</td>
+                <td>${x[3]}</td>
+            </tr>
+            `;
+        });
+
+        html+=`
+        </tbody>
+        </table>
+        </div>
+        `;
+
+        html+=`
+        <div style="margin-top:18px">
+            <a
+              href="https://hrm.dghs.gov.bd/public/facility-registry/reports/organization-summary"
+              target="_blank"
+              class="btn btn-primary"
+              style="display:inline-block;text-decoration:none">
+              🏥 DGHS পূর্ণ Facility Registry
+            </a>
+        </div>
+        `;
+    }
+
+
+    if(data.items){
+
+        html+=`
+        <div class="detail-grid">
+        `;
+
+        data.items.forEach(x=>{
+            html+=`
+            <div class="detail-item">
+                <strong>${x[0]}</strong>
+                <span>${x[1]}<br>${x[2] || ""}</span>
+            </div>
+            `;
+        });
+
+        html+=`</div>`;
+    }
+
+
+    if(data.routes){
+
+        html+=`
+        <h3 style="margin:20px 0 10px">জনপ্রিয় রুট</h3>
+        <div class="detail-grid">
+        `;
+
+        data.routes.forEach(x=>{
+            html+=`
+            <div class="detail-item">
+
+                <strong>${x[0]}</strong>
+
+                <span>${x[1]}</span>
+
+                <br><br>
+
+                <button
+                    class="btn"
+                    onclick="mapsSearch('${escapeAttr(x[1])}')">
+                    🗺️ Maps
+                </button>
+
+            </div>
+            `;
+        });
+
+        html+=`</div>`;
+    }
+
+
+    if(data.places){
+
+        html+=`
+        <h3 style="margin:20px 0 10px">পর্যটন স্পট</h3>
+
+        <div class="detail-grid">
+        `;
+
+        data.places.forEach(x=>{
+            html+=`
+            <div class="detail-item">
+                <strong>🏞️ ${x[0]}</strong>
+                <span>
+                    উপজেলা: ${x[1]}<br>
+                    ${x[2]}
+                </span>
+                <br><br>
+                <button
+                    class="btn"
+                    onclick="mapsSearch('${escapeAttr(x[0]+' '+x[1]+' Netrokona')}')">
+                    🗺️ Maps
+                </button>
+            </div>
+            `;
+        });
+
+        html+=`</div>`;
+    }
+
+
+    if(data.notable){
+
+        html+=`
+        <h3 style="margin:20px 0 10px">উল্লেখযোগ্য প্রতিষ্ঠান</h3>
+
+        <div class="detail-grid">
+        `;
+
+        data.notable.forEach(x=>{
+            html+=`
+            <div class="detail-item">
+                <strong>🎓 ${x}</strong>
+                <span>নেত্রকোণা জেলার শিক্ষা প্রতিষ্ঠান</span>
+            </div>
+            `;
+        });
+
+        html+=`</div>`;
+    }
+
+
+    if(data.actions){
+
+        html+=`
+        <h3 style="margin:20px 0 10px">দ্রুত খুঁজুন</h3>
+
+        <div class="detail-grid">
+        `;
+
+        data.actions.forEach(x=>{
+            html+=`
+            <div class="detail-item">
+
+                <strong>${x[0]}</strong>
+
+                <span>Google Maps-এ খুঁজুন</span>
+
+                <br><br>
+
+                <button
+                    class="btn btn-primary"
+                    onclick="mapsSearch('${escapeAttr(x[1])}')">
+                    🗺️ খুঁজুন
+                </button>
+
+            </div>
+            `;
+        });
+
+        html+=`</div>`;
+    }
+
+
+    if(data.links){
+
+        html+=`
+        <div style="margin-top:22px">
+
+        <h3 style="margin-bottom:10px">
+            🔗 সরকারি/গুরুত্বপূর্ণ লিংক
+        </h3>
+        `;
+
+        data.links.forEach(x=>{
+            html+=`
+            <a
+                href="${x[1]}"
+                target="_blank"
+                class="btn"
+                style="display:inline-block;text-decoration:none;margin:4px">
+                ${x[0]}
+            </a>
+            `;
+        });
+
+        html+=`</div>`;
+    }
+
+
+    if(data.note){
+
+        html+=`
+        <div class="complaint-warning" style="margin-top:20px">
+            ℹ️ ${data.note}
+        </div>
+        `;
+    }
+
+
+    document.getElementById("detailContent").innerHTML=html;
+
+    document.getElementById("detailModal").classList.add("show");
+}
+
+
+/* ============================
+   UPAZILA
+============================ */
+
+function openUpazila(name){
+
+    const data=upazilas[name];
+
+    if(!data) return;
+
+    document.getElementById("detailTitle").textContent=
+        "🗺️ "+name+" উপজেলা";
+
+    let html=`
+
+    <div class="detail-top">
+
+        <h2>${name} উপজেলা</h2>
+
+        <p>
+            এই উপজেলার ইউনিয়ন, স্বাস্থ্যসেবা ও স্থানীয় তথ্য।
+        </p>
+
+    </div>
+
+
+    <div class="info-grid">
+
+        <div class="info-card">
+            <div class="big">${data.unions.length}</div>
+            <h4>ইউনিয়ন</h4>
+        </div>
+
+        <div class="info-card">
+            <div class="big">${data.private}</div>
+            <h4>Private Hospital/Clinic</h4>
+        </div>
+
+        <div class="info-card">
+            <div class="big">${data.ngo}</div>
+            <h4>NGO Hospital/Clinic</h4>
+        </div>
+
+    </div>
+
+
+    <h3 style="margin:25px 0 10px">
+        ইউনিয়নসমূহ
+    </h3>
+
+    <div class="detail-grid">
+
+    `;
+
+
+    data.unions.forEach((u,i)=>{
+
+        html+=`
+        <div class="detail-item">
+
+            <strong>${i+1}. ${u}</strong>
+
+            <span>
+                ${name} উপজেলার ইউনিয়ন
+            </span>
+
+            <br><br>
+
+            <button
+                class="btn"
+                onclick="mapsSearch('${escapeAttr(u+' '+name+' Netrokona')}')">
+                🗺️ Maps
+            </button>
+
+        </div>
+        `;
+
+    });
+
+
+    html+=`
+    </div>
+
+    <div style="margin-top:20px">
+
+        <button
+            class="btn btn-primary"
+            onclick="mapsSearch('${escapeAttr(name+' Netrokona')}')">
+
+            📍 ${name} উপজেলায় সেবা খুঁজুন
+
+        </button>
+
+    </div>
+    `;
+
+
+    document.getElementById("detailContent").innerHTML=html;
+
+    document.getElementById("detailModal").classList.add("show");
+}
+
+
+/* ============================
+   MAPS
+============================ */
+
+function mapsSearch(query){
+
+    const url=
+      "https://www.google.com/maps/search/?api=1&query="
+      +encodeURIComponent(query);
+
+    window.open(url,"_blank");
+}
+
+
+/* ============================
+   SEARCH
+============================ */
+
+function searchData(query){
+
+    query=query.trim().toLowerCase();
+
+    const resultBox=document.getElementById("searchResults");
+
+    if(!query){
+
+        resultBox.innerHTML="";
+
+        return;
+    }
+
+    const results=[];
+
+
+    Object.keys(categoryData).forEach(key=>{
+
+        const d=categoryData[key];
+
+        const text=JSON.stringify(d).toLowerCase();
+
+        if(text.includes(query)){
+
+            results.push({
+                type:"category",
+                key:key,
+                title:d.title
+            });
+
+        }
+
+    });
+
+
+    Object.keys(upazilas).forEach(name=>{
+
+        if(name.toLowerCase().includes(query)){
+
+            results.push({
+                type:"upazila",
+                name:name,
+                title:"🗺️ "+name+" উপজেলা"
+            });
+
+        }
+
+    });
+
+
+    if(!results.length){
+
+        resultBox.innerHTML=`
+        <div class="info-card">
+            <h4>কিছু পাওয়া যায়নি</h4>
+            <p>অন্য কোনো শব্দ দিয়ে আবার চেষ্টা করুন।</p>
+        </div>
+        `;
+
+        return;
+    }
+
+
+    resultBox.innerHTML=`
+
+    <div
+        style="
+        background:rgba(255,255,255,.06);
+        border:1px solid var(--border);
+        border-radius:18px;
+        padding:15px">
+
+        <strong>🔎 সার্চ ফলাফল</strong>
+
+        <div
+            style="
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            gap:8px;
+            margin-top:10px">
+
+            ${results.slice(0,12).map(r=>`
+
+                <button
+                    class="btn"
+                    onclick="${
+                        r.type==="category"
+                        ? `openCategory('${r.key}')`
+                        : `openUpazila('${r.name}')`
+                    }">
+
+                    ${r.title}
+
+                </button>
+
+            `).join("")}
+
+        </div>
+
+    </div>
+
+    `;
+}
+
+
+/* ============================
+   AUTH
+============================ */
+
+function openAuth(type){
+
+    document.getElementById("authModal").classList.add("show");
+
+    switchAuth(type);
+}
+
+
+function switchAuth(type){
+
+    const login=
+        document.getElementById("loginForm");
+
+    const signup=
+        document.getElementById("signupForm");
+
+    const loginTab=
+        document.getElementById("loginTab");
+
+    const signupTab=
+        document.getElementById("signupTab");
+
+
+    if(type==="login"){
+
+        login.style.display="block";
+
+        signup.style.display="none";
+
+        loginTab.classList.add("active");
+
+        signupTab.classList.remove("active");
+
+    }else{
+
+        login.style.display="none";
+
+        signup.style.display="block";
+
+        loginTab.classList.remove("active");
+
+        signupTab.classList.add("active");
+
+    }
+
+}
+
+
+function togglePassword(id){
+
+    const input=document.getElementById(id);
+
+    input.type=
+        input.type==="password"
+        ? "text"
+        : "password";
+
+}
+
+
+function signupUser(){
+
+    const name=
+        document.getElementById("signupName").value.trim();
+
+    const identity=
+        document.getElementById("signupIdentity").value.trim();
+
+    const password=
+        document.getElementById("signupPassword").value;
+
+    const confirm=
+        document.getElementById("signupConfirm").value;
+
+
+    if(!name || !identity || !password){
+
+        showToast("সব তথ্য পূরণ করুন");
+
+        return;
+    }
+
+
+    if(password.length<8){
+
+        showToast("পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে");
+
+        return;
+    }
+
+
+    if(password!==confirm){
+
+        showToast("দুইটি পাসওয়ার্ড মিলছে না");
+
+        return;
+    }
+
+
+    const user={
+        name:name,
+        identity:identity,
+        password:password
+    };
+
+
+    localStorage.setItem(
+        "nth_user",
+        JSON.stringify(user)
+    );
+
+
+    showToast("সাইন আপ সফল হয়েছে 🎉");
+
+    switchAuth("login");
+
+    document.getElementById("loginIdentity").value=identity;
+
+}
+
+
+function loginUser(){
+
+    const identity=
+        document.getElementById("loginIdentity").value.trim();
+
+    const password=
+        document.getElementById("loginPassword").value;
+
+
+    const saved=
+        JSON.parse(
+            localStorage.getItem("nth_user") || "null"
+        );
+
+
+    if(!saved){
+
+        showToast("আগে একটি অ্যাকাউন্ট তৈরি করুন");
+
+        switchAuth("signup");
+
+        return;
+    }
+
+
+    if(
+        identity===saved.identity &&
+        password===saved.password
+    ){
+
+        localStorage.setItem(
+            "nth_logged_in",
+            "true"
+        );
+
+        closeModal("authModal");
+
+        showToast(
+            "স্বাগতম, "+saved.name+" 👋"
+        );
+
+    }else{
+
+        showToast("মোবাইল/ইমেইল অথবা পাসওয়ার্ড ভুল");
+
+    }
+
+}
+
+
+function forgotPassword(){
+
+    showToast(
+        "ডেমো সংস্করণে Forgot Password — বাস্তব অ্যাপে OTP/Email Reset লাগবে"
+    );
+
+}
+
+
+/* ============================
+   COMPLAINT
+============================ */
+
+let complaintStep=1;
+
+let anonymous=false;
+
+
+function openComplaintCenter(){
+
+    complaintStep=1;
+
+    document.getElementById("complaintModal")
+        .classList.add("show");
+
+    showComplaintStep(1);
+
+}
+
+
+function showComplaintStep(step){
+
+    complaintStep=step;
+
+
+    document
+        .querySelectorAll(".complaint-step")
+        .forEach(el=>el.classList.remove("active"));
+
+
+    document
+        .getElementById("complaintStep"+step)
+        .classList.add("active");
+
+
+    for(let i=1;i<=4;i++){
+
+        document
+            .getElementById("stepIndicator"+i)
+            .classList.toggle(
+                "active",
+                i===step
+            );
+
+    }
+
+}
+
+
+function complaintNext(step){
+
+    if(step===2){
+
+        const category=
+            document.getElementById("complaintCategory").value;
+
+        const title=
+            document.getElementById("complaintTitle").value.trim();
+
+        const details=
+            document.getElementById("complaintDetails").value.trim();
+
+
+        if(!category || !title || !details){
+
+            showToast("অভিযোগের প্রয়োজনীয় তথ্য পূরণ করুন");
+
+            return;
+        }
+
+    }
+
+
+    showComplaintStep(step);
+
+}
+
+
+function toggleAnonymous(){
+
+    anonymous=!anonymous;
+
+    const toggle=
+        document.getElementById("anonymousToggle");
+
+    const fields=
+        document.getElementById("identityFields");
+
+
+    toggle.classList.toggle("on",anonymous);
+
+    fields.style.display=
+        anonymous
+        ? "none"
+        : "block";
+
+}
+
+
+function showFiles(){
+
+    const files=
+        document.getElementById("evidenceFiles").files;
+
+    const list=
+        document.getElementById("fileList");
+
+
+    list.innerHTML="";
+
+
+    Array.from(files).forEach(file=>{
+
+        const div=document.createElement("div");
+
+        div.className="file-item";
+
+        div.textContent=
+            "📎 "+file.name+
+            " ("+
+            Math.round(file.size/1024)
+            +" KB)";
+
+        list.appendChild(div);
+
+    });
+
+}
+
+
+function submitComplaint(){
+
+    const id=
+        "NTH-"+
+        Math.floor(
+            100000+
+            Math.random()*900000
+        );
+
+
+    const complaint={
+
+        id:id,
+
+        category:
+            document.getElementById("complaintCategory").value,
+
+        title:
+            document.getElementById("complaintTitle").value,
+
+        place:
+            document.getElementById("complaintPlace").value,
+
+        date:
+            document.getElementById("complaintDate").value,
+
+        details:
+            document.getElementById("complaintDetails").value,
+
+        anonymous:anonymous,
+
+        createdAt:new Date().toISOString(),
+
+        status:"অভিযোগ জমা হয়েছে"
+
+    };
+
+
+    localStorage.setItem(
+        "complaint_"+id,
+        JSON.stringify(complaint)
+    );
+
+
+    document.getElementById("trackingId")
+        .textContent=id;
+
+
+    showComplaintStep(4);
+
+}
+
+
+function copyTrackingId(){
+
+    const id=
+        document.getElementById("trackingId").textContent;
+
+    navigator.clipboard
+        .writeText(id)
+        .then(()=>{
+            showToast("Tracking ID কপি হয়েছে");
+        })
+        .catch(()=>{
+            showToast(id);
+        });
+
+}
+
+
+function openTracker(){
+
+    closeModal("complaintModal");
+
+    document
+        .getElementById("trackerModal")
+        .classList.add("show");
+
+}
+
+
+function trackComplaint(){
+
+    const id=
+        document.getElementById("trackInput")
+        .value
+        .trim()
+        .toUpperCase();
+
+
+    const result=
+        document.getElementById("trackingResult");
+
+
+    const complaint=
+        JSON.parse(
+            localStorage.getItem(
+                "complaint_"+id
+            ) || "null"
+        );
+
+
+    if(!complaint){
+
+        result.innerHTML=`
+            <div class="complaint-warning">
+                ❌ এই Tracking ID পাওয়া যায়নি।
+            </div>
+        `;
+
+        return;
+    }
+
+
+    result.innerHTML=`
+
+        <div class="info-card">
+
+            <h3>${complaint.id}</h3>
+
+            <p style="color:#9db1be;margin-top:7px">
+                ${complaint.title}
+            </p>
+
+            <div
+                style="
+                margin-top:15px;
+                padding:13px;
+                border-radius:12px;
+                background:rgba(0,230,118,.08);
+                color:#69f0ae">
+
+                ● ${complaint.status}
+
+            </div>
+
+            <div
+                style="
+                margin-top:15px;
+                color:#8198a6;
+                font-size:12px">
+
+                অভিযোগ জমার সময়:
+                ${new Date(complaint.createdAt).toLocaleString("bn-BD")}
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* ============================
+   MODAL
+============================ */
+
+function closeModal(id){
+
+    document
+        .getElementById(id)
+        .classList.remove("show");
+
+}
+
+
+function outsideClose(event,id){
+
+    if(event.target.id===id){
+
+        closeModal(id);
+
+    }
+
+}
+
+
+/* ============================
+   TOAST
+============================ */
+
+let toastTimer;
+
+
+function showToast(message){
+
+    const toast=
+        document.getElementById("toast");
+
+    toast.textContent=message;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer=
+        setTimeout(()=>{
+            toast.classList.remove("show");
+        },3000);
+
+}
+
+
+/* ============================
+   ESCAPE
+============================ */
+
+function escapeAttr(str){
+
+    return String(str)
+        .replace(/'/g,"\\'")
+        .replace(/"/g,"&quot;");
+
+}
+
+
+/* ============================
+   CARD TILT
+============================ */
+
+document
+    .querySelectorAll(".service-card")
+    .forEach(card=>{
+
+        card.addEventListener("mousemove",e=>{
+
+            const rect=
+                card.getBoundingClientRect();
+
+            const x=
+                e.clientX-rect.left;
+
+            const y=
+                e.clientY-rect.top;
+
+            const rotateY=
+                ((x/rect.width)-.5)*5;
+
+            const rotateX=
+                ((y/rect.height)-.5)*-5;
+
+            card.style.transform=
+                `perspective(700px)
+                 rotateX(${rotateX}deg)
+                 rotateY(${rotateY}deg)
+                 translateY(-5px)`;
+
+        });
+
+
+        card.addEventListener("mouseleave",()=>{
+
+            card.style.transform="";
+
+        });
+
+    });
+
+
+/* ============================
+   ESC KEY
+============================ */
+
+document.addEventListener("keydown",e=>{
+
+    if(e.key==="Escape"){
+
+        [
+            "detailModal",
+            "authModal",
+            "complaintModal",
+            "trackerModal"
+        ].forEach(id=>closeModal(id));
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
